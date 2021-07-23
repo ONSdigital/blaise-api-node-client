@@ -20,3 +20,11 @@ Declare and consume the client by passing the URL of the rest api:
 ```
 const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`);
 ```
+
+### Mock objects
+
+Mock objects are available for use in tests
+
+```
+import {instrumentListMockObject, instrumentMockObject, installInstrumentMockObject, installInstrumentResponseMockObject, diagnosticMockOject} from "blaise-api-node-client";
+```
