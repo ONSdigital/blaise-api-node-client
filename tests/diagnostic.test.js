@@ -2,37 +2,19 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import 'regenerator-runtime/runtime'
 import BlaiseApiClient from "../src/blaise-api-client";
+import {diagnosticMockOject} from "../mocks/diagnostic-mocks";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri"
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
-
 describe("BlaiseRestapiClient", () => {
-  describe("getDiagnostics", () => {
-    const diagnosticsJSON = `[
-      {
-        "health check type": "Connection model",
-          "status": "OK"
-      },
-      {
-        "health check type": "Blaise connection",
-          "status": "OK"
-      },
-      {
-        "health check type": "Remote data server connection",
-          "status": "OK"
-      },
-      {
-        "health check type": "Remote Cati management connection",
-          "status": "OK"
-      }
-    ]`;
+  describe("get health Check from API", () => {
 
     beforeAll(() => {
          mock.onGet(`http://${blaiseApiUrl}/api/v1/health/diagnosis`).reply(200,
-        diagnosticsJSON,
+        diagnosticMockOject,
       );
     });
 
