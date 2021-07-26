@@ -7,7 +7,7 @@
   },
   "version": "1.0.0",
   "module": "./lib/esm/blaise-api-node-client.js",
-  "main": "./lib/cjs/bblaise-api-node-client.js",
+  "main": "./lib/cjs/blaise-api-node-client.js",
   "types": "./lib/esm/blaise-api-node-client.d.ts",
   "license": "MIT",
   "scripts": {
