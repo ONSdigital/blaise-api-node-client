@@ -1,4 +1,3 @@
-//TODO: update instrument as some properties are populated in TOBI
 interface Instrument {
     installDate: string;
     name: string;
@@ -14,7 +13,6 @@ interface Instrument {
     hasData?: boolean;
     active?: boolean;
 }
-
 interface InstallInstrument {
     instrumentName: string;
     instrumentFile: string;
@@ -23,5 +21,4 @@ interface InstallInstrument {
 interface InstallInstrumentResponse {
     instrumentFile: string;
 }
-
 export type { Instrument, InstallInstrument, InstallInstrumentResponse };
