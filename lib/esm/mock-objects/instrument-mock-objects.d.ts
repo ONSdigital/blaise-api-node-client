@@ -1,4 +1,4 @@
-export declare const instrumentListMockObject: {
+export declare const InstrumentListMockObject: {
     name: string;
     serverParkName: string;
     installDate: string;
@@ -7,7 +7,7 @@ export declare const instrumentListMockObject: {
     hasData: boolean;
     active: boolean;
 }[];
-export declare const instrumentMockObject: {
+export declare const InstrumentMockObject: {
     name: string;
     serverParkName: string;
     installDate: string;
@@ -16,11 +16,11 @@ export declare const instrumentMockObject: {
     hasData: boolean;
     active: boolean;
 };
-export declare const installInstrumentMockObject: {
+export declare const InstallInstrumentMockObject: {
     instrumentName: string;
     instrumentFile: string;
     bucketPath: string;
 };
-export declare const installInstrumentResponseMockObject: {
+export declare const InstallInstrumentResponseMockObject: {
     instrumentFile: string;
 };

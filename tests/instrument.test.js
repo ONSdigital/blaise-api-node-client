@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import 'regenerator-runtime/runtime'
 import BlaiseApiClient from "../src/blaise-api-client";
-import {instrumentListMockObject, instrumentMockObject, installInstrumentMockObject, installInstrumentResponseMockObject} from "../src/mock-objects/instrument-mock-objects";
+import {InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject} from "../src/mock-objects/instrument-mock-objects";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri"
@@ -13,7 +13,7 @@ describe("BlaiseRestapiClient", () => {
   describe("get all instruments with Cati data", () => {
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/instruments`).reply(200,
-        instrumentListMockObject,
+        InstrumentListMockObject,
       );
     });
 
@@ -24,7 +24,7 @@ describe("BlaiseRestapiClient", () => {
     it("returns a list of all instruments including CATI data", async () => {
       let instruments = await blaiseApiClient.getAllInstrumentsWithCatiData();
 
-      expect(instruments).toEqual(instrumentListMockObject);
+      expect(instruments).toEqual(InstrumentListMockObject);
     });
   });
 
@@ -33,7 +33,7 @@ describe("BlaiseRestapiClient", () => {
 
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments`).reply(200,
-        instrumentListMockObject,
+        InstrumentListMockObject,
       );
     });
 
@@ -44,7 +44,7 @@ describe("BlaiseRestapiClient", () => {
     it("returns a list of all instruments including CATI data within a serverpark", async () => {
       let instruments = await blaiseApiClient.getInstrumentsWithCatiData(serverpark);
 
-      expect(instruments).toEqual(instrumentListMockObject);
+      expect(instruments).toEqual(InstrumentListMockObject);
     });
   });
 
@@ -52,8 +52,8 @@ describe("BlaiseRestapiClient", () => {
     const serverpark = "test";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentMockObject.name}`).reply(200,
-        instrumentMockObject,
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}`).reply(200,
+        InstrumentMockObject,
       );
     });
 
@@ -62,9 +62,9 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("returns an instrument including CATI data", async () => {
-      let instrument = await blaiseApiClient.getInstrumentWithCatiData(serverpark, instrumentMockObject.name);
+      let instrument = await blaiseApiClient.getInstrumentWithCatiData(serverpark, InstrumentMockObject.name);
 
-      expect(instrument).toEqual(instrumentMockObject);
+      expect(instrument).toEqual(InstrumentMockObject);
     });
   });
 
@@ -73,7 +73,7 @@ describe("BlaiseRestapiClient", () => {
 
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments`).reply(200,
-        instrumentListMockObject,
+        InstrumentListMockObject,
       );
     });
 
@@ -84,7 +84,7 @@ describe("BlaiseRestapiClient", () => {
     it("returns a list of instruments in a serverpark", async () => {
       let instruments = await blaiseApiClient.getInstruments(serverpark);
 
-      expect(instruments).toEqual(instrumentListMockObject);
+      expect(instruments).toEqual(InstrumentListMockObject);
     });
   });
 
@@ -92,8 +92,8 @@ describe("BlaiseRestapiClient", () => {
     const serverpark = "test";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentMockObject.name}`).reply(200,
-        instrumentMockObject,
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}`).reply(200,
+        InstrumentMockObject,
       );
     });
 
@@ -102,9 +102,9 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("returns an instrument", async () => {
-      let instrument = await blaiseApiClient.getInstrument(serverpark, instrumentMockObject.name);
+      let instrument = await blaiseApiClient.getInstrument(serverpark, InstrumentMockObject.name);
 
-      expect(instrument).toEqual(instrumentMockObject);
+      expect(instrument).toEqual(InstrumentMockObject);
     });
   });
 
@@ -112,7 +112,7 @@ describe("BlaiseRestapiClient", () => {
     const serverpark = "test";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentMockObject.name}/exists`).reply(200,
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/exists`).reply(200,
         true,
       );
     });
@@ -122,7 +122,7 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("returns an instrument", async () => {
-      let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentMockObject.name);
+      let exists = await blaiseApiClient.instrumentExists(serverpark, InstrumentMockObject.name);
 
       expect(exists).toEqual(true);
     });
@@ -133,7 +133,7 @@ describe("BlaiseRestapiClient", () => {
 
     beforeEach(() => {
       mock.onPost(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments`).reply(201,
-        installInstrumentResponseMockObject,
+        InstallInstrumentResponseMockObject,
       );
     });
 
@@ -142,9 +142,9 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("installs an instrument and returns the instrument file", async () => {
-      let instrument = await blaiseApiClient.installInstrument(serverpark, installInstrumentMockObject);
+      let instrument = await blaiseApiClient.installInstrument(serverpark, InstallInstrumentMockObject);
 
-      expect(instrument).toEqual(installInstrumentResponseMockObject);
+      expect(instrument).toEqual(InstallInstrumentResponseMockObject);
     });
   });
 

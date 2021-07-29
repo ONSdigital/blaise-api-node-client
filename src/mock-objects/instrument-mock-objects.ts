@@ -1,4 +1,4 @@
-export const instrumentListMockObject = [{
+export const InstrumentListMockObject = [{
     name: "OPN2101A",
     serverParkName: "gusty",
     installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -24,7 +24,7 @@ export const instrumentListMockObject = [{
     active: false,
 }];
 
-export const instrumentMockObject = {
+export const InstrumentMockObject = {
     name: "OPN2101A",
     serverParkName: "gusty",
     installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -34,12 +34,12 @@ export const instrumentMockObject = {
     active: false,
 };
 
-export const installInstrumentMockObject = {
+export const InstallInstrumentMockObject = {
       instrumentName: "OPN2004A",
       instrumentFile: "OPN2004A.bpkg",
       bucketPath: "/"
     };
 
-export const installInstrumentResponseMockObject = {
+export const InstallInstrumentResponseMockObject = {
       instrumentFile: "OPN2004A.bpkg"
     };
