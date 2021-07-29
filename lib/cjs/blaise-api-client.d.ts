@@ -1,6 +1,7 @@
 import { AxiosInstance } from "axios";
 import { Instrument, InstallInstrument, InstallInstrumentResponse } from "./interfaces/instrument";
 import { Diagnostic } from "./interfaces/diagnostic";
+import { DiagnosticMockOject } from "./mock-objects/diagnostic-mock-objects";
 declare class BlaiseApiClient {
     blaise_api_url: string;
     httpClient: AxiosInstance;
@@ -21,3 +22,4 @@ declare class BlaiseApiClient {
 }
 export default BlaiseApiClient;
 export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic };
+export { DiagnosticMockOject };

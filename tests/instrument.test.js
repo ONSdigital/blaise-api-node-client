@@ -28,7 +28,6 @@ describe("BlaiseRestapiClient", () => {
     });
   });
 
-
   describe("get instruments with Cati data", () => {
     const serverpark = "test";
 
@@ -49,7 +48,7 @@ describe("BlaiseRestapiClient", () => {
     });
   });
 
-  describe("getInstrumentWithCatiData", () => {
+  describe("get instrument with Cati data", () => {
     const serverpark = "test";
 
     beforeEach(() => {
@@ -109,6 +108,26 @@ describe("BlaiseRestapiClient", () => {
     });
   });
 
+  describe("get whether instrument exists", () => {
+    const serverpark = "test";
+
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentMockObject.name}/exists`).reply(200,
+        true,
+      );
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns an instrument", async () => {
+      let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentMockObject.name);
+
+      expect(exists).toEqual(true);
+    });
+  });
+
   describe("installInstrument", () => {
     const serverpark = "test";
 
@@ -144,9 +163,9 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("deletes an instrument", async () => {
-      let instrument = await blaiseApiClient.deleteInstrument(serverpark, instrumentName);
+      let result = await blaiseApiClient.deleteInstrument(serverpark, instrumentName);
 
-      expect(instrument).toBeNull();
+      expect(result).toBeNull();
     });
   });
 });

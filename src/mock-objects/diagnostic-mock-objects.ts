@@ -1,4 +1,4 @@
-export const diagnosticMockOject = [
+export const DiagnosticMockOject = [
     {"health check type": "Connection model", status: "OK"},
     {"health check type": "Blaise connection", status: "OK"},
     {"health check type": "Remote data server connection", status: "OK"},
