@@ -14,9 +14,7 @@ interface Instrument {
     active?: boolean;
 }
 interface InstallInstrument {
-    instrumentName: string;
     instrumentFile: string;
-    bucketPath: string;
 }
 interface InstallInstrumentResponse {
     instrumentFile: string;
