@@ -15,9 +15,7 @@ interface Instrument {
 }
 
 interface InstallInstrument {
-    instrumentName: string
     instrumentFile: string
-    bucketPath: string
 }
 
 interface InstallInstrumentResponse {
