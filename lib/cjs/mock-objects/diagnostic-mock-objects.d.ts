@@ -1,4 +1,4 @@
-export declare const DiagnosticMockOject: {
+export declare const DiagnosticMockObject: {
     "health check type": string;
     status: string;
 }[];
