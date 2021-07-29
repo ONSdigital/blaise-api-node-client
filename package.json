@@ -6,9 +6,9 @@
     ]
   },
   "version": "1.0.0",
-  "module": "./lib/esm/blaise-api-client.js",
-  "main": "./lib/cjs/blaise-api-client.js",
-  "types": "./lib/esm/blaise-api-client.d.ts",
+  "module": "lib/esm/blaise-api-client.js",
+  "main": "lib/cjs/blaise-api-client.js",
+  "types": "lib/esm/blaise-api-client.d.ts",
   "license": "MIT",
   "scripts": {
     "build": "yarn build:esm && yarn build:cjs",
