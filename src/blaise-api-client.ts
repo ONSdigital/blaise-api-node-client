@@ -28,6 +28,11 @@ class BlaiseApiClient {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments`);
   }
 
+  //do tests!
+  async instrumentExists(serverpark: string, instrumentName: string): Promise<boolean> {
+    return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/exists`)
+  }
+
   async getInstrument(serverpark: string, instrumentName: string): Promise<Instrument> {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}`);
   }
