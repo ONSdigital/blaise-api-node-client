@@ -11,7 +11,8 @@ class BlaiseApiClient {
   constructor(blaise_api_url: string) {
     this.blaise_api_url = blaise_api_url;
     this.httpClient = axios.create();
-    this.httpClient.defaults.timeout = 10000;
+    // Removing as DQS request like install takes it time.
+    // this.httpClient.defaults.timeout = 10000;
   }
 
   async getAllInstrumentsWithCatiData(): Promise<Instrument[]> {
