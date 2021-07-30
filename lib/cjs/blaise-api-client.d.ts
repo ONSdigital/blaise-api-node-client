@@ -12,6 +12,7 @@ declare class BlaiseApiClient {
     getInstrumentWithCatiData(serverpark: string, instrumentName: string): Promise<Instrument>;
     getInstruments(serverpark: string): Promise<Instrument[]>;
     instrumentExists(serverpark: string, instrumentName: string): Promise<boolean>;
+    doesInstrumentHaveMode(serverpark: string, instrumentName: string, mode: string): Promise<boolean>;
     getInstrument(serverpark: string, instrumentName: string): Promise<Instrument>;
     installInstrument(serverpark: string, instrument: InstallInstrument): Promise<InstallInstrumentResponse>;
     deleteInstrument(serverpark: string, instrumentName: string): Promise<null>;

@@ -36,6 +36,11 @@ class BlaiseApiClient {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/exists`)
   }
 
+  //do tests!
+  async doesInstrumentHaveMode(serverpark: string, instrumentName: string, mode: string): Promise<boolean> {
+    return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/modes/${mode}`)
+  }
+
   async getInstrument(serverpark: string, instrumentName: string): Promise<Instrument> {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}`);
   }
