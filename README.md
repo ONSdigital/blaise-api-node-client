@@ -26,5 +26,5 @@ const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`);
 Mock objects are available for use in tests
 
 ```
-import {instrumentListMockObject, instrumentMockObject, installInstrumentMockObject, installInstrumentResponseMockObject, diagnosticMockOject} from "blaise-api-node-client";
+const {DiagnosticMockObject, InstrumentListMockObject, InstrumentMockObject} = jest.requireActual("blaise-api-node-client");
 ```
