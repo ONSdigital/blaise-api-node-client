@@ -21,6 +21,17 @@ Declare and consume the client by passing the URL of the rest api:
 const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`);
 ```
 
+Declare timeout for the HTTP client:
+```
+The client accpets a timeout in milliseconds (timeoutInMs) number parameter if you wish to explicitly set
+a timeout for the client. If this parameter is not passed then the default is used.
+
+To specify a timeout you need to instantiate the client as follows, where 1000 is the 
+timeout required:
+
+const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`, 1000);
+```
+
 ### Mock objects
 
 Mock objects are available for use in tests
