@@ -202,4 +202,26 @@ describe("BlaiseRestapiClient", () => {
       expect(result).toBeNull();
     });
   });
+
+describe("get a list of case ids for in instrument", () => {
+    const serverpark = "test";
+    const instrumentInstalled = "OPN2101A";
+    const instrumentNotInstalled = "OPN2102B";
+
+    const expectedCaseIds =["100002", "100003"];
+
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/cases/ids`).reply(200, expectedCaseIds);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns expected list of ids", async () => {
+      let caseIds = await blaiseApiClient.getInstrumentCaseIds(serverpark, instrumentInstalled);
+
+      expect(caseIds).toEqual(expectedCaseIds);
+    });
+  });
 });

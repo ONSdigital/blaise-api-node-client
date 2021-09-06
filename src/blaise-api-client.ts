@@ -53,6 +53,10 @@ class BlaiseApiClient {
     return this.delete(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}?name=${instrumentName}`);
   }
 
+  async getInstrumentCaseIds(serverpark: string, instrumentName: string): Promise<string[]> {
+    return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/ids`);
+  }
+
   async getDiagnostics(): Promise<Diagnostic[]> {
     return this.get("/api/v1/health/diagnosis");
   }
