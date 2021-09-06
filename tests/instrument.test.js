@@ -110,21 +110,55 @@ describe("BlaiseRestapiClient", () => {
 
   describe("get whether instrument exists", () => {
     const serverpark = "test";
+    const instrumentInstalled = "OPN2101A";
+    const instrumentNotInstalled = "OPN2102B";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/exists`).reply(200,
-        true,
-      );
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/exists`).reply(200, true,);
+       mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentNotInstalled}/exists`).reply(200, false,);
     });
 
     afterEach(() => {
       mock.reset();
     });
 
-    it("returns an instrument", async () => {
-      let exists = await blaiseApiClient.instrumentExists(serverpark, InstrumentMockObject.name);
+    it("returns true if it exists", async () => {
+      let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentInstalled);
 
       expect(exists).toEqual(true);
+    });
+
+    it("returns false if it does not exist", async () => {
+      let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentNotInstalled);
+
+      expect(exists).toEqual(false);
+    });
+  });
+
+  describe("get whether instrument has mode", () => {
+    const serverpark = "test";
+    const hasMode = "CATI";
+    const doesntHaveMode = "WEB";
+
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes/${hasMode}`).reply(200, true,);
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes/${doesntHaveMode}`).reply(200, false,);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns true if instrument has mode", async () => {
+      let exists = await blaiseApiClient.doesInstrumentHaveMode(serverpark, InstrumentMockObject.name, hasMode);
+
+      expect(exists).toEqual(true);
+    });
+
+    it("returns false if instrument does not have mode", async () => {
+      let exists = await blaiseApiClient.doesInstrumentHaveMode(serverpark, InstrumentMockObject.name, doesntHaveMode);
+
+      expect(exists).toEqual(false);
     });
   });
 
@@ -166,6 +200,28 @@ describe("BlaiseRestapiClient", () => {
       let result = await blaiseApiClient.deleteInstrument(serverpark, instrumentName);
 
       expect(result).toBeNull();
+    });
+  });
+
+describe("get a list of case ids for in instrument", () => {
+    const serverpark = "test";
+    const instrumentInstalled = "OPN2101A";
+    const instrumentNotInstalled = "OPN2102B";
+
+    const expectedCaseIds =["100002", "100003"];
+
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/cases/ids`).reply(200, expectedCaseIds);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns expected list of ids", async () => {
+      let caseIds = await blaiseApiClient.getInstrumentCaseIds(serverpark, instrumentInstalled);
+
+      expect(caseIds).toEqual(expectedCaseIds);
     });
   });
 });

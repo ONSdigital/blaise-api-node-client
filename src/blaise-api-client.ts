@@ -8,11 +8,13 @@ class BlaiseApiClient {
   blaise_api_url: string;
   httpClient: AxiosInstance;
 
-  constructor(blaise_api_url: string) {
+  constructor(blaise_api_url: string, timeoutInMs?:number) {
     this.blaise_api_url = blaise_api_url;
     this.httpClient = axios.create();
-    // Removing as DQS request like install takes it time.
-    // this.httpClient.defaults.timeout = 10000;
+
+    if (typeof timeoutInMs !== 'undefined') {
+      this.httpClient.defaults.timeout = 10000;
+    }
   }
 
   async getAllInstrumentsWithCatiData(): Promise<Instrument[]> {
@@ -31,12 +33,10 @@ class BlaiseApiClient {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments`);
   }
 
-  //do tests!
   async instrumentExists(serverpark: string, instrumentName: string): Promise<boolean> {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/exists`)
   }
 
-  //do tests!
   async doesInstrumentHaveMode(serverpark: string, instrumentName: string, mode: string): Promise<boolean> {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/modes/${mode}`)
   }
@@ -51,6 +51,10 @@ class BlaiseApiClient {
 
   async deleteInstrument(serverpark: string, instrumentName: string): Promise<null> {
     return this.delete(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}?name=${instrumentName}`);
+  }
+
+  async getInstrumentCaseIds(serverpark: string, instrumentName: string): Promise<string[]> {
+    return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/ids`);
   }
 
   async getDiagnostics(): Promise<Diagnostic[]> {
