@@ -6,7 +6,7 @@ import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockOb
 declare class BlaiseApiClient {
     blaise_api_url: string;
     httpClient: AxiosInstance;
-    constructor(blaise_api_url: string);
+    constructor(blaise_api_url: string, timeoutInMs?: number);
     getAllInstrumentsWithCatiData(): Promise<Instrument[]>;
     getInstrumentsWithCatiData(serverpark: string): Promise<Instrument[]>;
     getInstrumentWithCatiData(serverpark: string, instrumentName: string): Promise<Instrument>;
@@ -16,6 +16,7 @@ declare class BlaiseApiClient {
     getInstrument(serverpark: string, instrumentName: string): Promise<Instrument>;
     installInstrument(serverpark: string, instrument: InstallInstrument): Promise<InstallInstrumentResponse>;
     deleteInstrument(serverpark: string, instrumentName: string): Promise<null>;
+    getInstrumentCaseIds(serverpark: string, instrumentName: string): Promise<string[]>;
     getDiagnostics(): Promise<Diagnostic[]>;
     private url;
     private get;
