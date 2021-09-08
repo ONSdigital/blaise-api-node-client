@@ -5,11 +5,11 @@ import BlaiseApiClient from "../src/blaise-api-client";
 import {InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject} from "../src/mock-objects/instrument-mock-objects";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
-const blaiseApiUrl = "testUri"
+const blaiseApiUrl = "testUri";
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
-describe("BlaiseRestapiClient", () => {
+describe("blaiseApiClient", () => {
   describe("get all instruments with Cati data", () => {
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/instruments`).reply(200,
