@@ -19,7 +19,7 @@ interface InstallInstrument {
 interface InstallInstrumentResponse {
     instrumentFile: string;
 }
-interface InstallInstrumentSettings {
+interface InstrumentSettings {
     type: string;
     saveSessionOnTimeout: boolean;
     saveSessionOnQuit: boolean;
@@ -28,4 +28,4 @@ interface InstallInstrumentSettings {
     sessionTimeout: number;
     applyRecordLocking: boolean;
 }
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, InstallInstrumentSettings };
+export type { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings };
