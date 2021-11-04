@@ -22,4 +22,14 @@ interface InstallInstrumentResponse {
     instrumentFile: string
 }
 
-export type { Instrument, InstallInstrument, InstallInstrumentResponse };
+interface InstallInstrumentSettings {
+    type: string
+    saveSessionOnTimeout: boolean
+    saveSessionOnQuit: boolean
+    deleteSessionOnTimeout: boolean
+    deleteSessionOnQuit: boolean
+    sessionTimeout: number
+    applyRecordLocking: boolean
+}
+
+export type {Instrument, InstallInstrument, InstallInstrumentResponse, InstallInstrumentSettings};
