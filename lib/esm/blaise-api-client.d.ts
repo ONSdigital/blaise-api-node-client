@@ -18,6 +18,8 @@ declare class BlaiseApiClient {
     deleteInstrument(serverpark: string, instrumentName: string): Promise<null>;
     getInstrumentCaseIds(serverpark: string, instrumentName: string): Promise<string[]>;
     getDiagnostics(): Promise<Diagnostic[]>;
+    getInstrumentModes(serverpark: string, instrumentName: string): Promise<string[]>;
+    getInstrumentSettings(serverpark: string, instrumentName: string): Promise<null>;
     private url;
     private get;
     private post;

@@ -24,3 +24,12 @@ export declare const InstallInstrumentMockObject: {
 export declare const InstallInstrumentResponseMockObject: {
     instrumentFile: string;
 };
+export declare const InstrumentSettingsMockList: {
+    type: string;
+    saveSessionOnTimeout: boolean;
+    saveSessionOnQuit: boolean;
+    deleteSessionOnTimeout: boolean;
+    deleteSessionOnQuit: boolean;
+    sessionTimeout: number;
+    applyRecordLocking: boolean;
+}[];

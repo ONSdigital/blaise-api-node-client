@@ -2,226 +2,270 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import 'regenerator-runtime/runtime'
 import BlaiseApiClient from "../src/blaise-api-client";
-import {InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject} from "../src/mock-objects/instrument-mock-objects";
+import {
+    InstrumentListMockObject,
+    InstrumentMockObject,
+    InstallInstrumentMockObject,
+    InstallInstrumentResponseMockObject, InstrumentSettingsMockList
+} from "../src/mock-objects/instrument-mock-objects";
 
-const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
+const mock = new MockAdapter(axios, {onNoMatch: "throwException"});
 const blaiseApiUrl = "testUri";
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
 describe("blaiseApiClient", () => {
-  describe("get all instruments with Cati data", () => {
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/instruments`).reply(200,
-        InstrumentListMockObject,
-      );
+    describe("get all instruments with Cati data", () => {
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/instruments`).reply(200,
+                InstrumentListMockObject,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns a list of all instruments including CATI data", async () => {
+            let instruments = await blaiseApiClient.getAllInstrumentsWithCatiData();
+
+            expect(instruments).toEqual(InstrumentListMockObject);
+        });
     });
 
-    afterEach(() => {
-      mock.reset();
+    describe("get instruments with Cati data", () => {
+        const serverpark = "test";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments`).reply(200,
+                InstrumentListMockObject,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns a list of all instruments including CATI data within a serverpark", async () => {
+            let instruments = await blaiseApiClient.getInstrumentsWithCatiData(serverpark);
+
+            expect(instruments).toEqual(InstrumentListMockObject);
+        });
     });
 
-    it("returns a list of all instruments including CATI data", async () => {
-      let instruments = await blaiseApiClient.getAllInstrumentsWithCatiData();
+    describe("get instrument with Cati data", () => {
+        const serverpark = "test";
 
-      expect(instruments).toEqual(InstrumentListMockObject);
-    });
-  });
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}`).reply(200,
+                InstrumentMockObject,
+            );
+        });
 
-  describe("get instruments with Cati data", () => {
-    const serverpark = "test";
+        afterEach(() => {
+            mock.reset();
+        });
 
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments`).reply(200,
-        InstrumentListMockObject,
-      );
-    });
+        it("returns an instrument including CATI data", async () => {
+            let instrument = await blaiseApiClient.getInstrumentWithCatiData(serverpark, InstrumentMockObject.name);
 
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it("returns a list of all instruments including CATI data within a serverpark", async () => {
-      let instruments = await blaiseApiClient.getInstrumentsWithCatiData(serverpark);
-
-      expect(instruments).toEqual(InstrumentListMockObject);
-    });
-  });
-
-  describe("get instrument with Cati data", () => {
-    const serverpark = "test";
-
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}`).reply(200,
-        InstrumentMockObject,
-      );
+            expect(instrument).toEqual(InstrumentMockObject);
+        });
     });
 
-    afterEach(() => {
-      mock.reset();
+    describe("get instruments", () => {
+        const serverpark = "test";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments`).reply(200,
+                InstrumentListMockObject,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns a list of instruments in a serverpark", async () => {
+            let instruments = await blaiseApiClient.getInstruments(serverpark);
+
+            expect(instruments).toEqual(InstrumentListMockObject);
+        });
     });
 
-    it("returns an instrument including CATI data", async () => {
-      let instrument = await blaiseApiClient.getInstrumentWithCatiData(serverpark, InstrumentMockObject.name);
+    describe("get instrument", () => {
+        const serverpark = "test";
 
-      expect(instrument).toEqual(InstrumentMockObject);
-    });
-  });
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}`).reply(200,
+                InstrumentMockObject,
+            );
+        });
 
-  describe("get instruments", () => {
-    const serverpark = "test";
+        afterEach(() => {
+            mock.reset();
+        });
 
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments`).reply(200,
-        InstrumentListMockObject,
-      );
-    });
+        it("returns an instrument", async () => {
+            let instrument = await blaiseApiClient.getInstrument(serverpark, InstrumentMockObject.name);
 
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it("returns a list of instruments in a serverpark", async () => {
-      let instruments = await blaiseApiClient.getInstruments(serverpark);
-
-      expect(instruments).toEqual(InstrumentListMockObject);
-    });
-  });
-
-  describe("get instrument", () => {
-    const serverpark = "test";
-
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}`).reply(200,
-        InstrumentMockObject,
-      );
+            expect(instrument).toEqual(InstrumentMockObject);
+        });
     });
 
-    afterEach(() => {
-      mock.reset();
+    describe("get whether instrument exists", () => {
+        const serverpark = "test";
+        const instrumentInstalled = "OPN2101A";
+        const instrumentNotInstalled = "OPN2102B";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/exists`).reply(200, true,);
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentNotInstalled}/exists`).reply(200, false,);
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns true if it exists", async () => {
+            let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentInstalled);
+
+            expect(exists).toEqual(true);
+        });
+
+        it("returns false if it does not exist", async () => {
+            let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentNotInstalled);
+
+            expect(exists).toEqual(false);
+        });
     });
 
-    it("returns an instrument", async () => {
-      let instrument = await blaiseApiClient.getInstrument(serverpark, InstrumentMockObject.name);
+    describe("get whether instrument has mode", () => {
+        const serverpark = "test";
+        const hasMode = "CATI";
+        const doesntHaveMode = "WEB";
 
-      expect(instrument).toEqual(InstrumentMockObject);
-    });
-  });
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes/${hasMode}`).reply(200, true,);
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes/${doesntHaveMode}`).reply(200, false,);
+        });
 
-  describe("get whether instrument exists", () => {
-    const serverpark = "test";
-    const instrumentInstalled = "OPN2101A";
-    const instrumentNotInstalled = "OPN2102B";
+        afterEach(() => {
+            mock.reset();
+        });
 
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/exists`).reply(200, true,);
-       mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentNotInstalled}/exists`).reply(200, false,);
-    });
+        it("returns true if instrument has mode", async () => {
+            let exists = await blaiseApiClient.doesInstrumentHaveMode(serverpark, InstrumentMockObject.name, hasMode);
 
-    afterEach(() => {
-      mock.reset();
-    });
+            expect(exists).toEqual(true);
+        });
 
-    it("returns true if it exists", async () => {
-      let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentInstalled);
+        it("returns false if instrument does not have mode", async () => {
+            let exists = await blaiseApiClient.doesInstrumentHaveMode(serverpark, InstrumentMockObject.name, doesntHaveMode);
 
-      expect(exists).toEqual(true);
-    });
-
-    it("returns false if it does not exist", async () => {
-      let exists = await blaiseApiClient.instrumentExists(serverpark, instrumentNotInstalled);
-
-      expect(exists).toEqual(false);
-    });
-  });
-
-  describe("get whether instrument has mode", () => {
-    const serverpark = "test";
-    const hasMode = "CATI";
-    const doesntHaveMode = "WEB";
-
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes/${hasMode}`).reply(200, true,);
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes/${doesntHaveMode}`).reply(200, false,);
+            expect(exists).toEqual(false);
+        });
     });
 
-    afterEach(() => {
-      mock.reset();
+    describe("installInstrument", () => {
+        const serverpark = "test";
+
+        beforeEach(() => {
+            mock.onPost(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments`).reply(201,
+                InstallInstrumentResponseMockObject,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("installs an instrument and returns the instrument file", async () => {
+            let instrument = await blaiseApiClient.installInstrument(serverpark, InstallInstrumentMockObject);
+
+            expect(instrument).toEqual(InstallInstrumentResponseMockObject);
+        });
     });
 
-    it("returns true if instrument has mode", async () => {
-      let exists = await blaiseApiClient.doesInstrumentHaveMode(serverpark, InstrumentMockObject.name, hasMode);
+    describe("delete instrument", () => {
+        const serverpark = "test";
+        const instrumentName = "OPN2004A";
 
-      expect(exists).toEqual(true);
+        beforeEach(() => {
+            mock.onDelete(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}?name=${instrumentName}`).reply(204,
+                null,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("deletes an instrument", async () => {
+            let result = await blaiseApiClient.deleteInstrument(serverpark, instrumentName);
+
+            expect(result).toBeNull();
+        });
     });
 
-    it("returns false if instrument does not have mode", async () => {
-      let exists = await blaiseApiClient.doesInstrumentHaveMode(serverpark, InstrumentMockObject.name, doesntHaveMode);
+    describe("get a list of case ids for in instrument", () => {
+        const serverpark = "test";
+        const instrumentInstalled = "OPN2101A";
+        const instrumentNotInstalled = "OPN2102B";
 
-      expect(exists).toEqual(false);
-    });
-  });
+        const expectedCaseIds = ["100002", "100003"];
 
-  describe("installInstrument", () => {
-    const serverpark = "test";
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/cases/ids`).reply(200, expectedCaseIds);
+        });
 
-    beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments`).reply(201,
-        InstallInstrumentResponseMockObject,
-      );
-    });
+        afterEach(() => {
+            mock.reset();
+        });
 
-    afterEach(() => {
-      mock.reset();
-    });
+        it("returns expected list of ids", async () => {
+            let caseIds = await blaiseApiClient.getInstrumentCaseIds(serverpark, instrumentInstalled);
 
-    it("installs an instrument and returns the instrument file", async () => {
-      let instrument = await blaiseApiClient.installInstrument(serverpark, InstallInstrumentMockObject);
-
-      expect(instrument).toEqual(InstallInstrumentResponseMockObject);
-    });
-  });
-
-  describe("delete instrument", () => {
-    const serverpark = "test";
-    const instrumentName = "OPN2004A";
-
-    beforeEach(() => {
-      mock.onDelete(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}?name=${instrumentName}`).reply(204,
-        null,
-      );
+            expect(caseIds).toEqual(expectedCaseIds);
+        });
     });
 
-    afterEach(() => {
-      mock.reset();
+    describe("get instrument modes", () => {
+        const serverpark = "test";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/modes`).reply(200, ["CATI", "CAWI"]);
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns list of modes for instrument", async () => {
+            let exists = await blaiseApiClient.getInstrumentModes(serverpark, InstrumentMockObject.name);
+
+            expect(exists).toContain("CATI", "CAWI");
+        });
+
     });
 
-    it("deletes an instrument", async () => {
-      let result = await blaiseApiClient.deleteInstrument(serverpark, instrumentName);
+    describe("get instrument settings", () => {
+        const serverpark = "test";
 
-      expect(result).toBeNull();
-    });
-  });
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${InstrumentMockObject.name}/settings`).reply(200, InstrumentSettingsMockList);
+        });
 
-describe("get a list of case ids for in instrument", () => {
-    const serverpark = "test";
-    const instrumentInstalled = "OPN2101A";
-    const instrumentNotInstalled = "OPN2102B";
+        afterEach(() => {
+            mock.reset();
+        });
 
-    const expectedCaseIds =["100002", "100003"];
+        it("returns list of settings for instrument", async () => {
+            let exists = await blaiseApiClient.getInstrumentSettings(serverpark, InstrumentMockObject.name);
 
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentInstalled}/cases/ids`).reply(200, expectedCaseIds);
-    });
+            expect(exists).toEqual(InstrumentSettingsMockList);
+        });
 
-    afterEach(() => {
-      mock.reset();
     });
 
-    it("returns expected list of ids", async () => {
-      let caseIds = await blaiseApiClient.getInstrumentCaseIds(serverpark, instrumentInstalled);
-
-      expect(caseIds).toEqual(expectedCaseIds);
-    });
-  });
 });

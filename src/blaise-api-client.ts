@@ -61,6 +61,14 @@ class BlaiseApiClient {
     return this.get("/api/v1/health/diagnosis");
   }
 
+  async getInstrumentModes(serverpark: string, instrumentName: string): Promise<string[]> {
+    return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/modes`);
+  }
+
+  async getInstrumentSettings(serverpark: string, instrumentName: string): Promise<null> {
+    return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/settings`);
+  }
+
   private url(url: string): string {
     if (!url.startsWith("/")) {
       url = `/${url}`;

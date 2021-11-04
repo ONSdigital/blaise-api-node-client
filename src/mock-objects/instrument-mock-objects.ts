@@ -35,11 +35,23 @@ export const InstrumentMockObject = {
 };
 
 export const InstallInstrumentMockObject = {
-      instrumentName: "OPN2004A",
-      instrumentFile: "OPN2004A.bpkg",
-      bucketPath: "/"
-    };
+    instrumentName: "OPN2004A",
+    instrumentFile: "OPN2004A.bpkg",
+    bucketPath: "/"
+};
 
 export const InstallInstrumentResponseMockObject = {
-      instrumentFile: "OPN2004A.bpkg"
-    };
+    instrumentFile: "OPN2004A.bpkg"
+};
+
+export const InstrumentSettingsMockList = [
+    {
+        "type": "StrictInterviewing",
+        "saveSessionOnTimeout": true,
+        "saveSessionOnQuit": true,
+        "deleteSessionOnTimeout": true,
+        "deleteSessionOnQuit": true,
+        "sessionTimeout": 15,
+        "applyRecordLocking": true
+    }
+];
