@@ -65,7 +65,7 @@ class BlaiseApiClient {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/modes`);
   }
 
-  async getInstrumentSettings(serverpark: string, instrumentName: string): Promise<InstrumentSettings> {
+  async getInstrumentSettings(serverpark: string, instrumentName: string): Promise<InstrumentSettings[]> {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/settings`);
   }
 
