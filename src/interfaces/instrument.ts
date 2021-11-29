@@ -44,6 +44,13 @@ interface DaybatchSettings {
 
 type SurveyDays = string[] | Date[]
 
+type CaseFields = Record<string, any>
+
+interface CaseResponse {
+    caseID: string
+    fieldData: CaseFields
+}
+
 export type {
     Instrument,
     InstallInstrument,
@@ -51,5 +58,7 @@ export type {
     InstrumentSettings,
     DaybatchResponse,
     DaybatchSettings,
-    SurveyDays
+    SurveyDays,
+    CaseFields,
+    CaseResponse
 };

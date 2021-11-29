@@ -284,9 +284,9 @@ describe("blaiseApiClient", () => {
         });
 
         it("returns a list of case IDs in the current daybatch", async () => {
-            let exists = await blaiseApiClient.getDaybatch(serverpark, instrumentName);
+            let daybatch = await blaiseApiClient.getDaybatch(serverpark, instrumentName);
 
-            expect(exists).toEqual(InstrumentDaybatchCasesMock);
+            expect(daybatch).toEqual(InstrumentDaybatchCasesMock);
         });
     })
 
@@ -305,9 +305,9 @@ describe("blaiseApiClient", () => {
         });
 
         it("installs an instrument and returns the instrument file", async () => {
-            let instrument = await blaiseApiClient.addDaybatch(serverpark, instrumentName, AddDaybatchMock);
+            let daybatch = await blaiseApiClient.addDaybatch(serverpark, instrumentName, AddDaybatchMock);
 
-            expect(instrument).toEqual(InstrumentDaybatchCasesMock);
+            expect(daybatch).toEqual(InstrumentDaybatchCasesMock);
         });
     })
 
@@ -324,9 +324,9 @@ describe("blaiseApiClient", () => {
         });
 
         it("returns a list of surveydays", async () => {
-            let exists = await blaiseApiClient.getSurveyDays(serverpark, instrumentName);
+            let surveyDays = await blaiseApiClient.getSurveyDays(serverpark, instrumentName);
 
-            expect(exists).toEqual(SurveyDaysMock);
+            expect(surveyDays).toEqual(SurveyDaysMock);
         });
     })
 
@@ -345,16 +345,64 @@ describe("blaiseApiClient", () => {
         });
 
         it("adds surveydays by strings", async () => {
-            let instrument = await blaiseApiClient.addSurveyDays(serverpark, instrumentName, SurveyDaysMock);
+            let surveyDays = await blaiseApiClient.addSurveyDays(serverpark, instrumentName, SurveyDaysMock);
 
-            expect(instrument).toEqual(SurveyDaysMock);
+            expect(surveyDays).toEqual(SurveyDaysMock);
         });
 
 
         it("adds surveydays by dates", async () => {
-            let instrument = await blaiseApiClient.addSurveyDays(serverpark, instrumentName, SurveyDaysDatesMock);
+            let surveyDays = await blaiseApiClient.addSurveyDays(serverpark, instrumentName, SurveyDaysDatesMock);
 
-            expect(instrument).toEqual(SurveyDaysMock);
+            expect(surveyDays).toEqual(SurveyDaysMock);
+        });
+    })
+
+    describe("get case", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+        const caseID = "100101;"
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`).reply(200, {
+                caseID: caseID,
+                fieldData: {}
+            });
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns a case", async () => {
+            let caseResponse = await blaiseApiClient.getCase(serverpark, instrumentName, caseID);
+
+            expect(caseResponse.caseID).toEqual(caseID);
+            expect(caseResponse.fieldData).toEqual({});
+        });
+    })
+
+    describe("add case", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+        const caseID = "100101;"
+
+        beforeEach(() => {
+            mock.onPost(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`).reply(200, {
+                caseID: caseID,
+                fieldData: {}
+            });
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("adds a case", async () => {
+            let caseResponse = await blaiseApiClient.addCase(serverpark, instrumentName, caseID, {});
+
+            expect(caseResponse.caseID).toEqual(caseID);
+            expect(caseResponse.fieldData).toEqual({});
         });
     })
 });

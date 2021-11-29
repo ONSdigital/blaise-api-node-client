@@ -33,3 +33,13 @@ export declare const InstrumentSettingsMockList: {
     sessionTimeout: number;
     applyRecordLocking: boolean;
 }[];
+export declare const InstrumentDaybatchCasesMock: {
+    dayBatchDate: string;
+    caseIds: string[];
+}[];
+export declare const AddDaybatchMock: {
+    dayBatchDate: string;
+    checkForTreatedCases: boolean;
+};
+export declare const SurveyDaysMock: string[];
+export declare const SurveyDaysDatesMock: Date[];

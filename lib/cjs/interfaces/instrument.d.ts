@@ -28,4 +28,18 @@ interface InstrumentSettings {
     sessionTimeout: number;
     applyRecordLocking: boolean;
 }
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings };
+interface DaybatchResponse {
+    dayBatchDate: string;
+    caseIDs: string[];
+}
+interface DaybatchSettings {
+    dayBatchDate: string;
+    checkForTreatedCases: boolean;
+}
+declare type SurveyDays = string[] | Date[];
+declare type CaseFields = Record<string, any>;
+interface CaseResponse {
+    caseID: string;
+    fieldData: CaseFields;
+}
+export type { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings, DaybatchResponse, DaybatchSettings, SurveyDays, CaseFields, CaseResponse };

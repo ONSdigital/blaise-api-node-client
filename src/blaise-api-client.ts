@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
-  DaybatchResponse, DaybatchSettings, SurveyDays} from "./interfaces/instrument";
+  DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields} from "./interfaces/instrument";
 import { Diagnostic  } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
@@ -90,6 +90,14 @@ class BlaiseApiClient {
       return surveyDay
     })
     return this.post(`api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/surveydays`, surveyDays)
+  }
+
+  async getCase(serverpark: string, instrumentName: string, caseID: string): Promise<CaseResponse> {
+    return this.get(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`)
+  }
+
+  async addCase(serverpark: string, instrumentName: string, caseID: string, caseFields: CaseFields): Promise<CaseResponse> {
+    return this.post(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`, caseFields)
   }
 
   private url(url: string): string {

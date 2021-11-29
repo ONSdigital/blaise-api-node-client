@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings } from "./interfaces/instrument";
+import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings, DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields } from "./interfaces/instrument";
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects";
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects";
@@ -20,6 +20,12 @@ declare class BlaiseApiClient {
     getDiagnostics(): Promise<Diagnostic[]>;
     getInstrumentModes(serverpark: string, instrumentName: string): Promise<string[]>;
     getInstrumentSettings(serverpark: string, instrumentName: string): Promise<InstrumentSettings[]>;
+    getDaybatch(serverpark: string, instrumentName: string): Promise<DaybatchResponse>;
+    addDaybatch(serverpark: string, instrumentName: string, daybatchSettings: DaybatchSettings): Promise<DaybatchResponse>;
+    getSurveyDays(serverpark: string, instrumentName: string): Promise<string[]>;
+    addSurveyDays(serverpark: string, instrumentName: string, surveyDays: SurveyDays): Promise<string[]>;
+    getCase(serverpark: string, instrumentName: string, caseID: string): Promise<CaseResponse>;
+    addCase(serverpark: string, instrumentName: string, caseID: string, caseFields: CaseFields): Promise<CaseResponse>;
     private url;
     private get;
     private post;
