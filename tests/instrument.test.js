@@ -6,7 +6,8 @@ import {
     InstrumentListMockObject,
     InstrumentMockObject,
     InstallInstrumentMockObject,
-    InstallInstrumentResponseMockObject, InstrumentSettingsMockList
+    InstallInstrumentResponseMockObject, InstrumentSettingsMockList,
+    InstrumentDaybatchCasesMock, AddDaybatchMock
 } from "../src/mock-objects/instrument-mock-objects";
 
 const mock = new MockAdapter(axios, {onNoMatch: "throwException"});
@@ -268,4 +269,44 @@ describe("blaiseApiClient", () => {
 
     });
 
+
+    describe("get daybatch", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/daybatch`).reply(200, InstrumentDaybatchCasesMock);
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns a list of case IDs in the current daybatch", async () => {
+            let exists = await blaiseApiClient.getDaybatch(serverpark, instrumentName);
+
+            expect(exists).toEqual(InstrumentDaybatchCasesMock);
+        });
+    })
+
+    describe("add daybatch", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onPost(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/daybatch`).reply(201,
+                InstrumentDaybatchCasesMock,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("installs an instrument and returns the instrument file", async () => {
+            let instrument = await blaiseApiClient.addDaybatch(serverpark, instrumentName, AddDaybatchMock);
+
+            expect(instrument).toEqual(InstrumentDaybatchCasesMock);
+        });
+    })
 });

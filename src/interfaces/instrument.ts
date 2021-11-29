@@ -32,4 +32,21 @@ interface InstrumentSettings {
     applyRecordLocking: boolean
 }
 
-export type {Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings};
+interface DaybatchResponse {
+    dayBatchDate: string
+    caseIDs: string[]
+}
+
+interface DaybatchSettings {
+    dayBatchDate: string
+    checkForTreatedCases: boolean
+}
+
+export type {
+    Instrument,
+    InstallInstrument,
+    InstallInstrumentResponse,
+    InstrumentSettings,
+    DaybatchResponse,
+    DaybatchSettings
+};

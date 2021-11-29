@@ -55,3 +55,20 @@ export const InstrumentSettingsMockList = [
         "applyRecordLocking": true
     }
 ];
+
+export const InstrumentDaybatchCasesMock = [
+    {
+        "dayBatchDate": "2021-01-15T14:41:29.4399898+00:00",
+        "caseIds": [
+            "100101",
+            "100102",
+            "100103",
+            "100104"
+        ]
+    }
+]
+
+export const AddDaybatchMock = {
+    "dayBatchDate": "2021-01-15T14:41:29.4399898+00:00",
+    "checkForTreatedCases": true
+}

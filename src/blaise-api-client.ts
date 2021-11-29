@@ -1,5 +1,6 @@
 import axios, { AxiosInstance } from "axios";
-import {Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings} from "./interfaces/instrument";
+import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
+  DaybatchResponse, DaybatchSettings} from "./interfaces/instrument";
 import { Diagnostic  } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
@@ -69,6 +70,14 @@ class BlaiseApiClient {
     return this.get(`/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/settings`);
   }
 
+  async getDaybatch(serverpark: string, instrumentName: string): Promise<DaybatchResponse> {
+    return this.get(`/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/daybatch`);
+  }
+
+  async addDaybatch(serverpark: string, instrumentName: string, daybatchSettings: DaybatchSettings): Promise<DaybatchResponse> {
+    return this.post(`/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/daybatch`, daybatchSettings)
+  }
+
   private url(url: string): string {
     if (!url.startsWith("/")) {
       url = `/${url}`;
@@ -99,4 +108,10 @@ export default BlaiseApiClient;
 
 export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings };
 export { DiagnosticMockObject }
-export { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList }
+export {
+  InstrumentListMockObject,
+  InstrumentMockObject,
+  InstallInstrumentMockObject,
+  InstallInstrumentResponseMockObject,
+  InstrumentSettingsMockList
+}
