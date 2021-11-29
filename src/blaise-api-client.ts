@@ -128,7 +128,18 @@ class BlaiseApiClient {
 
 export default BlaiseApiClient;
 
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings };
+export type {
+  Instrument,
+  InstallInstrument,
+  InstallInstrumentResponse,
+  Diagnostic,
+  InstrumentSettings,
+  CaseFields,
+  CaseResponse,
+  SurveyDays,
+  DaybatchResponse,
+  DaybatchSettings
+};
 export { DiagnosticMockObject }
 export {
   InstrumentListMockObject,

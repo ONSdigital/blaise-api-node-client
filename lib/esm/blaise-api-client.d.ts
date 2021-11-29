@@ -32,6 +32,6 @@ declare class BlaiseApiClient {
     private delete;
 }
 export default BlaiseApiClient;
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings };
+export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings };
 export { DiagnosticMockObject };
 export { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList };
