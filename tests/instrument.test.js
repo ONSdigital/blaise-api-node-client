@@ -7,7 +7,8 @@ import {
     InstrumentMockObject,
     InstallInstrumentMockObject,
     InstallInstrumentResponseMockObject, InstrumentSettingsMockList,
-    InstrumentDaybatchCasesMock, AddDaybatchMock
+    InstrumentDaybatchCasesMock, AddDaybatchMock,
+    SurveyDaysMock, SurveyDaysDatesMock
 } from "../src/mock-objects/instrument-mock-objects";
 
 const mock = new MockAdapter(axios, {onNoMatch: "throwException"});
@@ -307,6 +308,53 @@ describe("blaiseApiClient", () => {
             let instrument = await blaiseApiClient.addDaybatch(serverpark, instrumentName, AddDaybatchMock);
 
             expect(instrument).toEqual(InstrumentDaybatchCasesMock);
+        });
+    })
+
+    describe("get survey days", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/surveydays`).reply(200, SurveyDaysMock);
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("returns a list of surveydays", async () => {
+            let exists = await blaiseApiClient.getSurveyDays(serverpark, instrumentName);
+
+            expect(exists).toEqual(SurveyDaysMock);
+        });
+    })
+
+    describe("add survey days", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onPost(`http://${blaiseApiUrl}/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/surveydays`).reply(201,
+                SurveyDaysMock,
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("adds surveydays by strings", async () => {
+            let instrument = await blaiseApiClient.addSurveyDays(serverpark, instrumentName, SurveyDaysMock);
+
+            expect(instrument).toEqual(SurveyDaysMock);
+        });
+
+
+        it("adds surveydays by dates", async () => {
+            let instrument = await blaiseApiClient.addSurveyDays(serverpark, instrumentName, SurveyDaysDatesMock);
+
+            expect(instrument).toEqual(SurveyDaysMock);
         });
     })
 });

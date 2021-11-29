@@ -42,11 +42,14 @@ interface DaybatchSettings {
     checkForTreatedCases: boolean
 }
 
+type SurveyDays = string[] | Date[]
+
 export type {
     Instrument,
     InstallInstrument,
     InstallInstrumentResponse,
     InstrumentSettings,
     DaybatchResponse,
-    DaybatchSettings
+    DaybatchSettings,
+    SurveyDays
 };

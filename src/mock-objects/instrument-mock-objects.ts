@@ -72,3 +72,11 @@ export const AddDaybatchMock = {
     "dayBatchDate": "2021-01-15T14:41:29.4399898+00:00",
     "checkForTreatedCases": true
 }
+
+export const SurveyDaysMock = [
+    "2021-01-15T14:41:29.4399898+00:00"
+]
+
+export const SurveyDaysDatesMock = [
+    new Date("2021-01-15T14:41:29.4399898+00:00")
+]

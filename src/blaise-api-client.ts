@@ -1,6 +1,6 @@
 import axios, { AxiosInstance } from "axios";
 import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
-  DaybatchResponse, DaybatchSettings} from "./interfaces/instrument";
+  DaybatchResponse, DaybatchSettings, SurveyDays} from "./interfaces/instrument";
 import { Diagnostic  } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
@@ -76,6 +76,20 @@ class BlaiseApiClient {
 
   async addDaybatch(serverpark: string, instrumentName: string, daybatchSettings: DaybatchSettings): Promise<DaybatchResponse> {
     return this.post(`/api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/daybatch`, daybatchSettings)
+  }
+
+  async getSurveyDays(serverpark: string, instrumentName: string): Promise<string[]> {
+    return this.get(`api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/surveydays`)
+  }
+
+  async addSurveyDays(serverpark: string, instrumentName: string, surveyDays: SurveyDays): Promise<string[]> {
+    surveyDays = surveyDays.map((surveyDay: string | Date) => {
+      if (surveyDay instanceof Date) {
+        return surveyDay.toString()
+      }
+      return surveyDay
+    })
+    return this.post(`api/v1/cati/serverparks/${serverpark}/instruments/${instrumentName}/surveydays`, surveyDays)
   }
 
   private url(url: string): string {
