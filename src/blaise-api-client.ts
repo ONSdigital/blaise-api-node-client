@@ -85,7 +85,7 @@ class BlaiseApiClient {
   async addSurveyDays(serverpark: string, instrumentName: string, surveyDays: SurveyDays): Promise<string[]> {
     surveyDays = surveyDays.map((surveyDay: string | Date) => {
       if (surveyDay instanceof Date) {
-        return surveyDay.toString()
+        return surveyDay.toISOString()
       }
       return surveyDay
     })
