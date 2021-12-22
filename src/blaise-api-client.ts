@@ -100,6 +100,14 @@ class BlaiseApiClient {
     return this.post(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`, caseFields)
   }
 
+  async activateInstrument(serverpark: string, instrumentName: string): Promise<null> {
+    return this.patch(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/activate`)
+  }
+
+  async deactivateInstrument(serverpark: string, instrumentName: string): Promise<null> {
+    return this.patch(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/deactivate`)
+  }
+
   private url(url: string): string {
     if (!url.startsWith("/")) {
       url = `/${url}`;
@@ -122,6 +130,12 @@ class BlaiseApiClient {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async delete(url: string): Promise<any> {
     const response = await this.httpClient.delete(`${this.blaise_api_url}${this.url(url)}`);
+    return response.data;
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  private async patch(url: string): Promise<any> {
+    const response = await this.httpClient.patch(`${this.blaise_api_url}${this.url(url)}`);
     return response.data;
   }
 }

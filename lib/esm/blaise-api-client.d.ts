@@ -26,10 +26,13 @@ declare class BlaiseApiClient {
     addSurveyDays(serverpark: string, instrumentName: string, surveyDays: SurveyDays): Promise<string[]>;
     getCase(serverpark: string, instrumentName: string, caseID: string): Promise<CaseResponse>;
     addCase(serverpark: string, instrumentName: string, caseID: string, caseFields: CaseFields): Promise<CaseResponse>;
+    activateInstrument(serverpark: string, instrumentName: string): Promise<null>;
+    deactivateInstrument(serverpark: string, instrumentName: string): Promise<null>;
     private url;
     private get;
     private post;
     private delete;
+    private patch;
 }
 export default BlaiseApiClient;
 export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings };

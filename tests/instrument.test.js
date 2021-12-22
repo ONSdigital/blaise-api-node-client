@@ -405,4 +405,42 @@ describe("blaiseApiClient", () => {
             expect(caseResponse.fieldData).toEqual({});
         });
     })
+
+    describe("activate instrument", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onPatch(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/activate`).reply(204, null);
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("activates an instrument", async() => {
+            let result = await blaiseApiClient.activateInstrument(serverpark, instrumentName);
+
+            expect(result).toBeNull();
+        })
+    })
+
+    describe("deactivate instrument", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onPatch(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/deactivate`).reply(204, null);
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("deactivates an instrument", async () => {
+            let result = await blaiseApiClient.deactivateInstrument(serverpark, instrumentName);
+
+            expect(result).toBeNull();
+        })
+    })
 });
