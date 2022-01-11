@@ -51,6 +51,26 @@ interface CaseResponse {
     fieldData: CaseFields
 }
 
+interface CaseStatus {
+    caseID: string,
+    ouutcome: Outcome,
+}
+
+enum Outcome {
+    Completed = 110,
+    Partial = 210,
+    NonContact = 310,
+    HQRefusal = 430,
+    NotAvailable = 440,
+    HardRefusal = 460,
+    SoftRefusal = 461,
+    LanguageDifficultiesHeadOffice = 541,
+    LanguageDifficultiesInterviewer = 542,
+    DeleteRequestedCompleted = 561,
+    DeleteRequestedPartial = 562,
+    Ineligible = 580
+}
+
 export type {
     Instrument,
     InstallInstrument,
@@ -60,5 +80,7 @@ export type {
     DaybatchSettings,
     SurveyDays,
     CaseFields,
-    CaseResponse
+    CaseResponse,
+    CaseStatus,
+    Outcome
 };
