@@ -68,7 +68,7 @@ declare enum Outcome {
     IneligibleSecondHome = 580,
     ConcernsWontTakePart = 360,
     RejectTandCs = 380,
-    LostAccessCide = 373,
+    LostAccessCode = 373,
     UnableToComplete = 370,
     NoInternetAccess = 371,
     RequestedDifferentMode = 372,
