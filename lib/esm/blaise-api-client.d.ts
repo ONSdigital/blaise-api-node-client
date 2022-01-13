@@ -1,5 +1,5 @@
 import { AxiosInstance } from "axios";
-import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings, DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields } from "./interfaces/instrument";
+import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings, DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields, CaseStatus, Outcome } from "./interfaces/instrument";
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects";
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects";
@@ -28,6 +28,7 @@ declare class BlaiseApiClient {
     addCase(serverpark: string, instrumentName: string, caseID: string, caseFields: CaseFields): Promise<CaseResponse>;
     activateInstrument(serverpark: string, instrumentName: string): Promise<null>;
     deactivateInstrument(serverpark: string, instrumentName: string): Promise<null>;
+    getCaseStatus(serverpark: string, instrumentName: string): Promise<CaseStatus[]>;
     private url;
     private get;
     private post;
@@ -35,6 +36,6 @@ declare class BlaiseApiClient {
     private patch;
 }
 export default BlaiseApiClient;
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings };
+export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings, CaseStatus };
 export { DiagnosticMockObject };
-export { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList };
+export { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList, Outcome };

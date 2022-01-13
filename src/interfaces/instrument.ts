@@ -52,11 +52,12 @@ interface CaseResponse {
 }
 
 interface CaseStatus {
-    caseID: string,
-    ouutcome: Outcome,
+    primaryKey: string,
+    outcome: Outcome,
 }
 
 enum Outcome {
+    None = 0,
     Completed = 110,
     CompletedNudge = 120,
     Partial = 210,
@@ -106,5 +107,6 @@ export type {
     CaseFields,
     CaseResponse,
     CaseStatus,
-    Outcome
 };
+
+export { Outcome };

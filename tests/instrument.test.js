@@ -10,8 +10,9 @@ import {
     InstrumentDaybatchCasesMock, AddDaybatchMock,
     SurveyDaysMock, SurveyDaysDatesMock
 } from "../src/mock-objects/instrument-mock-objects";
+import { Outcome } from "../src/interfaces/instrument";
 
-const mock = new MockAdapter(axios, {onNoMatch: "throwException"});
+const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
@@ -418,7 +419,7 @@ describe("blaiseApiClient", () => {
             mock.reset();
         });
 
-        it("activates an instrument", async() => {
+        it("activates an instrument", async () => {
             let result = await blaiseApiClient.activateInstrument(serverpark, instrumentName);
 
             expect(result).toBeNull();
@@ -442,5 +443,47 @@ describe("blaiseApiClient", () => {
 
             expect(result).toBeNull();
         })
+    })
+
+    describe("get cases status", () => {
+        const serverpark = "test";
+        const instrumentName = "dst2108t";
+
+        beforeEach(() => {
+            mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/status`).reply(200,
+                [
+                    {
+                        "primaryKey": "1",
+                        "outcome": 110
+                    },
+                    {
+                        "primaryKey": "2",
+                        "outcome": 310
+                    },
+                    {
+                        "primaryKey": "3",
+                        "outcome": 0
+                    }
+                ]
+            );
+        });
+
+        afterEach(() => {
+            mock.reset();
+        });
+
+        it("gets all cases and outcome codes for a given instrument", async () => {
+            let result = await blaiseApiClient.getCaseStatus(serverpark, instrumentName);
+
+            expect(result).toHaveLength(3);
+            expect(result[0].primaryKey).toEqual("1")
+            expect(result[0].outcome).toEqual(110)
+            expect(result[0].outcome).toEqual(Outcome.Completed)
+            expect(result[1].primaryKey).toEqual("2")
+            expect(result[1].outcome).toEqual(Outcome.NonContact)
+            expect(result[2].primaryKey).toEqual("3")
+            expect(result[2].outcome).toEqual(Outcome.None)
+        })
+
     })
 });

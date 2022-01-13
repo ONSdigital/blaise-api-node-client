@@ -1,7 +1,9 @@
 import axios, { AxiosInstance } from "axios";
-import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
-  DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields} from "./interfaces/instrument";
-import { Diagnostic  } from "./interfaces/diagnostic";
+import {
+  Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
+  DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields, CaseStatus, Outcome
+} from "./interfaces/instrument";
+import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
 
@@ -9,7 +11,7 @@ class BlaiseApiClient {
   blaise_api_url: string;
   httpClient: AxiosInstance;
 
-  constructor(blaise_api_url: string, timeoutInMs?:number) {
+  constructor(blaise_api_url: string, timeoutInMs?: number) {
     this.blaise_api_url = blaise_api_url;
     this.httpClient = axios.create();
 
@@ -108,6 +110,10 @@ class BlaiseApiClient {
     return this.patch(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/deactivate`)
   }
 
+  async getCaseStatus(serverpark: string, instrumentName: string): Promise<CaseStatus[]> {
+    return this.get(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/status`)
+  }
+
   private url(url: string): string {
     if (!url.startsWith("/")) {
       url = `/${url}`;
@@ -152,7 +158,8 @@ export type {
   CaseResponse,
   SurveyDays,
   DaybatchResponse,
-  DaybatchSettings
+  DaybatchSettings,
+  CaseStatus
 };
 export { DiagnosticMockObject }
 export {
@@ -160,5 +167,6 @@ export {
   InstrumentMockObject,
   InstallInstrumentMockObject,
   InstallInstrumentResponseMockObject,
-  InstrumentSettingsMockList
+  InstrumentSettingsMockList,
+  Outcome
 }
