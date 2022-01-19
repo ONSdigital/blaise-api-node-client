@@ -1,4 +1,4 @@
-import axios, { AxiosInstance } from "axios";
+import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
 import {
   Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
   DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields, CaseStatus, Outcome
@@ -6,17 +6,24 @@ import {
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
+import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 
 class BlaiseApiClient {
-  blaise_api_url: string;
+  blaiseApiUrl: string;
+  blaiseIapProvider?: BlaiseIapNodeProvider;
   httpClient: AxiosInstance;
 
-  constructor(blaise_api_url: string, timeoutInMs?: number) {
-    this.blaise_api_url = blaise_api_url;
+  constructor(blaiseApiUrl: string, timeoutInMs?:number, blaiseApiClientId?:string) {
+    this.blaiseApiUrl = blaiseApiUrl;
+
     this.httpClient = axios.create();
 
     if (typeof timeoutInMs !== 'undefined') {
       this.httpClient.defaults.timeout = 10000;
+    }
+
+    if (blaiseApiClientId) {
+      this.blaiseIapProvider = new BlaiseIapNodeProvider(blaiseApiClientId);
     }
   }
 
@@ -123,26 +130,38 @@ class BlaiseApiClient {
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async get(url: string): Promise<any> {
-    const response = await this.httpClient.get(`${this.blaise_api_url}${this.url(url)}`);
+    const config = await this.axiosConfig();
+    const response = await this.httpClient.get(`${this.blaiseApiUrl}${this.url(url)}`, config);
     return response.data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
   private async post(url: string, data: any): Promise<any> {
-    const response = await this.httpClient.post(`${this.blaise_api_url}${this.url(url)}`, data);
+    const config = await this.axiosConfig();
+    const response = await this.httpClient.post(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
     return response.data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async delete(url: string): Promise<any> {
-    const response = await this.httpClient.delete(`${this.blaise_api_url}${this.url(url)}`);
+    const config = await this.axiosConfig();
+    const response = await this.httpClient.delete(`${this.blaiseApiUrl}${this.url(url)}`, config);
     return response.data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private async patch(url: string): Promise<any> {
-    const response = await this.httpClient.patch(`${this.blaise_api_url}${this.url(url)}`);
+    const config = await this.axiosConfig();
+    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, config);
     return response.data;
+  }
+
+  private async axiosConfig(): Promise<AxiosRequestConfig> {
+    let config = {};
+    if (this.blaiseIapProvider) {
+      config = {headers: await this.blaiseIapProvider.getAuthHeader()};
+    }
+    return config
   }
 }
 

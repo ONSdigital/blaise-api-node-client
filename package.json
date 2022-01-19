@@ -19,17 +19,18 @@
   "dependencies": {
     "@babel/preset-env": "^7.14.7",
     "axios": "^0.21.1",
+    "blaise-iap-node-provider": "https://github.com/ONSdigital/blaise-iap-node-provider.git",
     "typescript": "~4.2.2"
   },
   "devDependencies": {
-    "@types/jest": "26.0.22",
-    "babel-jest": "^27.0.6",
-    "jest": "^27.0.6",
-    "ts-jest": "^27.0.3",
     "@babel/core": "^7.12.1",
     "@babel/preset-typescript": "^7.12.1",
+    "@types/jest": "26.0.22",
     "axios-mock-adapter": "^1.19.0",
+    "babel-jest": "^27.0.6",
     "eslint": "^7.29.0",
+    "jest": "^27.0.6",
+    "ts-jest": "^27.0.3",
     "yarn": "^1.22.10"
   },
   "files": [
