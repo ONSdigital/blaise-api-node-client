@@ -4,11 +4,15 @@ import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects";
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
+export declare type BlaiseApiConfig = {
+    timeoutInMs?: number;
+    blaiseApiClientId?: string;
+};
 declare class BlaiseApiClient {
     blaiseApiUrl: string;
     blaiseIapProvider?: BlaiseIapNodeProvider;
     httpClient: AxiosInstance;
-    constructor(blaiseApiUrl: string, timeoutInMs?: number, blaiseApiClientId?: string);
+    constructor(blaiseApiUrl: string, config?: BlaiseApiConfig);
     getAllInstrumentsWithCatiData(): Promise<Instrument[]>;
     getInstrumentsWithCatiData(serverpark: string): Promise<Instrument[]>;
     getInstrumentWithCatiData(serverpark: string, instrumentName: string): Promise<Instrument>;

@@ -8,22 +8,27 @@ import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 
+export type BlaiseApiConfig = {
+  timeoutInMs?: number;
+  blaiseApiClientId?: string;
+}
+
 class BlaiseApiClient {
   blaiseApiUrl: string;
   blaiseIapProvider?: BlaiseIapNodeProvider;
   httpClient: AxiosInstance;
 
-  constructor(blaiseApiUrl: string, timeoutInMs?:number, blaiseApiClientId?:string) {
+  constructor(blaiseApiUrl: string, config?: BlaiseApiConfig) {
     this.blaiseApiUrl = blaiseApiUrl;
 
     this.httpClient = axios.create();
 
-    if (typeof timeoutInMs !== 'undefined') {
-      this.httpClient.defaults.timeout = 10000;
+    if (config?.timeoutInMs !== undefined) {
+      this.httpClient.defaults.timeout = config.timeoutInMs;
     }
 
-    if (blaiseApiClientId) {
-      this.blaiseIapProvider = new BlaiseIapNodeProvider(blaiseApiClientId);
+    if (config?.blaiseApiClientId) {
+      this.blaiseIapProvider = new BlaiseIapNodeProvider(config.blaiseApiClientId);
     }
   }
 
