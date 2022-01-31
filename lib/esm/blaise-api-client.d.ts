@@ -3,6 +3,7 @@ import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSet
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects";
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects";
+import { User } from "./interfaces/user";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 export declare type BlaiseApiConfig = {
     timeoutInMs?: number;
@@ -35,6 +36,8 @@ declare class BlaiseApiClient {
     activateInstrument(serverpark: string, instrumentName: string): Promise<null>;
     deactivateInstrument(serverpark: string, instrumentName: string): Promise<null>;
     getCaseStatus(serverpark: string, instrumentName: string): Promise<CaseStatus[]>;
+    getUser(username: string): Promise<User>;
+    validatePassword(username: string, password: string): Promise<boolean>;
     private url;
     private get;
     private post;
@@ -43,6 +46,6 @@ declare class BlaiseApiClient {
     private axiosConfig;
 }
 export default BlaiseApiClient;
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings, CaseStatus };
+export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings, CaseStatus, User };
 export { DiagnosticMockObject };
 export { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList, Outcome };
