@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosRequestConfig} from "axios";
+import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import {
   Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSettings,
   DaybatchResponse, DaybatchSettings, SurveyDays, CaseResponse, CaseFields, CaseStatus, Outcome
@@ -6,6 +6,7 @@ import {
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
+import { User } from "./interfaces/user";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 
 export type BlaiseApiConfig = {
@@ -126,6 +127,14 @@ class BlaiseApiClient {
     return this.get(`api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/status`)
   }
 
+  async getUser(username: string): Promise<User> {
+    return this.get(`api/v1/users/${username}`)
+  }
+
+  async validatePassword(username: string, password: string): Promise<boolean> {
+    return this.get(`api/v1/users/${username}/password/${password}/validate`)
+  }
+
   private url(url: string): string {
     if (!url.startsWith("/")) {
       url = `/${url}`;
@@ -164,7 +173,7 @@ class BlaiseApiClient {
   private async axiosConfig(): Promise<AxiosRequestConfig> {
     let config = {};
     if (this.blaiseIapProvider) {
-      config = {headers: await this.blaiseIapProvider.getAuthHeader()};
+      config = { headers: await this.blaiseIapProvider.getAuthHeader() };
     }
     return config
   }
@@ -183,7 +192,8 @@ export type {
   SurveyDays,
   DaybatchResponse,
   DaybatchSettings,
-  CaseStatus
+  CaseStatus,
+  User
 };
 export { DiagnosticMockObject }
 export {
