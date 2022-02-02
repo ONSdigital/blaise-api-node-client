@@ -4,3 +4,7 @@ export type User = {
   serverParks: string[],
   defaultServerPark: string
 }
+
+export type ValidatePasswordRequest = {
+  password: string
+}

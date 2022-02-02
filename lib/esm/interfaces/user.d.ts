@@ -4,3 +4,6 @@ export declare type User = {
     serverParks: string[];
     defaultServerPark: string;
 };
+export declare type ValidatePasswordRequest = {
+    password: string;
+};
