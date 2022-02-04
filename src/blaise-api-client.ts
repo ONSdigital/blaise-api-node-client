@@ -202,7 +202,8 @@ export type {
   DaybatchResponse,
   DaybatchSettings,
   CaseStatus,
-  User
+  User,
+  CreateUser
 };
 export { DiagnosticMockObject }
 export {

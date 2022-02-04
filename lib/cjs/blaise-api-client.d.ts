@@ -48,6 +48,6 @@ declare class BlaiseApiClient {
     private axiosConfig;
 }
 export default BlaiseApiClient;
-export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings, CaseStatus, User };
+export type { Instrument, InstallInstrument, InstallInstrumentResponse, Diagnostic, InstrumentSettings, CaseFields, CaseResponse, SurveyDays, DaybatchResponse, DaybatchSettings, CaseStatus, User, CreateUser };
 export { DiagnosticMockObject };
 export { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList, Outcome };
