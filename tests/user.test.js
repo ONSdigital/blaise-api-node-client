@@ -2,6 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import 'regenerator-runtime/runtime'
 import BlaiseApiClient from "../src/blaise-api-client";
+import {CreateUserMockObject, CreateUserResponseMockObject} from "../src/mock-objects/user-mock-objects";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
@@ -66,4 +67,47 @@ describe("blaiseApiClient users", () => {
       expect(await blaiseApiClient.validatePassword(username, password)).toBeFalsy();
     })
   })
+
+  describe("create user", () => {
+
+    beforeEach(() => {
+      mock.onPost(`http://${blaiseApiUrl}/api/v1/users`).reply(201,
+          CreateUserResponseMockObject,
+      );
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("creates a user and returns a response", async () => {
+      let createUser = await blaiseApiClient.createUser(CreateUserMockObject);
+
+      expect(createUser.name).toEqual("Beyonce");
+      expect(createUser.role).toEqual("DST");
+      expect(createUser.serverParks).toHaveLength(1);
+      expect(createUser.defaultServerPark).toEqual("gusty");
+    });
+  });
+
+  describe("delete user", () => {
+    const userName = "Beyonce";
+
+    beforeEach(() => {
+      mock.onDelete(`http://${blaiseApiUrl}/api/v1/users/${userName}`).reply(204,
+          null,
+      );
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("deletes a user", async () => {
+      let result = await blaiseApiClient.deleteUser(userName);
+
+      expect(result).toBeNull();
+    });
+  });
+
 })

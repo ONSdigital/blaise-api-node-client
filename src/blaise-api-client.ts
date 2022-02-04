@@ -6,7 +6,7 @@ import {
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects"
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects"
-import { User, ValidatePasswordRequest } from "./interfaces/user";
+import { User, ValidatePasswordRequest, CreateUser, CreateUserResponse } from "./interfaces/user";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 
 export type BlaiseApiConfig = {
@@ -134,6 +134,14 @@ class BlaiseApiClient {
   async validatePassword(username: string, password: string): Promise<boolean> {
     const validationRequest: ValidatePasswordRequest = { password: password }
     return this.post(`api/v1/users/${username}/validate`, validationRequest)
+  }
+
+  async createUser(user: CreateUser): Promise<CreateUserResponse> {
+    return this.post("/api/v1/users", user);
+  }
+
+  async deleteUser(userName: string): Promise<null> {
+    return this.delete(`/api/v1/users/${userName}`);
   }
 
   private url(url: string): string {

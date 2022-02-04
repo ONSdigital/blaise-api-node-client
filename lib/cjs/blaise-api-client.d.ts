@@ -3,7 +3,7 @@ import { Instrument, InstallInstrument, InstallInstrumentResponse, InstrumentSet
 import { Diagnostic } from "./interfaces/diagnostic";
 import { DiagnosticMockObject } from "./mock-objects/diagnostic-mock-objects";
 import { InstrumentListMockObject, InstrumentMockObject, InstallInstrumentMockObject, InstallInstrumentResponseMockObject, InstrumentSettingsMockList } from "./mock-objects/instrument-mock-objects";
-import { User } from "./interfaces/user";
+import { User, CreateUser, CreateUserResponse } from "./interfaces/user";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 export declare type BlaiseApiConfig = {
     timeoutInMs?: number;
@@ -38,6 +38,8 @@ declare class BlaiseApiClient {
     getCaseStatus(serverpark: string, instrumentName: string): Promise<CaseStatus[]>;
     getUser(username: string): Promise<User>;
     validatePassword(username: string, password: string): Promise<boolean>;
+    createUser(user: CreateUser): Promise<CreateUserResponse>;
+    deleteUser(userName: string): Promise<null>;
     private url;
     private get;
     private post;
