@@ -1,9 +1,5 @@
 import { AxiosInstance } from "axios";
-import * as instrumentsTypes from "./interfaces/instruments";
-import * as diagnosticsTypes from "./interfaces/diagnostics";
-import * as casesTypes from "./interfaces/cases";
 import { Outcome } from "./interfaces/cases";
-import * as userTypes from "./interfaces/users";
 import * as diagonisticsMocks from "./mock-objects/diagnostic-mock-objects";
 import * as instrumentMocks from "./mock-objects/instrument-mock-objects";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
@@ -57,5 +53,8 @@ declare class BlaiseApiClient {
     private axiosConfig;
 }
 export default BlaiseApiClient;
-export type { instrumentsTypes, diagnosticsTypes, casesTypes, userTypes };
+export * from "./interfaces/instruments";
+export * from "./interfaces/diagnostics";
+export * from "./interfaces/cases";
+export * from "./interfaces/users";
 export { diagonisticsMocks, instrumentMocks, Outcome };
