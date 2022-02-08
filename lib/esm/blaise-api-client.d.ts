@@ -22,8 +22,8 @@ declare class BlaiseApiClient {
     constructor(blaiseApiUrl: string, config?: BlaiseApiConfig);
     getUser: typeof users.getUser;
     validatePassword: typeof users.validatePassword;
-    createUser(user: userTypes.CreateUser): Promise<userTypes.CreateUserResponse>;
-    deleteUser(userName: string): Promise<null>;
+    createUser: typeof users.createUser;
+    deleteUser: typeof users.deleteUser;
     getAllInstrumentsWithCatiData: typeof instruments.getAllInstrumentsWithCatiData;
     getInstrumentsWithCatiData: typeof instruments.getInstrumentsWithCatiData;
     getInstrumentWithCatiData: typeof instruments.getInstrumentWithCatiData;

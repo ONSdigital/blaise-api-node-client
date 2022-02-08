@@ -65,8 +65,8 @@ describe("blaiseApiClient users", () => {
 
     it("returns false", async () => {
       expect(await blaiseApiClient.validatePassword(username, password)).toBeFalsy();
-    })
-  })
+    });
+  });
 
   describe("create user", () => {
     beforeEach(() => {
@@ -80,7 +80,7 @@ describe("blaiseApiClient users", () => {
     });
 
     it("creates a user and returns a response", async () => {
-      let createUser = await blaiseApiClient.createUser(CreateUserMockObject);
+      const createUser = await blaiseApiClient.createUser(CreateUserMockObject);
 
       expect(createUser.name).toEqual("Beyonce");
       expect(createUser.role).toEqual("DST");
@@ -103,9 +103,9 @@ describe("blaiseApiClient users", () => {
     });
 
     it("deletes a user", async () => {
-      let result = await blaiseApiClient.deleteUser(userName);
+      const result = await blaiseApiClient.deleteUser(userName);
 
       expect(result).toBeNull();
     });
   });
-})
+});

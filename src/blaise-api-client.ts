@@ -38,14 +38,8 @@ class BlaiseApiClient {
 
   getUser = users.getUser;
   validatePassword = users.validatePassword;
-
-  async createUser(user: userTypes.CreateUser): Promise<userTypes.CreateUserResponse> {
-    return this.post("/api/v1/users", user);
-  }
-
-  async deleteUser(userName: string): Promise<null> {
-    return this.delete(`/api/v1/users/${userName}`);
-  }
+  createUser = users.createUser;
+  deleteUser = users.deleteUser;
 
   getAllInstrumentsWithCatiData = instruments.getAllInstrumentsWithCatiData;
   getInstrumentsWithCatiData = instruments.getInstrumentsWithCatiData;
