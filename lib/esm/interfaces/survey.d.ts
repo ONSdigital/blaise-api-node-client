@@ -1,4 +1,4 @@
-import { Instrument } from "./instrument";
+import { Instrument } from "./instruments";
 interface Survey {
     instruments: Instrument[];
     survey: string;

@@ -1,0 +1,18 @@
+import BlaiseApiClient from "../blaise-api-client";
+import { DaybatchResponse, DaybatchSettings, InstallInstrument, InstallInstrumentResponse, Instrument, InstrumentSettings, SurveyDays } from "../interfaces/instruments";
+export declare function getAllInstrumentsWithCatiData(this: BlaiseApiClient): Promise<Instrument[]>;
+export declare function getInstrumentsWithCatiData(this: BlaiseApiClient, serverpark: string): Promise<Instrument[]>;
+export declare function getInstrumentWithCatiData(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<Instrument>;
+export declare function getInstruments(this: BlaiseApiClient, serverpark: string): Promise<Instrument[]>;
+export declare function instrumentExists(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<boolean>;
+export declare function doesInstrumentHaveMode(this: BlaiseApiClient, serverpark: string, instrumentName: string, mode: string): Promise<boolean>;
+export declare function getInstrument(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<Instrument>;
+export declare function installInstrument(this: BlaiseApiClient, serverpark: string, instrument: InstallInstrument): Promise<InstallInstrumentResponse>;
+export declare function deleteInstrument(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<null>;
+export declare function getInstrumentCaseIds(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<string[]>;
+export declare function getInstrumentModes(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<string[]>;
+export declare function getInstrumentSettings(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<InstrumentSettings[]>;
+export declare function getDaybatch(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<DaybatchResponse>;
+export declare function addDaybatch(this: BlaiseApiClient, serverpark: string, instrumentName: string, daybatchSettings: DaybatchSettings): Promise<DaybatchResponse>;
+export declare function getSurveyDays(this: BlaiseApiClient, serverpark: string, instrumentName: string): Promise<string[]>;
+export declare function addSurveyDays(this: BlaiseApiClient, serverpark: string, instrumentName: string, surveyDays: SurveyDays): Promise<string[]>;

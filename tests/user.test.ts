@@ -1,8 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import 'regenerator-runtime/runtime'
+import "regenerator-runtime/runtime";
 import BlaiseApiClient from "../src/blaise-api-client";
-import {CreateUserMockObject, CreateUserResponseMockObject} from "../src/mock-objects/user-mock-objects";
+import { CreateUserMockObject, CreateUserResponseMockObject } from "../src/mock-objects/user-mock-objects";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
@@ -11,7 +11,7 @@ const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
 describe("blaiseApiClient users", () => {
   describe("get user", () => {
-    const username = "test-user"
+    const username = "test-user";
 
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v1/users/${username}`).reply(200, {
@@ -27,16 +27,16 @@ describe("blaiseApiClient users", () => {
     });
 
     it("returns the user details", async () => {
-      let result = await blaiseApiClient.getUser(username);
+      const result = await blaiseApiClient.getUser(username);
 
       expect(result.name).toEqual(username);
       expect(result.role).toEqual("DST");
-    })
-  })
+    });
+  });
 
   describe("validate password - valid", () => {
-    const username = "test-user"
-    const password = "test-password"
+    const username = "test-user";
+    const password = "test-password";
 
     beforeEach(() => {
       mock.onPost(`http://${blaiseApiUrl}/api/v1/users/${username}/validate`).reply(200, true);
@@ -48,12 +48,12 @@ describe("blaiseApiClient users", () => {
 
     it("returns true", async () => {
       expect(await blaiseApiClient.validatePassword(username, password)).toBeTruthy();
-    })
-  })
+    });
+  });
 
   describe("validate password - invalid", () => {
-    const username = "test-user"
-    const password = "test-password"
+    const username = "test-user";
+    const password = "test-password";
 
     beforeEach(() => {
       mock.onPost(`http://${blaiseApiUrl}/api/v1/users/${username}/validate`).reply(200, false);
@@ -69,10 +69,9 @@ describe("blaiseApiClient users", () => {
   })
 
   describe("create user", () => {
-
     beforeEach(() => {
       mock.onPost(`http://${blaiseApiUrl}/api/v1/users`).reply(201,
-          CreateUserResponseMockObject,
+        CreateUserResponseMockObject,
       );
     });
 
@@ -95,7 +94,7 @@ describe("blaiseApiClient users", () => {
 
     beforeEach(() => {
       mock.onDelete(`http://${blaiseApiUrl}/api/v1/users/${userName}`).reply(204,
-          null,
+        null,
       );
     });
 
@@ -109,5 +108,4 @@ describe("blaiseApiClient users", () => {
       expect(result).toBeNull();
     });
   });
-
 })
