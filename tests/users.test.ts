@@ -108,4 +108,49 @@ describe("blaiseApiClient users", () => {
       expect(result).toBeNull();
     });
   });
+
+  describe("get user roles", () => {
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/userroles`).reply(200, [
+        {
+          name: "test-role",
+          description: "test",
+          permissions: ["test"]
+        }
+      ]);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns the user details", async () => {
+      const result = await blaiseApiClient.getUserRoles();
+
+      expect(result).toEqual([
+        {
+          name: "test-role",
+          description: "test",
+          permissions: ["test"]
+        }
+      ])
+    });
+  });
+
+  describe("change password ", () => {
+    const username = "test-user";
+    const password = "test-password";
+
+    beforeEach(() => {
+      mock.onPatch(`http://${blaiseApiUrl}/api/v1/users/${username}/password`).reply(204, null);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns null", async () => {
+      expect(await blaiseApiClient.changePassword(username, password)).toBeNull();
+    });
+  });
 });

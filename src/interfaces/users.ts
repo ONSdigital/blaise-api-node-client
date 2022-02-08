@@ -5,8 +5,14 @@ export type User = {
   defaultServerPark: string
 }
 
-export type ValidatePasswordRequest = {
+export type PasswordRequest = {
   password: string
+}
+
+export type UserRole = {
+  name: string,
+  description: string,
+  permissions: string[]
 }
 
 export interface NewUser extends User {

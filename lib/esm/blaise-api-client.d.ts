@@ -24,6 +24,8 @@ declare class BlaiseApiClient {
     validatePassword: typeof users.validatePassword;
     createUser: typeof users.createUser;
     deleteUser: typeof users.deleteUser;
+    getUserRoles: typeof users.getUserRoles;
+    changePassword: typeof users.changePassword;
     getAllInstrumentsWithCatiData: typeof instruments.getAllInstrumentsWithCatiData;
     getInstrumentsWithCatiData: typeof instruments.getInstrumentsWithCatiData;
     getInstrumentWithCatiData: typeof instruments.getInstrumentWithCatiData;
@@ -50,7 +52,7 @@ declare class BlaiseApiClient {
     protected get(url: string): Promise<any>;
     protected post(url: string, data: any): Promise<any>;
     protected delete(url: string): Promise<any>;
-    protected patch(url: string): Promise<any>;
+    protected patch(url: string, data?: any | undefined): Promise<any>;
     private axiosConfig;
 }
 export default BlaiseApiClient;

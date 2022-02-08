@@ -40,6 +40,8 @@ class BlaiseApiClient {
   validatePassword = users.validatePassword;
   createUser = users.createUser;
   deleteUser = users.deleteUser;
+  getUserRoles = users.getUserRoles
+  changePassword = users.changePassword
 
   getAllInstrumentsWithCatiData = instruments.getAllInstrumentsWithCatiData;
   getInstrumentsWithCatiData = instruments.getInstrumentsWithCatiData;
@@ -95,9 +97,9 @@ class BlaiseApiClient {
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  protected async patch(url: string): Promise<any> {
+  protected async patch(url: string, data: any | undefined = undefined): Promise<any> {
     const config = await this.axiosConfig();
-    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, config);
+    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
     return response.data;
   }
 
