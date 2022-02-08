@@ -21,6 +21,7 @@ declare class BlaiseApiClient {
     httpClient: AxiosInstance;
     constructor(blaiseApiUrl: string, config?: BlaiseApiConfig);
     getUser: typeof users.getUser;
+    getUsers: typeof users.getUsers;
     validatePassword: typeof users.validatePassword;
     createUser: typeof users.createUser;
     deleteUser: typeof users.deleteUser;

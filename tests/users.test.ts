@@ -34,6 +34,37 @@ describe("blaiseApiClient users", () => {
     });
   });
 
+
+  describe("get users", () => {
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v1/users`).reply(200, [
+        {
+          name: "test-user",
+          role: "DST",
+          serverParks: ["gusty"],
+          defaultServerPark: "gusty"
+        }
+      ]);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it("returns the user details", async () => {
+      const result = await blaiseApiClient.getUsers();
+
+      expect(result).toEqual([
+        {
+          name: "test-user",
+          role: "DST",
+          serverParks: ["gusty"],
+          defaultServerPark: "gusty"
+        }
+      ]);
+    });
+  });
+
   describe("validate password - valid", () => {
     const username = "test-user";
     const password = "test-password";
@@ -133,7 +164,7 @@ describe("blaiseApiClient users", () => {
           description: "test",
           permissions: ["test"]
         }
-      ])
+      ]);
     });
   });
 

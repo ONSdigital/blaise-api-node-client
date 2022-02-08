@@ -37,11 +37,12 @@ class BlaiseApiClient {
   }
 
   getUser = users.getUser;
+  getUsers = users.getUsers;
   validatePassword = users.validatePassword;
   createUser = users.createUser;
   deleteUser = users.deleteUser;
-  getUserRoles = users.getUserRoles
-  changePassword = users.changePassword
+  getUserRoles = users.getUserRoles;
+  changePassword = users.changePassword;
 
   getAllInstrumentsWithCatiData = instruments.getAllInstrumentsWithCatiData;
   getInstrumentsWithCatiData = instruments.getInstrumentsWithCatiData;
