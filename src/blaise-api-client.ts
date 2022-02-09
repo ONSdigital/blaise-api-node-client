@@ -1,7 +1,5 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { Outcome } from "./interfaces/cases";
-import * as diagonisticsMocks from "./mock-objects/diagnostic-mock-objects";
-import * as instrumentMocks from "./mock-objects/instrument-mock-objects";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 import * as users from "./blaise-api-client/users";
 import * as instruments from "./blaise-api-client/instruments";
@@ -116,8 +114,9 @@ export * from "./interfaces/diagnostics";
 export * from "./interfaces/cases";
 export * from "./interfaces/users";
 
+export * from "./mock-objects/diagnostic-mock-objects";
+export * from "./mock-objects/instrument-mock-objects";
+
 export {
-  diagonisticsMocks,
-  instrumentMocks,
   Outcome
 };
