@@ -3,15 +3,21 @@ interface Instrument {
     name: string
     expired?: boolean
     serverParkName: string
-    activeToday?: boolean
-    surveyDays?: string[]
+    activeToday?: boolean // deprecated
+    surveyDays?: string[] // deprecated
     link?: string
     fieldPeriod: string
     surveyTLA?: string
     dataRecordCount?: number
     status?: string
     hasData?: boolean
-    active?: boolean
+    nodes?: Node[]
+    active?: boolean //deprecated
+}
+
+interface Node {
+    nodeName: string;
+    nodeStatus: string;
 }
 
 interface InstallInstrument {

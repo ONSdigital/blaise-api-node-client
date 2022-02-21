@@ -55,6 +55,7 @@ export * from "./interfaces/instruments";
 export * from "./interfaces/diagnostics";
 export * from "./interfaces/cases";
 export * from "./interfaces/users";
+export * from "./survey-days";
 export * from "./mock-objects/diagnostic-mock-objects";
 export * from "./mock-objects/instrument-mock-objects";
 export { Outcome };

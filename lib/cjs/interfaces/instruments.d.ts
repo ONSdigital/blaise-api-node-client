@@ -11,7 +11,12 @@ interface Instrument {
     dataRecordCount?: number;
     status?: string;
     hasData?: boolean;
+    nodes?: Node[];
     active?: boolean;
+}
+interface Node {
+    nodeName: string;
+    nodeStatus: string;
 }
 interface InstallInstrument {
     instrumentFile: string;

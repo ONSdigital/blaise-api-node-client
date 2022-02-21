@@ -1,15 +1,15 @@
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-import BlaiseApiClient from "../src/blaise-api-client";
-import {
+import BlaiseApiClient, {
     InstrumentListMockObject,
     InstrumentMockObject,
     InstallInstrumentMockObject,
     InstallInstrumentResponseMockObject, InstrumentSettingsMockList,
     InstrumentDaybatchCasesMock, AddDaybatchMock,
-    SurveyDaysMock, SurveyDaysDatesMock
-} from "../src/mock-objects/instrument-mock-objects";
+    SurveyDaysMock, SurveyDaysDatesMock,
+    surveyIsActive, surveyIsActiveToday
+} from "../src/blaise-api-client";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
@@ -72,6 +72,8 @@ describe("blaiseApiClient", () => {
             const instrument = await blaiseApiClient.getInstrumentWithCatiData(serverpark, InstrumentMockObject.name);
 
             expect(instrument).toEqual(InstrumentMockObject);
+            expect(surveyIsActive(instrument.surveyDays)).toBeFalsy();
+            expect(surveyIsActiveToday(instrument.surveyDays)).toBeFalsy();
         });
     });
 
@@ -112,6 +114,8 @@ describe("blaiseApiClient", () => {
             const instrument = await blaiseApiClient.getInstrument(serverpark, InstrumentMockObject.name);
 
             expect(instrument).toEqual(InstrumentMockObject);
+            expect(surveyIsActive(instrument.surveyDays)).toBeFalsy();
+            expect(surveyIsActiveToday(instrument.surveyDays)).toBeFalsy();
         });
     });
 
