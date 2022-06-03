@@ -13,7 +13,7 @@ describe("BlaiseRestapiClient", () => {
   describe("get health Check from API", () => {
 
     beforeAll(() => {
-         mock.onGet(`http://${blaiseApiUrl}/api/v1/health/diagnosis`).reply(200,
+         mock.onGet(`http://${blaiseApiUrl}/api/v2/health/diagnosis`).reply(200,
         DiagnosticMockObject,
       );
     });

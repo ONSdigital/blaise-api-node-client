@@ -14,7 +14,7 @@ describe("blaiseApiClient users", () => {
     const username = "test-user";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/users/${username}`).reply(200, {
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/users/${username}`).reply(200, {
         name: username,
         role: "DST",
         serverParks: ["gusty"],
@@ -37,7 +37,7 @@ describe("blaiseApiClient users", () => {
 
   describe("get users", () => {
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/users`).reply(200, [
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/users`).reply(200, [
         {
           name: "test-user",
           role: "DST",
@@ -70,7 +70,7 @@ describe("blaiseApiClient users", () => {
     const password = "test-password";
 
     beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v1/users/${username}/validate`).reply(200, true);
+      mock.onPost(`http://${blaiseApiUrl}/api/v2/users/${username}/validate`).reply(200, true);
     });
 
     afterEach(() => {
@@ -87,7 +87,7 @@ describe("blaiseApiClient users", () => {
     const password = "test-password";
 
     beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v1/users/${username}/validate`).reply(200, false);
+      mock.onPost(`http://${blaiseApiUrl}/api/v2/users/${username}/validate`).reply(200, false);
     });
 
     afterEach(() => {
@@ -101,7 +101,7 @@ describe("blaiseApiClient users", () => {
 
   describe("create user", () => {
     beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v1/users`).reply(201,
+      mock.onPost(`http://${blaiseApiUrl}/api/v2/users`).reply(201,
         CreateUserResponseMockObject,
       );
     });
@@ -124,7 +124,7 @@ describe("blaiseApiClient users", () => {
     const userName = "Beyonce";
 
     beforeEach(() => {
-      mock.onDelete(`http://${blaiseApiUrl}/api/v1/users/${userName}`).reply(204,
+      mock.onDelete(`http://${blaiseApiUrl}/api/v2/users/${userName}`).reply(204,
         null,
       );
     });
@@ -142,7 +142,7 @@ describe("blaiseApiClient users", () => {
 
   describe("get user roles", () => {
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/userroles`).reply(200, [
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/userroles`).reply(200, [
         {
           name: "test-role",
           description: "test",
@@ -173,7 +173,7 @@ describe("blaiseApiClient users", () => {
     const password = "test-password";
 
     beforeEach(() => {
-      mock.onPatch(`http://${blaiseApiUrl}/api/v1/users/${username}/password`).reply(204, null);
+      mock.onPatch(`http://${blaiseApiUrl}/api/v2/users/${username}/password`).reply(204, null);
     });
 
     afterEach(() => {

@@ -12,11 +12,11 @@ const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 describe("blaiseApiClient", () => {
   describe("get case", () => {
     const serverpark = "test";
-    const instrumentName = "dst2108t";
+    const questionnaireName = "dst2108t";
     const caseID = "100101;";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`).reply(200, {
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseID}`).reply(200, {
         caseID: caseID,
         fieldData: {}
       });
@@ -27,7 +27,7 @@ describe("blaiseApiClient", () => {
     });
 
     it("returns a case", async () => {
-      const caseResponse = await blaiseApiClient.getCase(serverpark, instrumentName, caseID);
+      const caseResponse = await blaiseApiClient.getCase(serverpark, questionnaireName, caseID);
 
       expect(caseResponse.caseID).toEqual(caseID);
       expect(caseResponse.fieldData).toEqual({});
@@ -36,11 +36,11 @@ describe("blaiseApiClient", () => {
 
   describe("add case", () => {
     const serverpark = "test";
-    const instrumentName = "dst2108t";
+    const questionnaireName = "dst2108t";
     const caseID = "100101;";
 
     beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/${caseID}`).reply(200, {
+      mock.onPost(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseID}`).reply(200, {
         caseID: caseID,
         fieldData: {}
       });
@@ -51,7 +51,7 @@ describe("blaiseApiClient", () => {
     });
 
     it("adds a case", async () => {
-      const caseResponse = await blaiseApiClient.addCase(serverpark, instrumentName, caseID, {});
+      const caseResponse = await blaiseApiClient.addCase(serverpark, questionnaireName, caseID, {});
 
       expect(caseResponse.caseID).toEqual(caseID);
       expect(caseResponse.fieldData).toEqual({});
@@ -60,10 +60,10 @@ describe("blaiseApiClient", () => {
 
   describe("get cases status", () => {
     const serverpark = "test";
-    const instrumentName = "dst2108t";
+    const questionnaireName = "dst2108t";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v1/serverparks/${serverpark}/instruments/${instrumentName}/cases/status`).reply(200,
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/status`).reply(200,
         [
           {
             "primaryKey": "1",
@@ -85,8 +85,8 @@ describe("blaiseApiClient", () => {
       mock.reset();
     });
 
-    it("gets all cases and outcome codes for a given instrument", async () => {
-      const result = await blaiseApiClient.getCaseStatus(serverpark, instrumentName);
+    it("gets all cases and outcome codes for a given questionnaire", async () => {
+      const result = await blaiseApiClient.getCaseStatus(serverpark, questionnaireName);
 
       expect(result).toHaveLength(3);
       expect(result[0].primaryKey).toEqual("1");

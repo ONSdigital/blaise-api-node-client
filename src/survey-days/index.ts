@@ -1,4 +1,4 @@
-import { SurveyDays } from "../interfaces/instruments";
+import { SurveyDays } from "../interfaces/questionnaires";
 
 export function surveyIsActiveToday(surveyDays: SurveyDays | undefined): boolean {
   if (!surveyDays) {

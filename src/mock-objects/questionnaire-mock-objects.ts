@@ -1,4 +1,4 @@
-export const InstrumentListMockObject = [{
+export const QuestionnaireListMockObject = [{
     name: "OPN2101A",
     serverParkName: "gusty",
     installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -24,7 +24,7 @@ export const InstrumentListMockObject = [{
     active: false,
 }];
 
-export const InstrumentMockObject = {
+export const QuestionnaireMockObject = {
     name: "OPN2101A",
     serverParkName: "gusty",
     installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -34,17 +34,17 @@ export const InstrumentMockObject = {
     active: false,
 };
 
-export const InstallInstrumentMockObject = {
-    instrumentName: "OPN2004A",
-    instrumentFile: "OPN2004A.bpkg",
+export const InstallQuestionnaireMockObject = {
+    questionnaireName: "OPN2004A",
+    questionnaireFile: "OPN2004A.bpkg",
     bucketPath: "/"
 };
 
-export const InstallInstrumentResponseMockObject = {
-    instrumentFile: "OPN2004A.bpkg"
+export const InstallQuestionnaireResponseMockObject = {
+    questionnaireFile: "OPN2004A.bpkg"
 };
 
-export const InstrumentSettingsMockList = [
+export const QuestionnaireSettingsMockList = [
     {
         "type": "StrictInterviewing",
         "saveSessionOnTimeout": true,
@@ -56,7 +56,7 @@ export const InstrumentSettingsMockList = [
     }
 ];
 
-export const InstrumentDaybatchCasesMock = [
+export const QuestionnaireDaybatchCasesMock = [
     {
         "dayBatchDate": "2021-01-15T14:41:29.4399898+00:00",
         "caseIds": [
