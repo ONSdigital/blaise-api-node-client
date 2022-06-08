@@ -2,7 +2,7 @@ import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
 import { Outcome } from "./interfaces/cases";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 import * as users from "./blaise-api-client/users";
-import * as instruments from "./blaise-api-client/instruments";
+import * as questionnaires from "./blaise-api-client/questionnaires";
 import * as cases from "./blaise-api-client/cases";
 import * as diagnostics from "./blaise-api-client/diagnostics";
 
@@ -38,27 +38,27 @@ class BlaiseApiClient {
   getUserRoles = users.getUserRoles;
   changePassword = users.changePassword;
 
-  getAllInstrumentsWithCatiData = instruments.getAllInstrumentsWithCatiData;
-  getInstrumentsWithCatiData = instruments.getInstrumentsWithCatiData;
-  getInstrumentWithCatiData = instruments.getInstrumentWithCatiData;
-  getInstruments = instruments.getInstruments;
-  instrumentExists = instruments.instrumentExists;
-  doesInstrumentHaveMode = instruments.doesInstrumentHaveMode;
-  getInstrument = instruments.getInstrument;
-  installInstrument = instruments.installInstrument;
-  deleteInstrument = instruments.deleteInstrument;
-  getInstrumentCaseIds = instruments.getInstrumentCaseIds;
-  getInstrumentModes = instruments.getInstrumentModes;
-  getInstrumentSettings = instruments.getInstrumentSettings;
-  getDaybatch = instruments.getDaybatch;
-  addDaybatch = instruments.addDaybatch;
-  getSurveyDays = instruments.getSurveyDays;
-  addSurveyDays = instruments.addSurveyDays;
+  getAllQuestionnairesWithCatiData = questionnaires.getAllQuestionnairesWithCatiData;
+  getQuestionnairesWithCatiData = questionnaires.getQuestionnairesWithCatiData;
+  getQuestionnaireWithCatiData = questionnaires.getQuestionnaireWithCatiData;
+  getQuestionnaires = questionnaires.getQuestionnaires;
+  questionnaireExists = questionnaires.questionnaireExists;
+  doesQuestionnaireHaveMode = questionnaires.doesQuestionnaireHaveMode;
+  getQuestionnaire = questionnaires.getQuestionnaire;
+  installQuestionnaire = questionnaires.installQuestionnaire;
+  deleteQuestionnaire = questionnaires.deleteQuestionnaire;
+  getQuestionnaireCaseIds = questionnaires.getQuestionnaireCaseIds;
+  getQuestionnaireModes = questionnaires.getQuestionnaireModes;
+  getQuestionnaireSettings = questionnaires.getQuestionnaireSettings;
+  activateQuestionnaire = questionnaires.activateQuestionnaire;
+  deactivateQuestionnaire = questionnaires.deactivateQuestionnaire;
+  getDaybatch = questionnaires.getDaybatch;
+  addDaybatch = questionnaires.addDaybatch;
+  getSurveyDays = questionnaires.getSurveyDays;
+  addSurveyDays = questionnaires.addSurveyDays;
 
   getCase = cases.getCase;
   addCase = cases.addCase;
-  activateInstrument = cases.activateInstrument;
-  deactivateInstrument = cases.deactivateInstrument;
   getCaseStatus = cases.getCaseStatus;
 
   getDiagnostics = diagnostics.getDiagnostics;
@@ -109,14 +109,14 @@ class BlaiseApiClient {
 
 export default BlaiseApiClient;
 
-export * from "./interfaces/instruments";
+export * from "./interfaces/questionnaires";
 export * from "./interfaces/diagnostics";
 export * from "./interfaces/cases";
 export * from "./interfaces/users";
 export * from "./survey-days";
 
 export * from "./mock-objects/diagnostic-mock-objects";
-export * from "./mock-objects/instrument-mock-objects";
+export * from "./mock-objects/questionnaire-mock-objects";
 
 export {
   Outcome

@@ -29,7 +29,7 @@ Add a dependency to your package.json file:
 
 Add an import statement where you wish to consume the client and interfaces:
 ```
-import BlaiseApiRest, { Instrument } from "blaise-api-node-client";
+import BlaiseApiRest, { Questionnaire } from "blaise-api-node-client";
 ```
 
 Declare and consume the client by passing the URL of the rest api:
@@ -53,5 +53,5 @@ const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`, 1000);
 Mock objects are available for use in tests
 
 ```
-const {DiagnosticMockObject, InstrumentListMockObject, InstrumentMockObject} = jest.requireActual("blaise-api-node-client");
+const {DiagnosticMockObject, QuestionnaireListMockObject, QuestionnaireMockObject} = jest.requireActual("blaise-api-node-client");
 ```

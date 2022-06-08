@@ -1,6 +1,6 @@
-import { Instrument } from "./instruments";
+import { Questionnaire } from "./questionnaires";
 interface Survey {
-    instruments: Instrument[];
+    questionnaires: Questionnaire[];
     survey: string;
 }
-export type { Instrument, Survey };
+export type { Questionnaire, Survey };

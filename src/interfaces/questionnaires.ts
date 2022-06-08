@@ -1,4 +1,4 @@
-interface Instrument {
+interface Questionnaire {
     installDate: string
     name: string
     expired?: boolean
@@ -20,15 +20,15 @@ interface Node {
     nodeStatus: string;
 }
 
-interface InstallInstrument {
-    instrumentFile: string
+interface InstallQuestionnaire {
+    questionnaireFile: string
 }
 
-interface InstallInstrumentResponse {
-    instrumentFile: string
+interface InstallQuestionnaireResponse {
+    iquestionnaireFile: string
 }
 
-interface InstrumentSettings {
+interface QuestionnaireSettings {
     type: string
     saveSessionOnTimeout: boolean
     saveSessionOnQuit: boolean
@@ -51,10 +51,10 @@ interface DaybatchSettings {
 type SurveyDays = string[] | Date[]
 
 export type {
-    Instrument,
-    InstallInstrument,
-    InstallInstrumentResponse,
-    InstrumentSettings,
+    Questionnaire,
+    InstallQuestionnaire,
+    InstallQuestionnaireResponse,
+    QuestionnaireSettings,
     DaybatchResponse,
     DaybatchSettings,
     SurveyDays,
