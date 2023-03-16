@@ -13,7 +13,7 @@ interface Questionnaire {
     hasData?: boolean;
     nodes?: Node[];
     active?: boolean;
-    blaiseVersion: string;
+    blaiseVersion?: string;
 }
 interface Node {
     nodeName: string;

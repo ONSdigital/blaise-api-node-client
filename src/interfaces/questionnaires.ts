@@ -13,7 +13,7 @@ interface Questionnaire {
     hasData?: boolean
     nodes?: Node[]
     active?: boolean //deprecated
-    blaiseVersion: string
+    blaiseVersion?: string
 }
 
 interface Node {
