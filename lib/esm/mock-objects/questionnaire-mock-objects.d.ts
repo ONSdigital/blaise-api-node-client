@@ -15,6 +15,7 @@ export declare const QuestionnaireMockObject: {
     dataRecordCount: number;
     hasData: boolean;
     active: boolean;
+    blaiseVersion: string;
 };
 export declare const InstallQuestionnaireMockObject: {
     questionnaireName: string;

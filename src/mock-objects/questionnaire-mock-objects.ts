@@ -32,6 +32,7 @@ export const QuestionnaireMockObject = {
     dataRecordCount: 0,
     hasData: false,
     active: false,
+    blaiseVersion: "5.9.9.2735",
 };
 
 export const InstallQuestionnaireMockObject = {
