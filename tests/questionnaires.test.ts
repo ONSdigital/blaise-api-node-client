@@ -110,7 +110,7 @@ describe("blaiseApiClient", () => {
             mock.reset();
         });
 
-        it("returns an questionnaire", async () => {
+        it("returns a questionnaire", async () => {
             const questionnaire = await blaiseApiClient.getQuestionnaire(serverpark, QuestionnaireMockObject.name);
 
             expect(questionnaire).toEqual(QuestionnaireMockObject);
