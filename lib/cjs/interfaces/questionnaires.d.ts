@@ -6,7 +6,7 @@ interface Questionnaire {
     activeToday?: boolean;
     surveyDays?: string[];
     link?: string;
-    fieldPeriod: string;
+    fieldPeriod?: string;
     surveyTLA?: string;
     dataRecordCount?: number;
     status?: string;
