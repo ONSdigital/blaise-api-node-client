@@ -5,13 +5,18 @@ import * as users from "./blaise-api-client/users";
 import * as questionnaires from "./blaise-api-client/questionnaires";
 import * as cases from "./blaise-api-client/cases";
 import * as diagnostics from "./blaise-api-client/diagnostics";
+import { Questionnaire } from "./interfaces/questionnaires";
 
 export type BlaiseApiConfig = {
   timeoutInMs?: number;
   blaiseApiClientId?: string;
 }
 
-class BlaiseApiClient {
+interface IBlaiseClient {
+  getQuestionnaires(serverPark:string): Promise<Questionnaire[]>
+}
+
+class BlaiseApiClient implements IBlaiseClient {
   blaiseApiUrl: string;
   blaiseIapProvider?: BlaiseIapNodeProvider;
   httpClient: AxiosInstance;
