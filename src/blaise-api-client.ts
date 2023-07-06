@@ -12,8 +12,8 @@ export type BlaiseApiConfig = {
   blaiseApiClientId?: string;
 }
 
-interface IBlaiseClient {
-  getQuestionnaires(serverPark:string): Promise<Questionnaire[]>
+export interface IBlaiseClient {
+  getQuestionnaires(serverPark: string): Promise<Questionnaire[]>
 }
 
 class BlaiseApiClient implements IBlaiseClient {
