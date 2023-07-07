@@ -1,8 +1,8 @@
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import "regenerator-runtime/runtime";
-import BlaiseApiClient from "../src/blaise-api-client";
-import { Outcome } from "../src/interfaces/cases.interface";
+import BlaiseApiClient, { CaseStatusListMockObject } from "../src/blaise-api-client";
+//import { Outcome } from "../src/interfaces/cases.interface";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
@@ -64,21 +64,22 @@ describe("blaiseApiClient", () => {
 
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/status`).reply(200,
-        [
-          {
-            "primaryKey": "1",
-            "outcome": 110
-          },
-          {
-            "primaryKey": "2",
-            "outcome": 310
-          },
-          {
-            "primaryKey": "3",
-            "outcome": 0
-          }
-        ]
-      );
+        CaseStatusListMockObject
+        // [
+        //   {
+        //     "primaryKey": "1",
+        //     "outcome": 110
+        //   },
+        //   {
+        //     "primaryKey": "2",
+        //     "outcome": 310
+        //   },
+        //   {
+        //     "primaryKey": "3",
+        //     "outcome": 0
+        //   }
+        // ]
+       );
     });
 
     afterEach(() => {
@@ -88,14 +89,15 @@ describe("blaiseApiClient", () => {
     it("gets all cases and outcome codes for a given questionnaire", async () => {
       const result = await blaiseApiClient.getCaseStatus(serverpark, questionnaireName);
 
-      expect(result).toHaveLength(3);
-      expect(result[0].primaryKey).toEqual("1");
-      expect(result[0].outcome).toEqual(110);
-      expect(result[0].outcome).toEqual(Outcome.Completed);
-      expect(result[1].primaryKey).toEqual("2");
-      expect(result[1].outcome).toEqual(Outcome.NonContact);
-      expect(result[2].primaryKey).toEqual("3");
-      expect(result[2].outcome).toEqual(Outcome.None);
+      expect(result).toEqual(CaseStatusListMockObject);
+      // expect(result).toHaveLength(3);
+      // expect(result[0].primaryKey).toEqual("1");
+      // expect(result[0].outcome).toEqual(110);
+      // expect(result[0].outcome).toEqual(Outcome.Completed);
+      // expect(result[1].primaryKey).toEqual("2");
+      // expect(result[1].outcome).toEqual(Outcome.NonContact);
+      // expect(result[2].primaryKey).toEqual("3");
+      // expect(result[2].outcome).toEqual(Outcome.None);
     });
 
   });

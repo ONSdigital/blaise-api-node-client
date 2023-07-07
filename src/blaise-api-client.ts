@@ -122,6 +122,7 @@ export * from "./survey-days";
 
 export * from "./mock-objects/diagnostic.mock.objects";
 export * from "./mock-objects/questionnaire.mock.objects";
+export * from "./mock-objects/case.mock.objects";
 
 export {
   Outcome
