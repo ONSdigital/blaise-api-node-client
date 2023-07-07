@@ -1,11 +1,11 @@
 type CaseFields = Record<string, any>
 
-interface CaseResponse {
+interface ICaseResponse {
   caseID: string
   fieldData: CaseFields
 }
 
-interface CaseStatus {
+interface ICaseStatus {
   primaryKey: string,
   outcome: Outcome,
 }
@@ -52,8 +52,8 @@ enum Outcome {
 
 export type {
   CaseFields,
-  CaseResponse,
-  CaseStatus,
+  ICaseResponse,
+  ICaseStatus,
 };
 
 

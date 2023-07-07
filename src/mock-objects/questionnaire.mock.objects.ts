@@ -1,4 +1,6 @@
-export const QuestionnaireListMockObject = [{
+import { IDaybatchResponse, IDaybatchSettings, IInstallQuestionnaire, IInstallQuestionnaireResponse, IQuestionnaire, IQuestionnaireSettings, ISurveyDays } from "../interfaces/questionnaires.interface";
+
+export const QuestionnaireListMockObject:IQuestionnaire[] = [{
     name: "OPN2101A",
     serverParkName: "gusty",
     installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -24,7 +26,7 @@ export const QuestionnaireListMockObject = [{
     active: false,
 }];
 
-export const QuestionnaireMockObject = {
+export const QuestionnaireMockObject:IQuestionnaire = {
     name: "OPN2101A",
     serverParkName: "gusty",
     installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -35,32 +37,28 @@ export const QuestionnaireMockObject = {
     blaiseVersion: "5.9.9.2735",
 };
 
-export const InstallQuestionnaireMockObject = {
-    questionnaireName: "OPN2004A",
+export const InstallQuestionnaireMockObject:IInstallQuestionnaire = {
     questionnaireFile: "OPN2004A.bpkg",
-    bucketPath: "/"
 };
 
-export const InstallQuestionnaireResponseMockObject = {
+export const InstallQuestionnaireResponseMockObject:IInstallQuestionnaireResponse = {
     questionnaireFile: "OPN2004A.bpkg"
 };
 
-export const QuestionnaireSettingsMockList = [
-    {
-        "type": "StrictInterviewing",
-        "saveSessionOnTimeout": true,
-        "saveSessionOnQuit": true,
-        "deleteSessionOnTimeout": true,
-        "deleteSessionOnQuit": true,
-        "sessionTimeout": 15,
-        "applyRecordLocking": true
-    }
-];
+export const QuestionnaireSettingsMockList:IQuestionnaireSettings[] = [{
+        type: "StrictInterviewing",
+        saveSessionOnTimeout: true,
+        saveSessionOnQuit: true,
+        deleteSessionOnTimeout: true,
+        deleteSessionOnQuit: true,
+        sessionTimeout: 15,
+        applyRecordLocking: true
+}];
 
-export const QuestionnaireDaybatchCasesMock = [
+export const QuestionnaireDaybatchCasesMock:IDaybatchResponse[] = [
     {
-        "dayBatchDate": "2021-01-15T14:41:29.4399898+00:00",
-        "caseIds": [
+        dayBatchDate: "2021-01-15T14:41:29.4399898+00:00",
+        caseIds: [
             "100101",
             "100102",
             "100103",
@@ -69,15 +67,15 @@ export const QuestionnaireDaybatchCasesMock = [
     }
 ];
 
-export const AddDaybatchMock = {
-    "dayBatchDate": "2021-01-15T14:41:29.4399898+00:00",
-    "checkForTreatedCases": true
+export const AddDaybatchMock:IDaybatchSettings = {
+    dayBatchDate: "2021-01-15T14:41:29.4399898+00:00",
+    checkForTreatedCases: true
 };
 
 export const SurveyDaysMock = [
     "2021-01-15T14:41:29.4399898+00:00"
 ];
 
-export const SurveyDaysDatesMock = [
+export const SurveyDaysDatesMock:ISurveyDays = [
     new Date("2021-01-15T14:41:29.4399898+00:00")
 ];

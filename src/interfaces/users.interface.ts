@@ -1,20 +1,20 @@
-export type User = {
+export type IUser = {
   name: string,
   role: string,
   serverParks: string[],
   defaultServerPark: string
 }
 
-export type PasswordRequest = {
+export type IPasswordRequest = {
   password: string
 }
 
-export type UserRole = {
+export type IUserRole = {
   name: string,
   description: string,
   permissions: string[]
 }
 
-export interface NewUser extends User {
+export interface INewUser extends IUser {
   password: string
 }

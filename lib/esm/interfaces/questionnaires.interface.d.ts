@@ -1,4 +1,4 @@
-interface Questionnaire {
+interface IQuestionnaire {
     installDate: string;
     name: string;
     expired?: boolean;
@@ -11,21 +11,21 @@ interface Questionnaire {
     dataRecordCount?: number;
     status?: string;
     hasData?: boolean;
-    nodes?: Node[];
+    nodes?: INode[];
     active?: boolean;
     blaiseVersion?: string;
 }
-interface Node {
+interface INode {
     nodeName: string;
     nodeStatus: string;
 }
-interface InstallQuestionnaire {
+interface IInstallQuestionnaire {
     questionnaireFile: string;
 }
-interface InstallQuestionnaireResponse {
-    iquestionnaireFile: string;
+interface IInstallQuestionnaireResponse {
+    questionnaireFile: string;
 }
-interface QuestionnaireSettings {
+interface IQuestionnaireSettings {
     type: string;
     saveSessionOnTimeout: boolean;
     saveSessionOnQuit: boolean;
@@ -34,13 +34,13 @@ interface QuestionnaireSettings {
     sessionTimeout: number;
     applyRecordLocking: boolean;
 }
-interface DaybatchResponse {
+interface IDaybatchResponse {
     dayBatchDate: string;
-    caseIDs: string[];
+    caseIds: string[];
 }
-interface DaybatchSettings {
+interface IDaybatchSettings {
     dayBatchDate: string;
     checkForTreatedCases: boolean;
 }
-declare type SurveyDays = string[] | Date[];
-export type { Questionnaire, InstallQuestionnaire, InstallQuestionnaireResponse, QuestionnaireSettings, DaybatchResponse, DaybatchSettings, SurveyDays, };
+declare type ISurveyDays = string[] | Date[];
+export type { IQuestionnaire, IInstallQuestionnaire, IInstallQuestionnaireResponse, IQuestionnaireSettings, IDaybatchResponse, IDaybatchSettings, ISurveyDays, };

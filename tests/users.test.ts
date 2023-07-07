@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 import BlaiseApiClient from "../src/blaise-api-client";
-import { CreateUserMockObject, CreateUserResponseMockObject } from "../src/mock-objects/user-mock-objects";
+import { CreateUserMockObject, CreateUserResponseMockObject } from "../src/mock-objects/user.mock.objects";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";

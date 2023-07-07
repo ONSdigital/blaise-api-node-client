@@ -1,5 +1,5 @@
-interface Diagnostic {
+interface IDiagnostic {
     "health check type": string;
     status: string;
 }
-export type { Diagnostic };
+export type { IDiagnostic };

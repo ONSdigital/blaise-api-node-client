@@ -1,6 +1,6 @@
-import { SurveyDays } from "../interfaces/questionnaires";
+import { ISurveyDays } from "../interfaces/questionnaires.interface";
 
-export function surveyIsActiveToday(surveyDays: SurveyDays | undefined): boolean {
+export function surveyIsActiveToday(surveyDays: ISurveyDays | undefined): boolean {
   if (!surveyDays) {
     return false;
   }
@@ -13,7 +13,7 @@ export function surveyIsActiveToday(surveyDays: SurveyDays | undefined): boolean
   return false;
 }
 
-export function surveyIsActive(surveyDays: SurveyDays | undefined): boolean {
+export function surveyIsActive(surveyDays: ISurveyDays | undefined): boolean {
   if (!surveyDays) {
     return false;
   }

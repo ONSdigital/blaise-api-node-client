@@ -1,9 +1,9 @@
 declare type CaseFields = Record<string, any>;
-interface CaseResponse {
+interface ICaseResponse {
     caseID: string;
     fieldData: CaseFields;
 }
-interface CaseStatus {
+interface ICaseStatus {
     primaryKey: string;
     outcome: Outcome;
 }
@@ -46,5 +46,5 @@ declare enum Outcome {
     RequestForContext = 794,
     QuestionProblem = 795
 }
-export type { CaseFields, CaseResponse, CaseStatus, };
+export type { CaseFields, ICaseResponse, ICaseStatus, };
 export { Outcome };

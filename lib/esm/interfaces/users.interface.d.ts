@@ -1,17 +1,17 @@
-export declare type User = {
+export declare type IUser = {
     name: string;
     role: string;
     serverParks: string[];
     defaultServerPark: string;
 };
-export declare type PasswordRequest = {
+export declare type IPasswordRequest = {
     password: string;
 };
-export declare type UserRole = {
+export declare type IUserRole = {
     name: string;
     description: string;
     permissions: string[];
 };
-export interface NewUser extends User {
+export interface INewUser extends IUser {
     password: string;
 }

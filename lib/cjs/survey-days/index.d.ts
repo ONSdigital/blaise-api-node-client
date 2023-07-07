@@ -1,3 +1,3 @@
-import { SurveyDays } from "../interfaces/questionnaires";
-export declare function surveyIsActiveToday(surveyDays: SurveyDays | undefined): boolean;
-export declare function surveyIsActive(surveyDays: SurveyDays | undefined): boolean;
+import { ISurveyDays } from "../interfaces/questionnaires.interface";
+export declare function surveyIsActiveToday(surveyDays: ISurveyDays | undefined): boolean;
+export declare function surveyIsActive(surveyDays: ISurveyDays | undefined): boolean;

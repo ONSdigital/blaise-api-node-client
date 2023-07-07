@@ -1,11 +1,11 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from "axios";
-import { Outcome } from "./interfaces/cases";
+import { Outcome } from "./interfaces/cases.interface";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
 import * as users from "./blaise-api-client/users";
 import * as questionnaires from "./blaise-api-client/questionnaires";
 import * as cases from "./blaise-api-client/cases";
 import * as diagnostics from "./blaise-api-client/diagnostics";
-import { Questionnaire } from "./interfaces/questionnaires";
+import { IQuestionnaire } from "./interfaces/questionnaires.interface";
 
 export type BlaiseApiConfig = {
   timeoutInMs?: number;
@@ -13,7 +13,7 @@ export type BlaiseApiConfig = {
 }
 
 export interface IBlaiseClient {
-  getQuestionnaires(serverPark: string): Promise<Questionnaire[]>
+  getQuestionnaires(serverPark: string): Promise<IQuestionnaire[]>
 }
 
 class BlaiseApiClient implements IBlaiseClient {
@@ -114,14 +114,14 @@ class BlaiseApiClient implements IBlaiseClient {
 
 export default BlaiseApiClient;
 
-export * from "./interfaces/questionnaires";
-export * from "./interfaces/diagnostics";
-export * from "./interfaces/cases";
-export * from "./interfaces/users";
+export * from "./interfaces/questionnaires.interface";
+export * from "./interfaces/diagnostics.interface";
+export * from "./interfaces/cases.interface";
+export * from "./interfaces/users.interface";
 export * from "./survey-days";
 
-export * from "./mock-objects/diagnostic-mock-objects";
-export * from "./mock-objects/questionnaire-mock-objects";
+export * from "./mock-objects/diagnostic.mock.objects";
+export * from "./mock-objects/questionnaire.mock.objects";
 
 export {
   Outcome

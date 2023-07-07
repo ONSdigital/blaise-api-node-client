@@ -1,3 +1,3 @@
 import BlaiseApiClient from "../blaise-api-client";
-import { Diagnostic } from "../interfaces/diagnostics";
-export declare function getDiagnostics(this: BlaiseApiClient): Promise<Diagnostic[]>;
+import { IDiagnostic } from "../interfaces/diagnostics.interface";
+export declare function getDiagnostics(this: BlaiseApiClient): Promise<IDiagnostic[]>;
