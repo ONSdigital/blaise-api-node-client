@@ -120,9 +120,10 @@ export * from "./interfaces/cases.interface";
 export * from "./interfaces/users.interface";
 export * from "./survey-days";
 
-export * from "./mock-objects/diagnostic.mock.objects";
-export * from "./mock-objects/questionnaire.mock.objects";
-export * from "./mock-objects/case.mock.objects";
+export * from "./mock-objects/cases.mock.objects";
+export * from "./mock-objects/diagnostics.mock.objects";
+export * from "./mock-objects/questionnaires.mock.objects";
+export * from "./mock-objects/users.mock.objects";
 
 export {
   Outcome

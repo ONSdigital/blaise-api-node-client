@@ -9,7 +9,7 @@ import BlaiseApiClient, {
     QuestionnaireDaybatchCasesMock, AddDaybatchMock,
     SurveyDaysMock, SurveyDaysDatesMock,
     surveyIsActive, surveyIsActiveToday
-} from "../src/blaise-api-client";
+} from "../blaise-api-client";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
