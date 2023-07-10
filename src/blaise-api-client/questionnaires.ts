@@ -1,19 +1,19 @@
 import BlaiseApiClient from "../blaise-api-client";
-import { DaybatchResponse, DaybatchSettings, InstallQuestionnaire, InstallQuestionnaireResponse, Questionnaire, QuestionnaireSettings, SurveyDays } from "../interfaces/questionnaires";
+import { IDaybatchResponse, IDaybatchSettings, IInstallQuestionnaire, IInstallQuestionnaireResponse, IQuestionnaire, IQuestionnaireSettings, ISurveyDays } from "../interfaces/questionnaires.interface";
 
-export async function getAllQuestionnairesWithCatiData(this: BlaiseApiClient): Promise<Questionnaire[]> {
+export async function getAllQuestionnairesWithCatiData(this: BlaiseApiClient): Promise<IQuestionnaire[]> {
   return this.get("/api/v2/cati/questionnaires");
 }
 
-export async function getQuestionnairesWithCatiData(this: BlaiseApiClient, serverpark: string): Promise<Questionnaire[]> {
+export async function getQuestionnairesWithCatiData(this: BlaiseApiClient, serverpark: string): Promise<IQuestionnaire[]> {
   return this.get(`/api/v2/cati/serverparks/${serverpark}/questionnaires`);
 }
 
-export async function getQuestionnaireWithCatiData(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<Questionnaire> {
+export async function getQuestionnaireWithCatiData(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<IQuestionnaire> {
   return this.get(`/api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}`);
 }
 
-export async function getQuestionnaires(this: BlaiseApiClient, serverpark: string): Promise<Questionnaire[]> {
+export async function getQuestionnaires(this: BlaiseApiClient, serverpark: string): Promise<IQuestionnaire[]> {
   return this.get(`/api/v2/serverparks/${serverpark}/questionnaires`);
 }
 
@@ -25,11 +25,11 @@ export async function doesQuestionnaireHaveMode(this: BlaiseApiClient, serverpar
   return this.get(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/modes/${mode}`);
 }
 
-export async function getQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<Questionnaire> {
+export async function getQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<IQuestionnaire> {
   return this.get(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}`);
 }
 
-export async function installQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaire: InstallQuestionnaire): Promise<InstallQuestionnaireResponse> {
+export async function installQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaire: IInstallQuestionnaire): Promise<IInstallQuestionnaireResponse> {
   return this.post(`/api/v2/serverparks/${serverpark}/questionnaires`, questionnaire);
 }
 
@@ -45,7 +45,7 @@ export async function getQuestionnaireModes(this: BlaiseApiClient, serverpark: s
   return this.get(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/modes`);
 }
 
-export async function getQuestionnaireSettings(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<QuestionnaireSettings[]> {
+export async function getQuestionnaireSettings(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<IQuestionnaireSettings[]> {
   return this.get(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/settings`);
 }
 
@@ -57,11 +57,11 @@ export async function deactivateQuestionnaire(this: BlaiseApiClient, serverpark:
   return this.patch(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/deactivate`);
 }
 
-export async function getDaybatch(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<DaybatchResponse> {
+export async function getDaybatch(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<IDaybatchResponse> {
   return this.get(`/api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/daybatch`);
 }
 
-export async function addDaybatch(this: BlaiseApiClient, serverpark: string, questionnaireName: string, daybatchSettings: DaybatchSettings): Promise<DaybatchResponse> {
+export async function addDaybatch(this: BlaiseApiClient, serverpark: string, questionnaireName: string, daybatchSettings: IDaybatchSettings): Promise<IDaybatchResponse> {
   return this.post(`/api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/daybatch`, daybatchSettings);
 }
 
@@ -69,7 +69,7 @@ export async function getSurveyDays(this: BlaiseApiClient, serverpark: string, q
   return this.get(`api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/surveydays`);
 }
 
-export async function addSurveyDays(this: BlaiseApiClient, serverpark: string, questionnaireName: string, surveyDays: SurveyDays): Promise<string[]> {
+export async function addSurveyDays(this: BlaiseApiClient, serverpark: string, questionnaireName: string, surveyDays: ISurveyDays): Promise<string[]> {
   surveyDays = surveyDays.map((surveyDay: string | Date) => {
     if (surveyDay instanceof Date) {
       return surveyDay.toISOString();

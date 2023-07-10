@@ -1,9 +1,9 @@
 import BlaiseApiClient from "../blaise-api-client";
-import { NewUser, User, UserRole } from "../interfaces/users";
-export declare function getUser(this: BlaiseApiClient, username: string): Promise<User>;
-export declare function getUsers(this: BlaiseApiClient): Promise<User[]>;
+import { INewUser, IUser, IUserRole } from "../interfaces/users.interface";
+export declare function getUser(this: BlaiseApiClient, username: string): Promise<IUser>;
+export declare function getUsers(this: BlaiseApiClient): Promise<IUser[]>;
 export declare function validatePassword(this: BlaiseApiClient, username: string, password: string): Promise<boolean>;
-export declare function createUser(this: BlaiseApiClient, user: NewUser): Promise<NewUser>;
+export declare function createUser(this: BlaiseApiClient, user: INewUser): Promise<INewUser>;
 export declare function deleteUser(this: BlaiseApiClient, username: string): Promise<null>;
-export declare function getUserRoles(this: BlaiseApiClient): Promise<UserRole[]>;
+export declare function getUserRoles(this: BlaiseApiClient): Promise<IUserRole[]>;
 export declare function changePassword(this: BlaiseApiClient, username: string, password: string): Promise<null>;
