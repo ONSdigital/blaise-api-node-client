@@ -117,8 +117,8 @@ export * from "./enums/caseOutcome";
 export * from "./types/caseData";
 export * from "./types/surveyDays";
 
-export * from "./mock-objects/caseMockObjects";
-export * from "./mock-objects/diagnosticMockObjects";
-export * from "./mock-objects/questionnaireMockObjects";
-export * from "./mock-objects/userMockObjects";
-export * from "./mock-objects/daybatchMockObjects";
+export * from "./mockObjects/caseMockObjects";
+export * from "./mockObjects/diagnosticMockObjects";
+export * from "./mockObjects/questionnaireMockObjects";
+export * from "./mockObjects/userMockObjects";
+export * from "./mockObjects/daybatchMockObjects";
