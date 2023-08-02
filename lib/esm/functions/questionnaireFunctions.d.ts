@@ -1,0 +1,16 @@
+import BlaiseApiClient from "../blaiseApiClient";
+import { InstallQuestionnaire, InstallQuestionnaireResponse, Questionnaire, QuestionnaireSettings } from "../interfaces/questionnaire";
+export declare function getAllQuestionnairesWithCatiData(this: BlaiseApiClient): Promise<Questionnaire[]>;
+export declare function getQuestionnairesWithCatiData(this: BlaiseApiClient, serverpark: string): Promise<Questionnaire[]>;
+export declare function getQuestionnaireWithCatiData(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<Questionnaire>;
+export declare function getQuestionnaires(this: BlaiseApiClient, serverpark: string): Promise<Questionnaire[]>;
+export declare function questionnaireExists(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<boolean>;
+export declare function doesQuestionnaireHaveMode(this: BlaiseApiClient, serverpark: string, questionnaireName: string, mode: string): Promise<boolean>;
+export declare function getQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<Questionnaire>;
+export declare function installQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaire: InstallQuestionnaire): Promise<InstallQuestionnaireResponse>;
+export declare function deleteQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<null>;
+export declare function getQuestionnaireCaseIds(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<string[]>;
+export declare function getQuestionnaireModes(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<string[]>;
+export declare function getQuestionnaireSettings(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<QuestionnaireSettings[]>;
+export declare function activateQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<null>;
+export declare function deactivateQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<null>;
