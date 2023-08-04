@@ -7,6 +7,6 @@ export interface CaseResponse {
 }
 
 export interface CaseStatus {
-  caseId: string,
-  caseOutcome: CaseOutcome,
+  primaryKey: string,
+  outcome: CaseOutcome,
 }

@@ -1,14 +1,14 @@
 import { CaseResponse, CaseStatus } from "../interfaces/case";
 
 export const CaseStatusListMockObject:CaseStatus[] = [{
-    "caseId": "1",
-    "caseOutcome": 110
+    "primaryKey": "1",
+    "outcome": 110
 }, {
-    "caseId": "2",
-    "caseOutcome": 310
+    "primaryKey": "2",
+    "outcome": 310
 }, {
-    "caseId": "3",
-    "caseOutcome": 0
+    "primaryKey": "3",
+    "outcome": 0
 }];
 
 export const CaseResponseMockObject:CaseResponse = {
