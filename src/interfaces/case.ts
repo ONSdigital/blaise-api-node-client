@@ -7,6 +7,6 @@ export interface CaseResponse {
 }
 
 export interface CaseStatus {
-  caseID: string,
+  caseId: string,
   caseOutcome: CaseOutcome,
 }
