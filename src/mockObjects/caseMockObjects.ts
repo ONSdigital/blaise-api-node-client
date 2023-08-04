@@ -12,7 +12,7 @@ export const CaseStatusListMockObject:CaseStatus[] = [{
 }];
 
 export const CaseResponseMockObject:CaseResponse = {
-    "caseID": "1",
+    "caseId": "1",
     "caseData": {
         "qiD.Serial_Number": "900001",
         "qDataBag.Prem1": "Flat 1",
