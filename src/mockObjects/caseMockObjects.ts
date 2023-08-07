@@ -13,7 +13,7 @@ export const CaseStatusListMockObject:CaseStatus[] = [{
 
 export const CaseResponseMockObject:CaseResponse = {
     "caseId": "1",
-    "caseData": {
+    "fieldData": {
         "qiD.Serial_Number": "1",
         "qDataBag.Prem1": "Flat 1",
         "qDataBag.Prem2": "Richmond House",

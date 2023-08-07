@@ -17,7 +17,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`).reply(200, {
         caseId: caseId,
-        caseData: {}
+        fieldData: {}
       });
     });
 
@@ -29,7 +29,7 @@ describe("blaiseApiClient", () => {
       const caseResponse = await blaiseApiClient.getCase(serverpark, questionnaireName, caseId);
 
       expect(caseResponse.caseId).toEqual(caseId);
-      expect(caseResponse.caseData).toEqual({});
+      expect(caseResponse.fieldData).toEqual({});
     });
   });
 
@@ -41,7 +41,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock.onPost(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`).reply(200, {
         caseId: caseId,
-        caseData: {}
+        fieldData: {}
       });
     });
 
@@ -53,7 +53,7 @@ describe("blaiseApiClient", () => {
       const caseResponse = await blaiseApiClient.addCase(serverpark, questionnaireName, caseId, {});
 
       expect(caseResponse.caseId).toEqual(caseId);
-      expect(caseResponse.caseData).toEqual({});
+      expect(caseResponse.fieldData).toEqual({});
     });
   });
 

@@ -3,7 +3,7 @@ import { CaseData } from "../types/caseData";
 
 export interface CaseResponse {
   caseId: string
-  caseData: CaseData
+  fieldData: CaseData
 }
 
 export interface CaseStatus {
