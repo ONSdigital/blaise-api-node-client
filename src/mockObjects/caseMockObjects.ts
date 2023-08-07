@@ -28,6 +28,6 @@ export const CaseResponseMockObject:CaseResponse = {
         "dmDteOfBth[1]": "1980-01-15",
         "dmName[2]": "Richmond Junior",
         "dmDteOfBth[2]": "2005-04-12",
-        "qHousehold.QHHold.PerCount": "2",
+        "dmhSize": "2",
     }
 };
