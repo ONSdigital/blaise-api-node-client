@@ -12,12 +12,12 @@ describe("blaiseApiClient", () => {
   describe("get case", () => {
     const serverpark = "test";
     const questionnaireName = "dst2108t";
-    const caseID = "100101;";
+    const caseId = "100101;";
 
     beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseID}`).reply(200, {
-        caseID: caseID,
-        caseData: {}
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`).reply(200, {
+        caseId: caseId,
+        fieldData: {}
       });
     });
 
@@ -26,22 +26,22 @@ describe("blaiseApiClient", () => {
     });
 
     it("returns a case", async () => {
-      const caseResponse = await blaiseApiClient.getCase(serverpark, questionnaireName, caseID);
+      const caseResponse = await blaiseApiClient.getCase(serverpark, questionnaireName, caseId);
 
-      expect(caseResponse.caseID).toEqual(caseID);
-      expect(caseResponse.caseData).toEqual({});
+      expect(caseResponse.caseId).toEqual(caseId);
+      expect(caseResponse.fieldData).toEqual({});
     });
   });
 
   describe("add case", () => {
     const serverpark = "test";
     const questionnaireName = "dst2108t";
-    const caseID = "100101;";
+    const caseId = "100101;";
 
     beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseID}`).reply(200, {
-        caseID: caseID,
-        caseData: {}
+      mock.onPost(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`).reply(200, {
+        caseId: caseId,
+        fieldData: {}
       });
     });
 
@@ -50,10 +50,10 @@ describe("blaiseApiClient", () => {
     });
 
     it("adds a case", async () => {
-      const caseResponse = await blaiseApiClient.addCase(serverpark, questionnaireName, caseID, {});
+      const caseResponse = await blaiseApiClient.addCase(serverpark, questionnaireName, caseId, {});
 
-      expect(caseResponse.caseID).toEqual(caseID);
-      expect(caseResponse.caseData).toEqual({});
+      expect(caseResponse.caseId).toEqual(caseId);
+      expect(caseResponse.fieldData).toEqual({});
     });
   });
 
