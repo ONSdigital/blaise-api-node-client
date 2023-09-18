@@ -7,6 +7,7 @@ import * as questionnaires from "./functions/questionnaireFunctions";
 import * as cases from "./functions/caseFunctions";
 import * as diagnostics from "./functions/diagnosticFunctions";
 import * as daybatch from "./functions/daybatchFunctions";
+import * as reports from "./functions/reportFunctions";
 declare class BlaiseApiClient implements BlaiseApi {
     blaiseApiUrl: string;
     blaiseIapProvider?: BlaiseIapNodeProvider;
@@ -41,6 +42,7 @@ declare class BlaiseApiClient implements BlaiseApi {
     addCase: typeof cases.addCase;
     getCaseStatus: typeof cases.getCaseStatus;
     getDiagnostics: typeof diagnostics.getDiagnostics;
+    getReportData: typeof reports.getReportData;
     private url;
     protected get(url: string): Promise<any>;
     protected post(url: string, data: any): Promise<any>;
@@ -54,6 +56,7 @@ export * from "./interfaces/diagnostic";
 export * from "./interfaces/case";
 export * from "./interfaces/user";
 export * from "./interfaces/daybatch";
+export * from "./interfaces/report";
 export * from "./enums/caseOutcome";
 export * from "./types/caseData";
 export * from "./types/surveyDays";
@@ -62,3 +65,4 @@ export * from "./mockObjects/diagnosticMockObjects";
 export * from "./mockObjects/questionnaireMockObjects";
 export * from "./mockObjects/userMockObjects";
 export * from "./mockObjects/daybatchMockObjects";
+export * from "./mockObjects/reportMockObjects";

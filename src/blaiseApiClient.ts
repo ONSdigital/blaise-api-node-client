@@ -7,6 +7,7 @@ import * as questionnaires from "./functions/questionnaireFunctions";
 import * as cases from "./functions/caseFunctions";
 import * as diagnostics from "./functions/diagnosticFunctions";
 import * as daybatch from "./functions/daybatchFunctions";
+import * as reports from "./functions/reportFunctions";
 
 
 class BlaiseApiClient implements BlaiseApi {
@@ -61,6 +62,8 @@ class BlaiseApiClient implements BlaiseApi {
 
   getDiagnostics = diagnostics.getDiagnostics;
 
+  getReportData = reports.getReportData;
+
   private url(url: string): string {
     if (!url.startsWith("/")) {
       url = `/${url}`;
@@ -112,6 +115,7 @@ export * from "./interfaces/diagnostic";
 export * from "./interfaces/case";
 export * from "./interfaces/user";
 export * from "./interfaces/daybatch";
+export * from "./interfaces/report";
 
 export * from "./enums/caseOutcome";
 export * from "./types/caseData";
@@ -122,3 +126,4 @@ export * from "./mockObjects/diagnosticMockObjects";
 export * from "./mockObjects/questionnaireMockObjects";
 export * from "./mockObjects/userMockObjects";
 export * from "./mockObjects/daybatchMockObjects";
+export * from "./mockObjects/reportMockObjects";
