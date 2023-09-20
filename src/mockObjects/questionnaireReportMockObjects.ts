@@ -1,6 +1,6 @@
-import Report from "../interfaces/report";
+import {QuestionnaireReport} from "../interfaces/questionnaireReport";
 
-export const reportMockObject: Report = {
+export const reportMockObject: QuestionnaireReport = {
     questionnaireName: "FRS2211A",
     questionnaireId: "00000000-0000-0000-0000-000000000000",
     reportingData: [

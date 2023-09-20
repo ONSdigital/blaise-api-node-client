@@ -2,7 +2,7 @@ import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import "regenerator-runtime/runtime";
 import BlaiseApiClient from "../blaiseApiClient";
-import { reportMockObject } from "../mockObjects/reportMockObjects";
+import { reportMockObject } from "../mockObjects/questionnaireReportMockObjects";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
@@ -29,7 +29,11 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("returns an expect report", async () => {
+<<<<<<< HEAD:src/functions/reportFunctions.test.ts
       const reportData = await blaiseApiClient.getReportData(serverpark, questionnaireName, fieldIds);
+=======
+      const reportData = await blaiseApiClient.getQuestionnaireReportData(serverpark, questionnaireName);
+>>>>>>> 15f64bd3e788116d29aeb3b91e01b6c7324f98b5:src/functions/questionnaireReportFunctions.test.ts
 
       expect(reportData).toEqual(reportMockObject);
     });
