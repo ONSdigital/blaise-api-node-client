@@ -3,5 +3,6 @@
   "transform": {
     "^.+\\.(ts|tsx)?$": "ts-jest",
     "^.+\\.(js|jsx)$": "babel-jest"
-  }
+  },
+  "modulePathIgnorePatterns": ["node_modules", "lib", "tests"]
 }
