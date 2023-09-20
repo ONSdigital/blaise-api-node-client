@@ -115,7 +115,7 @@ export * from "./interfaces/diagnostic";
 export * from "./interfaces/case";
 export * from "./interfaces/user";
 export * from "./interfaces/daybatch";
-export * from "./interfaces/report";
+export * from "./interfaces/questionnaireReport";
 
 export * from "./enums/caseOutcome";
 export * from "./types/caseData";
@@ -126,4 +126,4 @@ export * from "./mockObjects/diagnosticMockObjects";
 export * from "./mockObjects/questionnaireMockObjects";
 export * from "./mockObjects/userMockObjects";
 export * from "./mockObjects/daybatchMockObjects";
-export * from "./mockObjects/reportMockObjects";
+export * from "./mockObjects/questionnaireReportMockObjects";
