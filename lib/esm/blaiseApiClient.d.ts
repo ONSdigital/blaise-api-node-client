@@ -42,7 +42,7 @@ declare class BlaiseApiClient implements BlaiseApi {
     addCase: typeof cases.addCase;
     getCaseStatus: typeof cases.getCaseStatus;
     getDiagnostics: typeof diagnostics.getDiagnostics;
-    getReportData: typeof reports.getQuestionnaireReportData;
+    getQuestionnaireReportData: typeof reports.getQuestionnaireReportData;
     private url;
     protected get(url: string): Promise<any>;
     protected post(url: string, data: any): Promise<any>;

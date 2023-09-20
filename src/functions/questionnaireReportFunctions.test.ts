@@ -26,7 +26,7 @@ describe("BlaiseRestapiClient", () => {
     });
 
     it("returns an expect report", async () => {
-      const reportData = await blaiseApiClient.getReportData(serverpark, questionnaireName);
+      const reportData = await blaiseApiClient.getQuestionnaireReportData(serverpark, questionnaireName);
 
       expect(reportData).toEqual(reportMockObject);
     });

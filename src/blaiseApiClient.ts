@@ -62,7 +62,7 @@ class BlaiseApiClient implements BlaiseApi {
 
   getDiagnostics = diagnostics.getDiagnostics;
 
-  getReportData = reports.getQuestionnaireReportData;
+  getQuestionnaireReportData = reports.getQuestionnaireReportData;
 
   private url(url: string): string {
     if (!url.startsWith("/")) {
