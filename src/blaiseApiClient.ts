@@ -7,7 +7,7 @@ import * as questionnaires from "./functions/questionnaireFunctions";
 import * as cases from "./functions/caseFunctions";
 import * as diagnostics from "./functions/diagnosticFunctions";
 import * as daybatch from "./functions/daybatchFunctions";
-import * as reports from "./functions/reportFunctions";
+import * as reports from "./functions/questionnaireReportFunctions";
 
 
 class BlaiseApiClient implements BlaiseApi {
@@ -62,7 +62,7 @@ class BlaiseApiClient implements BlaiseApi {
 
   getDiagnostics = diagnostics.getDiagnostics;
 
-  getReportData = reports.getReportData;
+  getReportData = reports.getQuestionnaireReportData;
 
   private url(url: string): string {
     if (!url.startsWith("/")) {
