@@ -108,6 +108,7 @@ class BlaiseApiClient implements BlaiseApi {
 export default BlaiseApiClient;
 
 export * from "./interfaces/questionnaire";
+export * from "./interfaces/survey";
 export * from "./interfaces/diagnostic";
 export * from "./interfaces/case";
 export * from "./interfaces/user";
