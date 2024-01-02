@@ -87,7 +87,7 @@ class BlaiseApiClient implements BlaiseApi {
 
   getDiagnostics = diagnostics.getDiagnostics;
 
-  private url(url: string): string {
+  private static url(url: string): string {
     if (!url.startsWith('/')) {
       // eslint-disable-next-line no-param-reassign
       url = `/${url}`;
@@ -98,28 +98,28 @@ class BlaiseApiClient implements BlaiseApi {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async get(url: string): Promise<any> {
     const config = await this.axiosConfig();
-    const response = await this.httpClient.get(`${this.blaiseApiUrl}${this.url(url)}`, config);
+    const response = await this.httpClient.get(`${this.blaiseApiUrl}${BlaiseApiClient.url(url)}`, config);
     return response.data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
   protected async post(url: string, data: any): Promise<any> {
     const config = await this.axiosConfig();
-    const response = await this.httpClient.post(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
+    const response = await this.httpClient.post(`${this.blaiseApiUrl}${BlaiseApiClient.url(url)}`, data, config);
     return response.data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async delete(url: string): Promise<any> {
     const config = await this.axiosConfig();
-    const response = await this.httpClient.delete(`${this.blaiseApiUrl}${this.url(url)}`, config);
+    const response = await this.httpClient.delete(`${this.blaiseApiUrl}${BlaiseApiClient.url(url)}`, config);
     return response.data;
   }
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async patch(url: string, data: any | undefined = undefined): Promise<any> {
     const config = await this.axiosConfig();
-    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
+    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${BlaiseApiClient.url(url)}`, data, config);
     return response.data;
   }
 
