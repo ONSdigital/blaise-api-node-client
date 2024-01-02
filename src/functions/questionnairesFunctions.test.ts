@@ -83,7 +83,7 @@ describe('blaiseApiClient', () => {
         200,
         QuestionnaireListMockObject,
       );
-    }); /v2/;
+    });
 
     afterEach(() => {
       mock.reset();
