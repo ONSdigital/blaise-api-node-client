@@ -15,7 +15,7 @@ export async function getSurveyDays(this: BlaiseApiClient, serverpark: string, q
 }
 
 export async function addSurveyDays(this: BlaiseApiClient, serverpark: string, questionnaireName: string, surveyDays: SurveyDays): Promise<string[]> {
-  surveyDays = surveyDays.map((surveyDay: string | Date) => {
+  surveyDays.map((surveyDay: string | Date) => {
     if (surveyDay instanceof Date) {
       return surveyDay.toISOString();
     }
