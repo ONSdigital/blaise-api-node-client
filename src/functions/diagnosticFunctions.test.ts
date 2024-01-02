@@ -1,19 +1,19 @@
-import MockAdapter from "axios-mock-adapter";
-import axios from "axios";
-import "regenerator-runtime/runtime";
-import BlaiseApiClient from "../blaiseApiClient";
-import {DiagnosticMockObject} from "../mockObjects/diagnosticMockObjects";
+import MockAdapter from 'axios-mock-adapter';
+import axios from 'axios';
+import 'regenerator-runtime/runtime';
+import BlaiseApiClient from '../blaiseApiClient';
+import { DiagnosticMockObject } from '../mockObjects/diagnosticMockObjects';
 
-const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
-const blaiseApiUrl = "testUri";
+const mock = new MockAdapter(axios, { onNoMatch: 'throwException' });
+const blaiseApiUrl = 'testUri';
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
-describe("BlaiseRestapiClient", () => {
-  describe("get health Check from API", () => {
-
+describe('BlaiseRestapiClient', () => {
+  describe('get health Check from API', () => {
     beforeAll(() => {
-         mock.onGet(`http://${blaiseApiUrl}/api/v2/health/diagnosis`).reply(200,
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/health/diagnosis`).reply(
+        200,
         DiagnosticMockObject,
       );
     });
@@ -22,12 +22,12 @@ describe("BlaiseRestapiClient", () => {
       mock.reset();
     });
 
-    it("returns a list of diagnostics", async () => {
+    it('returns a list of diagnostics', async () => {
       const diagnostics = await blaiseApiClient.getDiagnostics();
 
       expect(diagnostics).toHaveLength(4);
-      expect(diagnostics[0].status).toEqual("OK");
-      expect(diagnostics[0]["health check type"]).toEqual("Connection model");
+      expect(diagnostics[0].status).toEqual('OK');
+      expect(diagnostics[0]['health check type']).toEqual('Connection model');
     });
   });
 });

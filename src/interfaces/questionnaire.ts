@@ -1,41 +1,40 @@
 export interface Questionnaire {
-    installDate: string
-    name: string
-    expired?: boolean
-    serverParkName: string
-    activeToday?: boolean // deprecated
-    surveyDays?: string[] // deprecated
-    link?: string
-    fieldPeriod?: string
-    surveyTLA?: string
-    dataRecordCount?: number
-    status?: string
-    hasData?: boolean
-    nodes?: Node[]
-    active?: boolean //deprecated
-    blaiseVersion?: string
+  installDate: string
+  name: string
+  expired?: boolean
+  serverParkName: string
+  activeToday?: boolean // deprecated
+  surveyDays?: string[] // deprecated
+  link?: string
+  fieldPeriod?: string
+  surveyTLA?: string
+  dataRecordCount?: number
+  status?: string
+  hasData?: boolean
+  nodes?: Node[]
+  active?: boolean // deprecated
+  blaiseVersion?: string
 }
 
 export interface Node {
-    nodeName: string;
-    nodeStatus: string;
+  nodeName: string;
+  nodeStatus: string;
 }
 
 export interface InstallQuestionnaire {
-    questionnaireFile: string
+  questionnaireFile: string
 }
 
 export interface InstallQuestionnaireResponse {
-    questionnaireFile: string
+  questionnaireFile: string
 }
 
 export interface QuestionnaireSettings {
-    type: string
-    saveSessionOnTimeout: boolean
-    saveSessionOnQuit: boolean
-    deleteSessionOnTimeout: boolean
-    deleteSessionOnQuit: boolean
-    sessionTimeout: number
-    applyRecordLocking: boolean
+  type: string
+  saveSessionOnTimeout: boolean
+  saveSessionOnQuit: boolean
+  deleteSessionOnTimeout: boolean
+  deleteSessionOnQuit: boolean
+  sessionTimeout: number
+  applyRecordLocking: boolean
 }
-

@@ -1,6 +1,6 @@
-import BlaiseApiClient from "../blaiseApiClient";
-import { DaybatchResponse, DaybatchSettings } from "../interfaces/daybatch";
-import { SurveyDays } from "../types/surveyDays";
+import BlaiseApiClient from '../blaiseApiClient';
+import { DaybatchResponse, DaybatchSettings } from '../interfaces/daybatch';
+import { SurveyDays } from '../types/surveyDays';
 
 export async function getDaybatch(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<DaybatchResponse> {
   return this.get(`/api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/daybatch`);
