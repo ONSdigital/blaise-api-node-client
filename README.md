@@ -55,3 +55,32 @@ Mock objects are available for use in tests
 ```
 const {DiagnosticMockObject, QuestionnaireListMockObject, QuestionnaireMockObject} = jest.requireActual("blaise-api-node-client");
 ```
+
+### Local testing
+
+Install the dependencies
+
+```
+yarn
+```
+
+Tests can be run via the following package.json script
+
+```
+yarn test
+```
+
+Linting can be assessed with...
+
+```
+yarn lint
+```
+
+...and subsequent fixes can be applied with
+
+```
+yarn lint-fix
+```
+
+
+
