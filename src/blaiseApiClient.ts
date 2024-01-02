@@ -89,6 +89,7 @@ class BlaiseApiClient implements BlaiseApi {
 
   private url(url: string): string {
     if (!url.startsWith('/')) {
+      // eslint-disable-next-line no-param-reassign
       url = `/${url}`;
     }
     return url;
