@@ -26,6 +26,8 @@
         "@typescript-eslint"
     ],
     "rules": {
+        "import/no-cycle": 0,
+        "import/prefer-default-export": 0,
         "@typescript-eslint/no-explicit-any": "error",
         "react/react-in-jsx-scope": "off",
         "react/require-default-props": "off",
