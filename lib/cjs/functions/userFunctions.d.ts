@@ -1,5 +1,5 @@
-import BlaiseApiClient from "../blaiseApiClient";
-import { NewUser, User, UserRole } from "../interfaces/user";
+import BlaiseApiClient from '../blaiseApiClient';
+import { NewUser, User, UserRole } from '../interfaces/user';
 export declare function getUser(this: BlaiseApiClient, username: string): Promise<User>;
 export declare function getUsers(this: BlaiseApiClient): Promise<User[]>;
 export declare function validatePassword(this: BlaiseApiClient, username: string, password: string): Promise<boolean>;

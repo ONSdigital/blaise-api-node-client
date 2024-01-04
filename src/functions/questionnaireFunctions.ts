@@ -1,8 +1,10 @@
-import BlaiseApiClient from "../blaiseApiClient";
-import { InstallQuestionnaire, InstallQuestionnaireResponse, Questionnaire, QuestionnaireSettings } from "../interfaces/questionnaire";
+import BlaiseApiClient from '../blaiseApiClient';
+import {
+  InstallQuestionnaire, InstallQuestionnaireResponse, Questionnaire, QuestionnaireSettings,
+} from '../interfaces/questionnaire';
 
 export async function getAllQuestionnairesWithCatiData(this: BlaiseApiClient): Promise<Questionnaire[]> {
-  return this.get("/api/v2/cati/questionnaires");
+  return this.get('/api/v2/cati/questionnaires');
 }
 
 export async function getQuestionnairesWithCatiData(this: BlaiseApiClient, serverpark: string): Promise<Questionnaire[]> {
@@ -56,4 +58,3 @@ export async function activateQuestionnaire(this: BlaiseApiClient, serverpark: s
 export async function deactivateQuestionnaire(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<null> {
   return this.patch(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/deactivate`);
 }
-
