@@ -37,3 +37,4 @@ export declare enum CaseOutcome {
     RequestForContext = 794,
     QuestionProblem = 795
 }
+export default CaseOutcome;
