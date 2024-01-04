@@ -1,3 +1,4 @@
+// eslint-disable-next-line no-shadow
 export enum CaseOutcome {
     None = 0,
     Completed = 110,
@@ -36,4 +37,6 @@ export enum CaseOutcome {
     AssistanceRequested = 793,
     RequestForContext = 794,
     QuestionProblem = 795
-  }
+}
+
+export default CaseOutcome;
