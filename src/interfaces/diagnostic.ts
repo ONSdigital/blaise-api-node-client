@@ -1,4 +1,4 @@
 export interface Diagnostic {
-    "health check type": string
+    'health check type': string
     status: string
 }

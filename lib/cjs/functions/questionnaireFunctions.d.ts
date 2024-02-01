@@ -1,5 +1,5 @@
-import BlaiseApiClient from "../blaiseApiClient";
-import { InstallQuestionnaire, InstallQuestionnaireResponse, Questionnaire, QuestionnaireSettings } from "../interfaces/questionnaire";
+import BlaiseApiClient from '../blaiseApiClient';
+import { InstallQuestionnaire, InstallQuestionnaireResponse, Questionnaire, QuestionnaireSettings } from '../interfaces/questionnaire';
 export declare function getAllQuestionnairesWithCatiData(this: BlaiseApiClient): Promise<Questionnaire[]>;
 export declare function getQuestionnairesWithCatiData(this: BlaiseApiClient, serverpark: string): Promise<Questionnaire[]>;
 export declare function getQuestionnaireWithCatiData(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<Questionnaire>;

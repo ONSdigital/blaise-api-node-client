@@ -1,6 +1,6 @@
-import { CaseData } from "../types/caseData";
+import { CaseData } from '../types/caseData';
 
-export interface QuestionnaireReport 
+export interface QuestionnaireReport
 {
     questionnaireName: string,
     questionnaireId: string,

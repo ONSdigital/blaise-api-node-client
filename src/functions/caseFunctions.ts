@@ -1,6 +1,6 @@
-import BlaiseApiClient from "../blaiseApiClient";
-import {CaseResponse, CaseStatus } from "../interfaces/case";
-import { CaseData } from "../types/caseData";
+import BlaiseApiClient from '../blaiseApiClient';
+import { CaseResponse, CaseStatus } from '../interfaces/case';
+import { CaseData } from '../types/caseData';
 
 export async function getCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string): Promise<CaseResponse> {
   return this.get(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`);

@@ -1,4 +1,4 @@
-import { Questionnaire } from "./questionnaire";
+import { Questionnaire } from './questionnaire';
 
 export interface Survey {
     questionnaires: Questionnaire[]

@@ -1,3 +1,7 @@
+export interface Node {
+    nodeName: string;
+    nodeStatus: string;
+}
 export interface Questionnaire {
     installDate: string;
     name: string;
@@ -14,10 +18,6 @@ export interface Questionnaire {
     nodes?: Node[];
     active?: boolean;
     blaiseVersion?: string;
-}
-export interface Node {
-    nodeName: string;
-    nodeStatus: string;
 }
 export interface InstallQuestionnaire {
     questionnaireFile: string;

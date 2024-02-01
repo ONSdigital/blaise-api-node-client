@@ -1,3 +1,8 @@
+export interface Node {
+    nodeName: string;
+    nodeStatus: string;
+}
+
 export interface Questionnaire {
     installDate: string
     name: string
@@ -12,13 +17,8 @@ export interface Questionnaire {
     status?: string
     hasData?: boolean
     nodes?: Node[]
-    active?: boolean //deprecated
+    active?: boolean // deprecated
     blaiseVersion?: string
-}
-
-export interface Node {
-    nodeName: string;
-    nodeStatus: string;
 }
 
 export interface InstallQuestionnaire {
@@ -38,4 +38,3 @@ export interface QuestionnaireSettings {
     sessionTimeout: number
     applyRecordLocking: boolean
 }
-
