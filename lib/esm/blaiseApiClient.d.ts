@@ -7,6 +7,7 @@ import * as questionnaires from './functions/questionnaireFunctions';
 import * as cases from './functions/caseFunctions';
 import * as diagnostics from './functions/diagnosticFunctions';
 import * as daybatch from './functions/daybatchFunctions';
+import * as reports from './functions/questionnaireReportFunctions';
 declare class BlaiseApiClient implements BlaiseApi {
     blaiseApiUrl: string;
     blaiseIapProvider?: BlaiseIapNodeProvider;
@@ -41,6 +42,7 @@ declare class BlaiseApiClient implements BlaiseApi {
     addCase: typeof cases.addCase;
     getCaseStatus: typeof cases.getCaseStatus;
     getDiagnostics: typeof diagnostics.getDiagnostics;
+    getQuestionnaireReportData: typeof reports.getQuestionnaireReportData;
     private url;
     protected get<T>(url: string): Promise<T>;
     protected post<T>(url: string, data: any): Promise<T>;
@@ -50,11 +52,11 @@ declare class BlaiseApiClient implements BlaiseApi {
 }
 export default BlaiseApiClient;
 export * from './interfaces/questionnaire';
-export * from './interfaces/survey';
 export * from './interfaces/diagnostic';
 export * from './interfaces/case';
 export * from './interfaces/user';
 export * from './interfaces/daybatch';
+export * from './interfaces/questionnaireReport';
 export * from './enums/caseOutcome';
 export * from './types/caseData';
 export * from './types/surveyDays';
@@ -63,3 +65,4 @@ export * from './mockObjects/diagnosticMockObjects';
 export * from './mockObjects/questionnaireMockObjects';
 export * from './mockObjects/userMockObjects';
 export * from './mockObjects/daybatchMockObjects';
+export * from './mockObjects/questionnaireReportMockObjects';
