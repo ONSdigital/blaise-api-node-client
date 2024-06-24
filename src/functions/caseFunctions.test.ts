@@ -33,6 +33,34 @@ describe('blaiseApiClient', () => {
     });
   });
 
+  describe('get case multikey', () => {
+    const serverpark = 'test';
+    const questionnaireName = 'dst2108t';
+    const caseId = '100101;';
+    const keyValueMap = new Map<string, string>();
+    keyValueMap.set('key1', 'value1');
+    keyValueMap.set('key2', 'value2');
+    const queryString = blaiseApiClient.getMultikeyQueryString(keyValueMap);
+
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/multikey?${queryString}`).reply(200, {
+        caseId,
+        fieldData: {},
+      });
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it('returns a case', async () => {
+      const caseResponse = await blaiseApiClient.getCaseMultikey(serverpark, questionnaireName, keyValueMap);
+
+      expect(caseResponse.caseId).toEqual(caseId);
+      expect(caseResponse.fieldData).toEqual({});
+    });
+  });
+
   describe('add case', () => {
     const serverpark = 'test';
     const questionnaireName = 'dst2108t';
