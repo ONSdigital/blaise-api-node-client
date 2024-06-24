@@ -84,6 +84,10 @@ class BlaiseApiClient implements BlaiseApi {
 
   addCase = cases.addCase;
 
+  addCaseMultikey = cases.addCaseMultikey;
+
+  getMultikeyQueryString = cases.getMultikeyQueryString;
+
   getCaseStatus = cases.getCaseStatus;
 
   getDiagnostics = diagnostics.getDiagnostics;
