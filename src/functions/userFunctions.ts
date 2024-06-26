@@ -1,6 +1,7 @@
 import BlaiseApiClient from '../blaiseApiClient';
 import {
   NewUser, User, UserRole, PasswordRequest,
+  RoleRequest,
 } from '../interfaces/user';
 
 export async function getUser(this: BlaiseApiClient, username: string): Promise<User> {
@@ -26,6 +27,12 @@ export async function deleteUser(this: BlaiseApiClient, username: string): Promi
 
 export async function getUserRoles(this: BlaiseApiClient): Promise<UserRole[]> {
   return this.get<UserRole[]>('/api/v2/userroles');
+}
+
+// TODO: Find corresponding endpoint in Blaise REST API C# client
+export async function changeRole(this: BlaiseApiClient, username: string, role: string): Promise<null> {
+  const roleRequest: RoleRequest = { role };
+  return this.patch<null>(`/api/v2/users/${username}/role`, roleRequest);
 }
 
 export async function changePassword(this: BlaiseApiClient, username: string, password: string): Promise<null> {
