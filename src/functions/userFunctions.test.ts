@@ -185,4 +185,21 @@ describe('blaiseApiClient users', () => {
       expect(await blaiseApiClient.changePassword(username, password)).toBeNull();
     });
   });
+
+  describe('change user role ', () => {
+    const username = 'test-user';
+    const role = 'test-role';
+
+    beforeEach(() => {
+      mock.onPatch(`http://${blaiseApiUrl}/api/v2/users/${username}/role`).reply(204, null);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it('returns null', async () => {
+      expect(await blaiseApiClient.changeUserRole(username, role)).toBeNull();
+    });
+  });
 });
