@@ -6,8 +6,31 @@ export async function getCase(this: BlaiseApiClient, serverpark: string, questio
   return this.get(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`);
 }
 
+export function getMultikeyQueryString(multiKeyValueMap: Map<string, string>) {
+  const keyNamesQueryString = `keyNames=${Array.from(multiKeyValueMap.keys()).join('&keyNames=')}`;
+  const keyValuesQueryString = `keyValues=${Array.from(multiKeyValueMap.values()).join('&keyValues=')}`;
+  const keyValueQueryString = `${keyNamesQueryString}&${keyValuesQueryString}`;
+  return keyValueQueryString;
+}
+
+export async function getCaseMultikey(this: BlaiseApiClient, serverpark: string, questionnaireName: string, multiKeyValueMap: Map<string, string>): Promise<CaseResponse> {
+  const queryString = getMultikeyQueryString(multiKeyValueMap);
+  return this.get(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/multikey?${queryString}`);
+}
+
 export async function addCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string, caseFields: CaseData): Promise<CaseResponse> {
   return this.post(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`, caseFields);
+}
+
+export async function addCaseMultikey(
+  this: BlaiseApiClient,
+  serverpark: string,
+  questionnaireName: string,
+  multiKeyValueMap: Map<string, string>,
+  caseFields: CaseData,
+): Promise<CaseResponse> {
+  const queryString = getMultikeyQueryString(multiKeyValueMap);
+  return this.post(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/multikey?${queryString}`, caseFields);
 }
 
 export async function getCaseStatus(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<CaseStatus[]> {
