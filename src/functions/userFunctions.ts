@@ -30,7 +30,7 @@ export async function getUserRoles(this: BlaiseApiClient): Promise<UserRole[]> {
 }
 
 // TODO: Find corresponding endpoint in Blaise REST API C# client
-export async function changeRole(this: BlaiseApiClient, username: string, role: string): Promise<null> {
+export async function changeUserRole(this: BlaiseApiClient, username: string, role: string): Promise<null> {
   const roleRequest: RoleRequest = { role };
   return this.patch<null>(`/api/v2/users/${username}/role`, roleRequest);
 }
