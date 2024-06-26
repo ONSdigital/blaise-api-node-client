@@ -6,4 +6,5 @@ export declare function validatePassword(this: BlaiseApiClient, username: string
 export declare function createUser(this: BlaiseApiClient, user: NewUser): Promise<NewUser>;
 export declare function deleteUser(this: BlaiseApiClient, username: string): Promise<null>;
 export declare function getUserRoles(this: BlaiseApiClient): Promise<UserRole[]>;
+export declare function changeUserRole(this: BlaiseApiClient, username: string, role: string): Promise<null>;
 export declare function changePassword(this: BlaiseApiClient, username: string, password: string): Promise<null>;

@@ -7,6 +7,9 @@ export interface User {
 export interface PasswordRequest {
     password: string;
 }
+export interface RoleRequest {
+    role: string;
+}
 export interface UserRole {
     name: string;
     description: string;
