@@ -46,6 +46,8 @@ class BlaiseApiClient implements BlaiseApi {
 
   changeUserRole = users.changeUserRole;
 
+  changeUserServerParks = users.changeUserServerParks;
+
   getAllQuestionnairesWithCatiData = questionnaires.getAllQuestionnairesWithCatiData;
 
   getQuestionnairesWithCatiData = questionnaires.getQuestionnairesWithCatiData;

@@ -21,6 +21,7 @@ declare class BlaiseApiClient implements BlaiseApi {
     getUserRoles: typeof users.getUserRoles;
     changePassword: typeof users.changePassword;
     changeUserRole: typeof users.changeUserRole;
+    changeUserServerParks: typeof users.changeUserServerParks;
     getAllQuestionnairesWithCatiData: typeof questionnaires.getAllQuestionnairesWithCatiData;
     getQuestionnairesWithCatiData: typeof questionnaires.getQuestionnairesWithCatiData;
     getQuestionnaireWithCatiData: typeof questionnaires.getQuestionnaireWithCatiData;
