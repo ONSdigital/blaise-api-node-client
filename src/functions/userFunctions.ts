@@ -34,6 +34,11 @@ export async function changeUserRole(this: BlaiseApiClient, username: string, ro
   return this.patch<null>(`/api/v2/users/${username}/role`, roleRequest);
 }
 
+export async function changeUserServerParks(this: BlaiseApiClient, username: string, serverParks: string[], defaultServerPark: string): Promise<null> {
+  const serverParksRequest = { serverParks, defaultServerPark };
+  return this.patch<null>(`/api/v2/users/${username}/serverparks`, serverParksRequest);
+}
+
 export async function changePassword(this: BlaiseApiClient, username: string, password: string): Promise<null> {
   const passwordRequest: PasswordRequest = { password };
   return this.patch<null>(`/api/v2/users/${username}/password`, passwordRequest);
