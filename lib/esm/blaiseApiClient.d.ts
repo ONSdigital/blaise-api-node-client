@@ -40,7 +40,10 @@ declare class BlaiseApiClient implements BlaiseApi {
     getSurveyDays: typeof daybatch.getSurveyDays;
     addSurveyDays: typeof daybatch.addSurveyDays;
     getCase: typeof cases.getCase;
+    getCaseMultikey: typeof cases.getCaseMultikey;
     addCase: typeof cases.addCase;
+    addCaseMultikey: typeof cases.addCaseMultikey;
+    getMultikeyQueryString: typeof cases.getMultikeyQueryString;
     getCaseStatus: typeof cases.getCaseStatus;
     getDiagnostics: typeof diagnostics.getDiagnostics;
     getQuestionnaireReportData: typeof reports.getQuestionnaireReportData;
