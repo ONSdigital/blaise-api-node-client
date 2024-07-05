@@ -1,6 +1,7 @@
 import BlaiseApiClient from '../blaiseApiClient';
 import {
   NewUser, User, UserRole, PasswordRequest,
+  RoleRequest,
 } from '../interfaces/user';
 
 export async function getUser(this: BlaiseApiClient, username: string): Promise<User> {
@@ -26,6 +27,16 @@ export async function deleteUser(this: BlaiseApiClient, username: string): Promi
 
 export async function getUserRoles(this: BlaiseApiClient): Promise<UserRole[]> {
   return this.get<UserRole[]>('/api/v2/userroles');
+}
+
+export async function changeUserRole(this: BlaiseApiClient, username: string, role: string): Promise<null> {
+  const roleRequest: RoleRequest = { role };
+  return this.patch<null>(`/api/v2/users/${username}/role`, roleRequest);
+}
+
+export async function changeUserServerParks(this: BlaiseApiClient, username: string, serverParks: string[], defaultServerPark: string): Promise<null> {
+  const serverParksRequest = { serverParks, defaultServerPark };
+  return this.patch<null>(`/api/v2/users/${username}/serverparks`, serverParksRequest);
 }
 
 export async function changePassword(this: BlaiseApiClient, username: string, password: string): Promise<null> {
