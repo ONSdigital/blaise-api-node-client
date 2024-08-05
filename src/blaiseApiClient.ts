@@ -8,6 +8,7 @@ import * as cases from './functions/caseFunctions';
 import * as diagnostics from './functions/diagnosticFunctions';
 import * as daybatch from './functions/daybatchFunctions';
 import * as reports from './functions/questionnaireReportFunctions';
+import * as editing from './functions/editingFunctions';
 
 class BlaiseApiClient implements BlaiseApi {
   blaiseApiUrl: string;
@@ -100,6 +101,8 @@ class BlaiseApiClient implements BlaiseApi {
 
   getQuestionnaireReportData = reports.getQuestionnaireReportData;
 
+  getEditingDetails = editing.getEditingDetails;
+
   // eslint-disable-next-line class-methods-use-this
   private url(url: string): string {
     let formattedUrl = url;
@@ -154,8 +157,10 @@ export * from './interfaces/case';
 export * from './interfaces/user';
 export * from './interfaces/daybatch';
 export * from './interfaces/questionnaireReport';
+export * from './interfaces/editing';
 
 export * from './enums/caseOutcome';
+export * from './enums/editedStatus';
 export * from './types/caseData';
 export * from './types/surveyDays';
 
@@ -165,3 +170,4 @@ export * from './mockObjects/questionnaireMockObjects';
 export * from './mockObjects/userMockObjects';
 export * from './mockObjects/daybatchMockObjects';
 export * from './mockObjects/questionnaireReportMockObjects';
+export * from './mockObjects/editingMockObjects';

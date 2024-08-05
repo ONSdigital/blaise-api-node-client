@@ -5,6 +5,6 @@ export interface EditingDetails {
   primaryKey: string,
   outcome: CaseOutcome,
   assignedTo: string,
-  editedStatus: EditedStatus, 
+  editedStatus: EditedStatus,
   interviewer: string,
 }
