@@ -1,7 +1,7 @@
 import MockAdapter from 'axios-mock-adapter';
 import axios from 'axios';
 import 'regenerator-runtime/runtime';
-import BlaiseApiClient, { CaseStatusListMockObject } from '../blaiseApiClient';
+import BlaiseApiClient, { CaseEditInformationListMockObject, CaseStatusListMockObject } from '../blaiseApiClient';
 
 const mock = new MockAdapter(axios, { onNoMatch: 'throwException' });
 const blaiseApiUrl = 'testUri';
@@ -132,6 +132,34 @@ describe('blaiseApiClient', () => {
       const result = await blaiseApiClient.getCaseStatus(serverpark, questionnaireName);
 
       expect(result).toEqual(CaseStatusListMockObject);
+    });
+  });
+
+  describe('get case edit information', () => {
+    const serverpark = 'test';
+    const questionnaireName = 'FRS2108A';
+
+    beforeEach(() => {
+      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/edit`).reply(
+        200,
+        CaseEditInformationListMockObject,
+      );
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it('returns editing details for a case', async () => {
+      const editingDetailsListResponse = await blaiseApiClient.getCaseEditInformation(serverpark, questionnaireName);
+
+      editingDetailsListResponse.forEach((editingDetailsResponse, index) => {
+        expect(editingDetailsResponse.primaryKey).toEqual(CaseEditInformationListMockObject[index].primaryKey);
+        expect(editingDetailsResponse.outcome).toEqual(CaseEditInformationListMockObject[index].outcome);
+        expect(editingDetailsResponse.assignedTo).toEqual(CaseEditInformationListMockObject[index].assignedTo);
+        expect(editingDetailsResponse.editedStatus).toEqual(CaseEditInformationListMockObject[index].editedStatus);
+        expect(editingDetailsResponse.interviewer).toEqual(CaseEditInformationListMockObject[index].interviewer);
+      });
     });
   });
 });
