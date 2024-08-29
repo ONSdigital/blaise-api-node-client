@@ -3,6 +3,7 @@ export enum CaseOutcome {
     None = 0,
     Completed = 110,
     CompletedNudge = 120,
+    CompletedProxy = 130,
     Partial = 210,
     AppointmentMade = 300,
     NonContact = 310,
