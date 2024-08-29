@@ -1,5 +1,6 @@
 import { EditedStatus } from '../blaiseApiClient';
 import { CaseOutcome } from '../enums/caseOutcome';
+import Organisation from '../enums/organisation';
 import { CaseData } from '../types/caseData';
 
 export interface CaseResponse {
@@ -16,6 +17,7 @@ export interface CaseEditInformation {
   primaryKey: string,
   outcome: CaseOutcome,
   assignedTo: string,
-  editedStatus: EditedStatus,
   interviewer: string,
+  editedStatus: EditedStatus,
+  organisation: Organisation,
 }
