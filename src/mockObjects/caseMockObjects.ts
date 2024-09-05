@@ -39,7 +39,8 @@ export const CaseEditInformationListMockObject:CaseEditInformation[] = [
     assignedTo: 'Rich',
     interviewer: 'Jane Doe',
     editedStatus: 3,
-    organisation: 1
+    organisation: 1,
+    editUrl: '',
   },
   {
     primaryKey: '100102',
@@ -47,7 +48,8 @@ export const CaseEditInformationListMockObject:CaseEditInformation[] = [
     assignedTo: 'Jake',
     interviewer: 'Bob Roberts',
     editedStatus: 3,
-    organisation: 1    
+    organisation: 1,
+    editUrl: '',
   },
   {
     primaryKey: '100113',
@@ -55,6 +57,7 @@ export const CaseEditInformationListMockObject:CaseEditInformation[] = [
     assignedTo: 'Jamie',
     interviewer: 'Frank Frankinson',
     editedStatus: 3,
-    organisation: 1    
+    organisation: 1,
+    editUrl: '',
   },
 ];
