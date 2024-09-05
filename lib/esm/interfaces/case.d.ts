@@ -17,4 +17,5 @@ export interface CaseEditInformation {
     interviewer: string;
     editedStatus: EditedStatus;
     organisation: Organisation;
+    editUrl: string;
 }
