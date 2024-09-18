@@ -43,6 +43,7 @@ declare class BlaiseApiClient implements BlaiseApi {
     getCase: typeof cases.getCase;
     getCaseMultikey: typeof cases.getCaseMultikey;
     addCase: typeof cases.addCase;
+    updateCase: typeof cases.updateCase;
     addCaseMultikey: typeof cases.addCaseMultikey;
     getMultikeyQueryString: typeof cases.getMultikeyQueryString;
     getCaseStatus: typeof cases.getCaseStatus;

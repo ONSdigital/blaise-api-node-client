@@ -5,6 +5,7 @@ export declare function getCase(this: BlaiseApiClient, serverpark: string, quest
 export declare function getMultikeyQueryString(multiKeyValueMap: Map<string, string>): string;
 export declare function getCaseMultikey(this: BlaiseApiClient, serverpark: string, questionnaireName: string, multiKeyValueMap: Map<string, string>): Promise<CaseResponse>;
 export declare function addCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string, caseFields: CaseData): Promise<CaseResponse>;
+export declare function updateCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string, caseFields: CaseData): Promise<null>;
 export declare function addCaseMultikey(this: BlaiseApiClient, serverpark: string, questionnaireName: string, multiKeyValueMap: Map<string, string>, caseFields: CaseData): Promise<CaseResponse>;
 export declare function getCaseStatus(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<CaseStatus[]>;
 export declare function getCaseEditInformation(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<CaseEditInformation[]>;

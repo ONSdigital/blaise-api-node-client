@@ -22,6 +22,10 @@ export async function addCase(this: BlaiseApiClient, serverpark: string, questio
   return this.post(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`, caseFields);
 }
 
+export async function updateCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string, caseFields: CaseData): Promise<null> {
+  return this.patch<null>(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`, caseFields);
+}
+
 export async function addCaseMultikey(
   this: BlaiseApiClient,
   serverpark: string,

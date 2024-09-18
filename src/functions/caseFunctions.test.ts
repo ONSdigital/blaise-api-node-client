@@ -85,6 +85,26 @@ describe('blaiseApiClient', () => {
     });
   });
 
+  describe('update case', () => {
+    const serverpark = 'test';
+    const questionnaireName = 'dst2108t';
+    const caseId = '100101;';
+
+    beforeEach(() => {
+      mock.onPatch(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`).reply(204, null);
+    });
+
+    afterEach(() => {
+      mock.reset();
+    });
+
+    it('updates a case', async () => {
+      const result = await blaiseApiClient.updateCase(serverpark, questionnaireName, caseId, {});
+
+      expect(result).toBeNull();
+    });
+  });
+
   describe('add case multikey', () => {
     const serverpark = 'test';
     const questionnaireName = 'dst2108t';
