@@ -12,7 +12,7 @@ export interface Questionnaire {
     surveyDays?: string[] // deprecated
     link?: string
     fieldPeriod?: string
-    surveyTLA?: string
+    surveyTla?: string
     dataRecordCount?: number
     status?: string
     hasData?: boolean

@@ -11,7 +11,7 @@ export interface Questionnaire {
     surveyDays?: string[];
     link?: string;
     fieldPeriod?: string;
-    surveyTLA?: string;
+    surveyTla?: string;
     dataRecordCount?: number;
     status?: string;
     hasData?: boolean;

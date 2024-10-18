@@ -1,4 +1,4 @@
-import { CaseResponse, CaseStatus } from '../interfaces/case';
+import { CaseEditInformation, CaseResponse, CaseStatus } from '../interfaces/case';
 
 export const CaseStatusListMockObject:CaseStatus[] = [{
   primaryKey: '1',
@@ -31,3 +31,33 @@ export const CaseResponseMockObject:CaseResponse = {
     dmhSize: '2',
   },
 };
+
+export const CaseEditInformationListMockObject:CaseEditInformation[] = [
+  {
+    primaryKey: '100101',
+    outcome: 110,
+    assignedTo: 'Rich',
+    interviewer: 'Jane Doe',
+    editedStatus: 3,
+    organisation: 1,
+    editUrl: '',
+  },
+  {
+    primaryKey: '100102',
+    outcome: 210,
+    assignedTo: 'Jake',
+    interviewer: 'Bob Roberts',
+    editedStatus: 3,
+    organisation: 1,
+    editUrl: '',
+  },
+  {
+    primaryKey: '100113',
+    outcome: 430,
+    assignedTo: 'Jamie',
+    interviewer: 'Frank Frankinson',
+    editedStatus: 3,
+    organisation: 1,
+    editUrl: '',
+  },
+];

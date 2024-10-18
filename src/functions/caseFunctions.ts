@@ -1,5 +1,5 @@
 import BlaiseApiClient from '../blaiseApiClient';
-import { CaseResponse, CaseStatus } from '../interfaces/case';
+import { CaseEditInformation, CaseResponse, CaseStatus } from '../interfaces/case';
 import { CaseData } from '../types/caseData';
 
 export async function getCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string): Promise<CaseResponse> {
@@ -22,6 +22,10 @@ export async function addCase(this: BlaiseApiClient, serverpark: string, questio
   return this.post(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`, caseFields);
 }
 
+export async function updateCase(this: BlaiseApiClient, serverpark: string, questionnaireName: string, caseId: string, caseFields: CaseData): Promise<null> {
+  return this.patch<null>(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`, caseFields);
+}
+
 export async function addCaseMultikey(
   this: BlaiseApiClient,
   serverpark: string,
@@ -35,4 +39,8 @@ export async function addCaseMultikey(
 
 export async function getCaseStatus(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<CaseStatus[]> {
   return this.get(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/status`);
+}
+
+export async function getCaseEditInformation(this: BlaiseApiClient, serverpark: string, questionnaireName: string): Promise<CaseEditInformation[]> {
+  return this.get(`api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/edit`);
 }

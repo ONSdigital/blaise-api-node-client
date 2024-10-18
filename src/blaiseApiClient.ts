@@ -90,11 +90,15 @@ class BlaiseApiClient implements BlaiseApi {
 
   addCase = cases.addCase;
 
+  updateCase = cases.updateCase;
+
   addCaseMultikey = cases.addCaseMultikey;
 
   getMultikeyQueryString = cases.getMultikeyQueryString;
 
   getCaseStatus = cases.getCaseStatus;
+
+  getCaseEditInformation = cases.getCaseEditInformation;
 
   getDiagnostics = diagnostics.getDiagnostics;
 
@@ -156,6 +160,7 @@ export * from './interfaces/daybatch';
 export * from './interfaces/questionnaireReport';
 
 export * from './enums/caseOutcome';
+export * from './enums/editedStatus';
 export * from './types/caseData';
 export * from './types/surveyDays';
 
