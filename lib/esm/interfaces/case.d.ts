@@ -18,4 +18,5 @@ export interface CaseEditInformation {
     editedStatus: EditedStatus;
     organisation: Organisation;
     editUrl: string;
+    readOnlyUrl: string;
 }

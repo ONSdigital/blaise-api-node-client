@@ -180,6 +180,7 @@ describe('blaiseApiClient', () => {
         expect(editingDetailsResponse.editedStatus).toEqual(CaseEditInformationListMockObject[index].editedStatus);
         expect(editingDetailsResponse.interviewer).toEqual(CaseEditInformationListMockObject[index].interviewer);
         expect(editingDetailsResponse.editUrl).toEqual('');
+        expect(editingDetailsResponse.readOnlyUrl).toEqual('');
       });
     });
   });

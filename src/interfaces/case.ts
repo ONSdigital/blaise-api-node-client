@@ -10,7 +10,7 @@ export interface CaseResponse {
 
 export interface CaseStatus {
   primaryKey: string,
-  outcome: CaseOutcome,
+  outcome: CaseOutcome
 }
 
 export interface CaseEditInformation {
@@ -20,5 +20,6 @@ export interface CaseEditInformation {
   interviewer: string,
   editedStatus: EditedStatus,
   organisation: Organisation,
-  editUrl: string
+  editUrl: string,
+  readOnlyUrl: string
 }

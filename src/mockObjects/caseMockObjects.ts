@@ -41,6 +41,7 @@ export const CaseEditInformationListMockObject:CaseEditInformation[] = [
     editedStatus: 3,
     organisation: 1,
     editUrl: '',
+    readOnlyUrl: '',
   },
   {
     primaryKey: '100102',
@@ -50,6 +51,7 @@ export const CaseEditInformationListMockObject:CaseEditInformation[] = [
     editedStatus: 3,
     organisation: 1,
     editUrl: '',
+    readOnlyUrl: '',
   },
   {
     primaryKey: '100113',
@@ -59,5 +61,6 @@ export const CaseEditInformationListMockObject:CaseEditInformation[] = [
     editedStatus: 3,
     organisation: 1,
     editUrl: '',
+    readOnlyUrl: '',
   },
 ];
