@@ -1,1 +1,1 @@
-export declare type SurveyDays = string[] | Date[];
+export type SurveyDays = string[] | Date[];

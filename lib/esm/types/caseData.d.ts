@@ -1,1 +1,1 @@
-export declare type CaseData = Record<string, any>;
+export type CaseData = Record<string, any>;
