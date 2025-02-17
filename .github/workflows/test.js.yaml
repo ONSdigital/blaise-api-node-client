@@ -8,6 +8,9 @@ on:
 
 jobs:
   test:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -22,6 +25,9 @@ jobs:
       - run: yarn run test --silent --runInBand
 
   lint:
+    permissions:
+      contents: read
+      pull-requests: write  
     runs-on: ubuntu-latest
     strategy:
       matrix:
