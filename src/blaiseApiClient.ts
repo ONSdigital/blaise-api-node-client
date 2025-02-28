@@ -134,7 +134,7 @@ class BlaiseApiClient implements BlaiseApi {
     return response.data as T;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-redundant-type-constituents
   protected async patch<T>(url: string, data: any | undefined = undefined): Promise<T> {
     const config = await this.axiosConfig();
     const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
