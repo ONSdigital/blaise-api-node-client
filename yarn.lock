@@ -1737,9 +1737,9 @@ bignumber.js@^9.0.0:
   resolved "https://registry.yarnpkg.com/bignumber.js/-/bignumber.js-9.1.2.tgz#b7c4242259c008903b13707983b5f4bbd31eda0c"
   integrity sha512-2/mKyZH9K85bzOEfhXDBFZTGd1CTs+5IHpeFQo9luiBG7hghdC851Pj2WAhb6E3R6b9tZj/XKhbg4fum+Kepug==
 
-"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2.0.0":
+"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2.0.1":
   version "1.0.0"
-  resolved "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#7684014f946a77bd052441fb97302d1c7eb8ffed"
+  resolved "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#5b535a8dc150c2e8665a9972aac071754870759d"
   dependencies:
     "@babel/preset-env" "^7.26.9"
     "@types/jsonwebtoken" "^8.5.5"
