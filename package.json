@@ -16,7 +16,7 @@
   "dependencies": {
     "@babel/preset-env": "^7.26.9",
     "axios": "^1.7.9",
-    "blaise-iap-node-provider": "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2ccc3faf3303942ec79f7841034f3741d81ab48b",
+    "blaise-iap-node-provider": "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#2.0.0",
     "browserslist": "^4.22.2",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.29.1",
