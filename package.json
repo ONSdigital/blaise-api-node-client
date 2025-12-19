@@ -1,6 +1,6 @@
 {
   "name": "blaise-api-node-client",
-  "version": "2.0.1-4894",
+  "version": "1.0.0",
   "module": "lib/esm/blaiseApiClient.js",
   "main": "lib/cjs/blaiseApiClient.js",
   "types": "lib/esm/blaiseApiClient.d.ts",
