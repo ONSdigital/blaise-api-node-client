@@ -38,7 +38,10 @@
     "typescript": "^4.9.5"
   },
   "resolutions": {
-    "@babel/traverse": "^7.23.2"
+    "@babel/traverse": "^7.23.2",
+    "@babel/runtime": "^7.26.10",
+    "js-yaml": "^4.1.1",
+    "brace-expansion": "^2.0.2"
   },
   "files": [
     "/lib",
