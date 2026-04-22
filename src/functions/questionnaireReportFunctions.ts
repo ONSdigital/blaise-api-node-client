@@ -1,13 +1,17 @@
-import BlaiseApiClient from '../blaiseApiClient';
-import { QuestionnaireReport } from '../interfaces/questionnaireReport';
+import BlaiseApiClient from "../blaiseApiClient.js";
+import { QuestionnaireReport } from "../interfaces/questionnaireReport.js";
 
-export async function getQuestionnaireReportData(this: BlaiseApiClient, serverpark: string, questionnaireName: string, fieldIds:string[]): Promise<QuestionnaireReport> {
-  const queryArray:string[] = [];
-  fieldIds.forEach((fieldId) => {
-    queryArray.push(`fieldIds=${fieldId}`);
-  });
+export async function getQuestionnaireReportData(
+  this: BlaiseApiClient,
+  serverpark: string,
+  questionnaireName: string,
+  fieldIds: string[],
+): Promise<QuestionnaireReport> {
+  const queryParams = fieldIds.map((fieldId) => `fieldIds=${fieldId}`).join("&");
 
-  return this.get(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/report?${queryArray.join('&')}`);
+  return this.get<QuestionnaireReport>(
+    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/report?${queryParams}`,
+  );
 }
 
 export default getQuestionnaireReportData;

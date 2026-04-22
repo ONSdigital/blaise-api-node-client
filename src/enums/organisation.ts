@@ -1,8 +1,11 @@
-// eslint-disable-next-line no-shadow
-export enum Organisation {
-    ONS = 1,
-    NatCen = 2,
-    Nisra = 3,
-}
+const Organisation = {
+  ONS: 1,
+  NatCen: 2,
+  Nisra: 3,
+} as const;
+
+export type Organisation = (typeof Organisation)[keyof typeof Organisation];
+
+export { Organisation };
 
 export default Organisation;

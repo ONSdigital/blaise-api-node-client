@@ -1,35 +1,38 @@
-import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
-import 'regenerator-runtime/runtime';
-import BlaiseApiClient from '../blaiseApiClient';
-import reportMockObject from '../mockObjects/questionnaireReportMockObjects';
+import { describe, it, expect, beforeEach, afterEach } from "vitest";
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import BlaiseApiClient from "../blaiseApiClient.js";
+import reportMockObject from "../mockObjects/questionnaireReportMockObjects.js";
 
-const mock = new MockAdapter(axios, { onNoMatch: 'throwException' });
-const blaiseApiUrl = 'testUri';
+const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
+const blaiseApiClient = new BlaiseApiClient("http://testUri");
 
-const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
+const fieldIds = ["qhadmin.hout", "allocation.toeditor"];
 
-const fieldIds = ['qhadmin.hout', 'allocation.toeditor'];
+describe("BlaiseRestapiClient", () => {
+  describe("get reporting data from API", () => {
+    const serverpark = "test";
+    const questionnaireName = "dst2108t";
+    const expectedQueryString = `fieldIds=${fieldIds[0]}&fieldIds=${fieldIds[1]}`;
 
-describe('BlaiseRestapiClient', () => {
-  describe('get reporting data from API', () => {
-    const serverpark = 'test';
-    const questionnaireName = 'dst2108t';
-    const expectedQueryString = `?fieldIds=${fieldIds[0]}&fieldIds=${fieldIds[1]}`;
-
-    beforeAll(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/report${expectedQueryString}`).reply(
-        200,
-        reportMockObject,
-      );
+    beforeEach(() => {
+      mock
+        .onGet(
+          `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/report?${expectedQueryString}`,
+        )
+        .reply(200, reportMockObject);
     });
 
-    afterAll(() => {
+    afterEach(() => {
       mock.reset();
     });
 
-    it('returns an expect report', async () => {
-      const reportData = await blaiseApiClient.getQuestionnaireReportData(serverpark, questionnaireName, fieldIds);
+    it("returns an expected report", async () => {
+      const reportData = await blaiseApiClient.getQuestionnaireReportData(
+        serverpark,
+        questionnaireName,
+        fieldIds,
+      );
 
       expect(reportData).toEqual(reportMockObject);
     });

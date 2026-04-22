@@ -1,5 +1,5 @@
-import { Questionnaire } from './questionnaire';
+import { Questionnaire } from "./questionnaire.js";
 
 export interface BlaiseApi {
-    getQuestionnaires(serverPark: string): Promise<Questionnaire[]>
-  }
+  getQuestionnaires(serverPark: string): Promise<Questionnaire[]>;
+}

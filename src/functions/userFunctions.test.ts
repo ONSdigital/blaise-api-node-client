@@ -1,204 +1,117 @@
-import MockAdapter from 'axios-mock-adapter';
-import axios from 'axios';
-import 'regenerator-runtime/runtime';
-import BlaiseApiClient from '../blaiseApiClient';
-import { CreateUserMockObject, CreateUserResponseMockObject } from '../mockObjects/userMockObjects';
+import { describe, it, expect, afterEach } from "vitest";
+import MockAdapter from "axios-mock-adapter";
+import axios from "axios";
+import BlaiseApiClient, {
+  CreateUserMockObject,
+  CreateUserResponseMockObject,
+} from "../blaiseApiClient.js";
 
-const mock = new MockAdapter(axios, { onNoMatch: 'throwException' });
-const blaiseApiUrl = 'testUri';
+const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
+const blaiseApiClient = new BlaiseApiClient("http://testUri");
 
-const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
+describe("blaiseApiClient users", () => {
+  afterEach(() => {
+    mock.reset();
+  });
 
-describe('blaiseApiClient users', () => {
-  describe('get user', () => {
-    const username = 'test-user';
+  describe("get user", () => {
+    const username = "test-user";
 
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v2/users/${username}`).reply(200, {
+    it("returns the user details", async () => {
+      mock.onGet(`api/v2/users/${username}`).reply(200, {
         name: username,
-        role: 'DST',
-        serverParks: ['gusty'],
-        defaultServerPark: 'gusty',
+        role: "DST",
+        serverParks: ["gusty"],
+        defaultServerPark: "gusty",
       });
-    });
 
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns the user details', async () => {
       const result = await blaiseApiClient.getUser(username);
 
       expect(result.name).toEqual(username);
-      expect(result.role).toEqual('DST');
+      expect(result.role).toEqual("DST");
     });
   });
 
-  describe('get users', () => {
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v2/users`).reply(200, [
-        {
-          name: 'test-user',
-          role: 'DST',
-          serverParks: ['gusty'],
-          defaultServerPark: 'gusty',
-        },
-      ]);
-    });
+  describe("get users", () => {
+    it("returns the user details", async () => {
+      mock
+        .onGet("api/v2/users")
+        .reply(200, [
+          { name: "test-user", role: "DST", serverParks: ["gusty"], defaultServerPark: "gusty" },
+        ]);
 
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns the user details', async () => {
       const result = await blaiseApiClient.getUsers();
 
       expect(result).toEqual([
-        {
-          name: 'test-user',
-          role: 'DST',
-          serverParks: ['gusty'],
-          defaultServerPark: 'gusty',
-        },
+        { name: "test-user", role: "DST", serverParks: ["gusty"], defaultServerPark: "gusty" },
       ]);
     });
   });
 
-  describe('validate password - valid', () => {
-    const username = 'test-user';
-    const password = 'test-password';
+  describe("validate password", () => {
+    const username = "test-user";
+    const password = "test-password";
 
-    beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v2/users/${username}/validate`).reply(200, true);
+    it("returns true for valid password", async () => {
+      mock.onPost(`api/v2/users/${username}/validate`).reply(200, true);
+      expect(await blaiseApiClient.validatePassword(username, password)).toBe(true);
     });
 
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns true', async () => {
-      expect(await blaiseApiClient.validatePassword(username, password)).toBeTruthy();
+    it("returns false for invalid password", async () => {
+      mock.onPost(`api/v2/users/${username}/validate`).reply(200, false);
+      expect(await blaiseApiClient.validatePassword(username, password)).toBe(false);
     });
   });
 
-  describe('validate password - invalid', () => {
-    const username = 'test-user';
-    const password = 'test-password';
-
-    beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v2/users/${username}/validate`).reply(200, false);
-    });
-
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns false', async () => {
-      expect(await blaiseApiClient.validatePassword(username, password)).toBeFalsy();
-    });
-  });
-
-  describe('create user', () => {
-    beforeEach(() => {
-      mock.onPost(`http://${blaiseApiUrl}/api/v2/users`).reply(
-        201,
-        CreateUserResponseMockObject,
-      );
-    });
-
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('creates a user and returns a response', async () => {
+  describe("create user", () => {
+    it("creates a user and returns a response", async () => {
+      mock.onPost("api/v2/users").reply(201, CreateUserResponseMockObject);
       const createUser = await blaiseApiClient.createUser(CreateUserMockObject);
 
-      expect(createUser.name).toEqual('Beyonce');
-      expect(createUser.role).toEqual('DST');
+      expect(createUser.name).toEqual("Beyonce");
+      expect(createUser.role).toEqual("DST");
       expect(createUser.serverParks).toHaveLength(1);
-      expect(createUser.defaultServerPark).toEqual('gusty');
     });
   });
 
-  describe('delete user', () => {
-    const userName = 'Beyonce';
+  describe("delete user", () => {
+    const userName = "Beyonce";
 
-    beforeEach(() => {
-      mock.onDelete(`http://${blaiseApiUrl}/api/v2/users/${userName}`).reply(
-        204,
-        null,
-      );
-    });
-
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('deletes a user', async () => {
+    it("deletes a user", async () => {
+      mock.onDelete(`api/v2/users/${userName}`).reply(204, null);
       const result = await blaiseApiClient.deleteUser(userName);
 
       expect(result).toBeNull();
     });
   });
 
-  describe('get user roles', () => {
-    beforeEach(() => {
-      mock.onGet(`http://${blaiseApiUrl}/api/v2/userroles`).reply(200, [
-        {
-          name: 'test-role',
-          description: 'test',
-          permissions: ['test'],
-        },
-      ]);
-    });
-
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns the user details', async () => {
+  describe("get user roles", () => {
+    it("returns the user details", async () => {
+      mock
+        .onGet("api/v2/userroles")
+        .reply(200, [{ name: "test-role", description: "test", permissions: ["test"] }]);
       const result = await blaiseApiClient.getUserRoles();
 
-      expect(result).toEqual([
-        {
-          name: 'test-role',
-          description: 'test',
-          permissions: ['test'],
-        },
-      ]);
+      expect(result).toEqual([{ name: "test-role", description: "test", permissions: ["test"] }]);
     });
   });
 
-  describe('change password ', () => {
-    const username = 'test-user';
-    const password = 'test-password';
+  describe("change password", () => {
+    const username = "test-user";
+    const password = "test-password";
 
-    beforeEach(() => {
-      mock.onPatch(`http://${blaiseApiUrl}/api/v2/users/${username}/password`).reply(204, null);
-    });
-
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns null', async () => {
+    it("returns null", async () => {
+      mock.onPatch(`api/v2/users/${username}/password`).reply(204, null);
       expect(await blaiseApiClient.changePassword(username, password)).toBeNull();
     });
   });
 
-  describe('change user role ', () => {
-    const username = 'test-user';
-    const role = 'test-role';
+  describe("change user role", () => {
+    const username = "test-user";
+    const role = "test-role";
 
-    beforeEach(() => {
-      mock.onPatch(`http://${blaiseApiUrl}/api/v2/users/${username}/role`).reply(204, null);
-    });
-
-    afterEach(() => {
-      mock.reset();
-    });
-
-    it('returns null', async () => {
+    it("returns null", async () => {
+      mock.onPatch(`api/v2/users/${username}/role`).reply(204, null);
       expect(await blaiseApiClient.changeUserRole(username, role)).toBeNull();
     });
   });

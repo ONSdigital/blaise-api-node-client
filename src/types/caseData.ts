@@ -1,2 +1,9 @@
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export type CaseData = Record<string, any>
+export type JSONValue =
+  | string
+  | number
+  | boolean
+  | null
+  | JSONValue[]
+  | { [key: string]: JSONValue };
+
+export type CaseData = Record<string, JSONValue>;

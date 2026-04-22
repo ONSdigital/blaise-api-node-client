@@ -1,6 +1,6 @@
-import { Questionnaire } from './questionnaire';
+import { Questionnaire } from "./questionnaire.js";
 
 export interface Survey {
-    questionnaires: Questionnaire[]
-    survey: string
+  questionnaires: Questionnaire[];
+  survey: string;
 }

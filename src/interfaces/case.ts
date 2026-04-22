@@ -1,25 +1,25 @@
-import { EditedStatus } from '../blaiseApiClient';
-import { CaseOutcome } from '../enums/caseOutcome';
-import Organisation from '../enums/organisation';
-import { CaseData } from '../types/caseData';
+import type { CaseOutcome } from "../enums/caseOutcome.js";
+import type { EditedStatus } from "../enums/editedStatus.js";
+import type { Organisation } from "../enums/organisation.js";
+import type { CaseData } from "../types/caseData.js";
 
 export interface CaseResponse {
-  caseId: string
-  fieldData: CaseData
+  readonly caseId: string;
+  readonly fieldData: CaseData;
 }
 
 export interface CaseStatus {
-  primaryKey: string,
-  outcome: CaseOutcome
+  readonly primaryKey: string;
+  readonly outcome: CaseOutcome;
 }
 
 export interface CaseEditInformation {
-  primaryKey: string,
-  outcome: CaseOutcome,
-  assignedTo: string,
-  interviewer: string,
-  editedStatus: EditedStatus,
-  organisation: Organisation,
-  editUrl: string,
-  readOnlyUrl: string
+  readonly primaryKey: string;
+  readonly outcome: CaseOutcome;
+  readonly assignedTo: string;
+  readonly interviewer: string;
+  readonly editedStatus: EditedStatus;
+  readonly organisation: Organisation;
+  readonly editUrl: string;
+  readonly readOnlyUrl: string;
 }

@@ -1,13 +1,13 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import BlaiseIapNodeProvider from 'blaise-iap-node-provider';
-import { BlaiseApiConfig } from './interfaces/blaiseApiConfig';
-import { BlaiseApi } from './interfaces/blaiseApi';
-import * as users from './functions/userFunctions';
-import * as questionnaires from './functions/questionnaireFunctions';
-import * as cases from './functions/caseFunctions';
-import * as diagnostics from './functions/diagnosticFunctions';
-import * as daybatch from './functions/daybatchFunctions';
-import * as reports from './functions/questionnaireReportFunctions';
+import axios, { AxiosInstance } from "axios";
+import BlaiseIapNodeProvider from "blaise-iap-node-provider";
+import { BlaiseApiConfig } from "./interfaces/blaiseApiConfig.js";
+import { BlaiseApi } from "./interfaces/blaiseApi.js";
+import * as users from "./functions/userFunctions.js";
+import * as questionnaires from "./functions/questionnaireFunctions.js";
+import * as cases from "./functions/caseFunctions.js";
+import * as diagnostics from "./functions/diagnosticFunctions.js";
+import * as daybatch from "./functions/daybatchFunctions.js";
+import * as reports from "./functions/questionnaireReportFunctions.js";
 
 class BlaiseApiClient implements BlaiseApi {
   blaiseApiUrl: string;
@@ -19,15 +19,24 @@ class BlaiseApiClient implements BlaiseApi {
   constructor(blaiseApiUrl: string, config?: BlaiseApiConfig) {
     this.blaiseApiUrl = blaiseApiUrl;
 
-    this.httpClient = axios.create();
-
-    if (config?.timeoutInMs !== undefined) {
-      this.httpClient.defaults.timeout = config.timeoutInMs;
-    }
-
     if (config?.blaiseApiClientId) {
       this.blaiseIapProvider = new BlaiseIapNodeProvider(config.blaiseApiClientId);
     }
+
+    this.httpClient = axios.create({
+      baseURL: blaiseApiUrl,
+      timeout: config?.timeoutInMs,
+    });
+
+    this.httpClient.interceptors.request.use(async (requestConfig) => {
+      if (this.blaiseIapProvider) {
+        const authHeaders = await this.blaiseIapProvider.getAuthHeader();
+
+        Object.assign(requestConfig.headers, authHeaders);
+      }
+
+      return requestConfig;
+    });
   }
 
   getUser = users.getUser;
@@ -104,69 +113,59 @@ class BlaiseApiClient implements BlaiseApi {
 
   getQuestionnaireReportData = reports.getQuestionnaireReportData;
 
-  // eslint-disable-next-line class-methods-use-this
-  private url(url: string): string {
-    let formattedUrl = url;
-    if (!formattedUrl.startsWith('/')) {
-      formattedUrl = `/${formattedUrl}`;
-    }
-    return formattedUrl;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async get<T>(url: string): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.get(`${this.blaiseApiUrl}${this.url(url)}`, config);
-    return response.data as T;
+    const response = await this.httpClient.get<T>(url);
+
+    return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
-  protected async post<T>(url: string, data: any): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.post(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
-    return response.data as T;
+  protected async post<T>(url: string, data: unknown): Promise<T> {
+    const response = await this.httpClient.post<T>(url, data);
+
+    return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async delete<T>(url: string): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.delete(`${this.blaiseApiUrl}${this.url(url)}`, config);
-    return response.data as T;
+    const response = await this.httpClient.delete<T>(url);
+
+    return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-redundant-type-constituents
-  protected async patch<T>(url: string, data: any | undefined = undefined): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
-    return response.data as T;
-  }
+  protected async patch<T>(url: string, data?: unknown): Promise<T> {
+    const response = await this.httpClient.patch<T>(url, data);
 
-  private async axiosConfig(): Promise<AxiosRequestConfig> {
-    let config = {};
-    if (this.blaiseIapProvider) {
-      config = { headers: await this.blaiseIapProvider.getAuthHeader() };
-    }
-    return config;
+    return response.data;
   }
 }
 
 export default BlaiseApiClient;
 
-export * from './interfaces/questionnaire';
-export * from './interfaces/diagnostic';
-export * from './interfaces/case';
-export * from './interfaces/user';
-export * from './interfaces/daybatch';
-export * from './interfaces/questionnaireReport';
+export * from "./interfaces/questionnaire.js";
 
-export * from './enums/caseOutcome';
-export * from './enums/editedStatus';
-export * from './types/caseData';
-export * from './types/surveyDays';
+export * from "./interfaces/diagnostic.js";
 
-export * from './mockObjects/caseMockObjects';
-export * from './mockObjects/diagnosticMockObjects';
-export * from './mockObjects/questionnaireMockObjects';
-export * from './mockObjects/userMockObjects';
-export * from './mockObjects/daybatchMockObjects';
-export * from './mockObjects/questionnaireReportMockObjects';
+export * from "./interfaces/case.js";
+
+export * from "./interfaces/user.js";
+
+export * from "./interfaces/daybatch.js";
+
+export * from "./interfaces/questionnaireReport.js";
+
+export * from "./enums/caseOutcome.js";
+
+export * from "./enums/editedStatus.js";
+
+export * from "./types/caseData.js";
+
+export * from "./mockObjects/caseMockObjects.js";
+
+export * from "./mockObjects/diagnosticMockObjects.js";
+
+export * from "./mockObjects/questionnaireMockObjects.js";
+
+export * from "./mockObjects/userMockObjects.js";
+
+export * from "./mockObjects/daybatchMockObjects.js";
+
+export * from "./mockObjects/questionnaireReportMockObjects.js";

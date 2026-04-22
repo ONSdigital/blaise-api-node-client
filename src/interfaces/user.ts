@@ -1,24 +1,26 @@
+import type { UserRole as UserRoleUnion } from "../enums/userRole.js";
+
+export interface UserRole {
+  readonly name: string;
+  readonly description: string;
+  readonly permissions: readonly string[];
+}
+
 export interface User {
-  name: string,
-  role: string,
-  serverParks: string[],
-  defaultServerPark: string
+  readonly name: string;
+  readonly role: UserRoleUnion | string;
+  readonly serverParks: readonly string[];
+  readonly defaultServerPark: string;
 }
 
 export interface PasswordRequest {
-  password: string
+  readonly password: string;
 }
 
 export interface RoleRequest {
-  role: string
-}
-
-export interface UserRole {
-  name: string,
-  description: string,
-  permissions: string[]
+  readonly role: string;
 }
 
 export interface NewUser extends User {
-  password: string
+  readonly password: string;
 }
