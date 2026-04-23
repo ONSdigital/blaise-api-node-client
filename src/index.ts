@@ -26,8 +26,6 @@ export * from "./enums/editedStatus.js";
 
 export * from "./enums/organisation.js";
 
-export * from "./enums/userRole.js";
-
 export * from "./mocks/case.mock.js";
 
 export * from "./mocks/diagnostic.mock.js";

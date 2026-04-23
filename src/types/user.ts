@@ -1,5 +1,3 @@
-import type { UserRole as UserRoleUnion } from "../enums/userRole.js";
-
 export interface UserRole {
   readonly name: string;
   readonly description: string;
@@ -8,7 +6,7 @@ export interface UserRole {
 
 export interface User {
   readonly name: string;
-  readonly role: UserRoleUnion | string;
+  readonly role: UserRole | string;
   readonly serverParks: readonly string[];
   readonly defaultServerPark: string;
 }

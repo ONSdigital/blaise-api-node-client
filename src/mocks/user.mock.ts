@@ -1,10 +1,9 @@
 import { NewUser } from "../types/user.js";
-import UserRole from "../enums/userRole.js";
 
 export const mockNewUser: NewUser = {
   password: "somethingVerySecure",
   name: "Beyonce",
-  role: UserRole.DST,
+  role: "DST",
   serverParks: ["gusty"],
   defaultServerPark: "gusty",
 };
@@ -12,7 +11,7 @@ export const mockNewUser: NewUser = {
 export const mockNewUserResponse: NewUser = {
   password: "somethingVerySecure",
   name: "Beyonce",
-  role: UserRole.DST,
+  role: "DST",
   serverParks: ["gusty"],
   defaultServerPark: "gusty",
 };
