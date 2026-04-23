@@ -1,17 +1,15 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import BlaiseApiClient, {
-  CaseEditInformationListMockObject,
-  CaseStatusListMockObject,
-} from "../blaiseApiClient.js";
+import BlaiseApiClient from "../blaiseApiClient.js";
+import { mockCaseEditInformationRecords, mockCaseStatuses } from "../mocks/case.mock.js";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
-describe("blaiseApiClient", () => {
+describe("blaiseApiClient case functions", () => {
   describe("get case", () => {
     const serverpark = "test";
     const questionnaireName = "dst2108t";
@@ -161,7 +159,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock
         .onGet(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/status`)
-        .reply(200, CaseStatusListMockObject);
+        .reply(200, mockCaseStatuses);
     });
 
     afterEach(() => {
@@ -171,7 +169,7 @@ describe("blaiseApiClient", () => {
     it("gets all cases and outcome codes", async () => {
       const result = await blaiseApiClient.getCaseStatus(serverpark, questionnaireName);
 
-      expect(result).toEqual(CaseStatusListMockObject);
+      expect(result).toEqual(mockCaseStatuses);
     });
   });
 
@@ -182,7 +180,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock
         .onGet(`/api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/edit`)
-        .reply(200, CaseEditInformationListMockObject);
+        .reply(200, mockCaseEditInformationRecords);
     });
 
     afterEach(() => {
@@ -192,7 +190,7 @@ describe("blaiseApiClient", () => {
     it("returns editing details for a case", async () => {
       const response = await blaiseApiClient.getCaseEditInformation(serverpark, questionnaireName);
 
-      expect(response).toEqual(CaseEditInformationListMockObject);
+      expect(response).toEqual(mockCaseEditInformationRecords);
     });
   });
 });

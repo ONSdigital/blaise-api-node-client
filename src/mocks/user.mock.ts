@@ -1,7 +1,7 @@
-import { NewUser } from "../interfaces/user.js";
+import { NewUser } from "../types/user.js";
 import UserRole from "../enums/userRole.js";
 
-export const CreateUserMockObject: NewUser = {
+export const mockNewUser: NewUser = {
   password: "somethingVerySecure",
   name: "Beyonce",
   role: UserRole.DST,
@@ -9,7 +9,7 @@ export const CreateUserMockObject: NewUser = {
   defaultServerPark: "gusty",
 };
 
-export const CreateUserResponseMockObject: NewUser = {
+export const mockNewUserResponse: NewUser = {
   password: "somethingVerySecure",
   name: "Beyonce",
   role: UserRole.DST,

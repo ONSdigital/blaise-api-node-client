@@ -1,10 +1,8 @@
-import { Diagnostic } from "../interfaces/diagnostic.js";
+import { Diagnostic } from "../types/diagnostic.js";
 
-export const DiagnosticMockObject: readonly Diagnostic[] = [
+export const mockDiagnostics: readonly Diagnostic[] = [
   { healthCheckType: "Connection model", status: "OK" },
   { healthCheckType: "Blaise connection", status: "OK" },
   { healthCheckType: "Remote data server connection", status: "OK" },
   { healthCheckType: "Remote Cati management connection", status: "OK" },
 ];
-
-export default DiagnosticMockObject;

@@ -1,19 +1,20 @@
 import { describe, it, expect, beforeEach, afterEach } from "vitest";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import BlaiseApiClient, {
-  QuestionnaireDaybatchCasesMock,
-  AddDaybatchMock,
-  SurveyDaysMock,
-  SurveyDaysDatesMock,
-} from "../blaiseApiClient.js";
+import BlaiseApiClient from "../blaiseApiClient.js";
+import {
+  mockDaybatchCases,
+  mockAddDaybatchSettings,
+  mockSurveyDays,
+  mockSurveyDayDates,
+} from "../mocks/daybatch.mock.js";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
-describe("blaiseApiClient", () => {
+describe("blaiseApiClient daybatch functions", () => {
   const basePath = "api/v2/cati/serverparks";
 
   describe("get daybatch", () => {
@@ -23,7 +24,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock
         .onGet(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/daybatch`)
-        .reply(200, QuestionnaireDaybatchCasesMock);
+        .reply(200, mockDaybatchCases);
     });
 
     afterEach(() => {
@@ -33,7 +34,7 @@ describe("blaiseApiClient", () => {
     it("returns a list of case IDs in the current daybatch", async () => {
       const daybatch = await blaiseApiClient.getDaybatch(serverpark, questionnaireName);
 
-      expect(daybatch).toEqual(QuestionnaireDaybatchCasesMock);
+      expect(daybatch).toEqual(mockDaybatchCases);
     });
   });
 
@@ -44,7 +45,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock
         .onPost(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/daybatch`)
-        .reply(201, QuestionnaireDaybatchCasesMock);
+        .reply(201, mockDaybatchCases);
     });
 
     afterEach(() => {
@@ -55,10 +56,10 @@ describe("blaiseApiClient", () => {
       const daybatch = await blaiseApiClient.addDaybatch(
         serverpark,
         questionnaireName,
-        AddDaybatchMock,
+        mockAddDaybatchSettings,
       );
 
-      expect(daybatch).toEqual(QuestionnaireDaybatchCasesMock);
+      expect(daybatch).toEqual(mockDaybatchCases);
     });
   });
 
@@ -69,7 +70,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock
         .onGet(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/surveydays`)
-        .reply(200, SurveyDaysMock);
+        .reply(200, mockSurveyDays);
     });
 
     afterEach(() => {
@@ -79,7 +80,7 @@ describe("blaiseApiClient", () => {
     it("returns a list of surveydays", async () => {
       const surveyDays = await blaiseApiClient.getSurveyDays(serverpark, questionnaireName);
 
-      expect(surveyDays).toEqual(SurveyDaysMock);
+      expect(surveyDays).toEqual(mockSurveyDays);
     });
   });
 
@@ -90,7 +91,7 @@ describe("blaiseApiClient", () => {
     beforeEach(() => {
       mock
         .onPost(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/surveydays`)
-        .reply(201, SurveyDaysMock);
+        .reply(201, mockSurveyDays);
     });
 
     afterEach(() => {
@@ -101,20 +102,20 @@ describe("blaiseApiClient", () => {
       const surveyDays = await blaiseApiClient.addSurveyDays(
         serverpark,
         questionnaireName,
-        SurveyDaysMock,
+        mockSurveyDays,
       );
 
-      expect(surveyDays).toEqual(SurveyDaysMock);
+      expect(surveyDays).toEqual(mockSurveyDays);
     });
 
     it("adds surveydays by dates", async () => {
       const surveyDays = await blaiseApiClient.addSurveyDays(
         serverpark,
         questionnaireName,
-        SurveyDaysDatesMock,
+        mockSurveyDayDates,
       );
 
-      expect(surveyDays).toEqual(SurveyDaysMock);
+      expect(surveyDays).toEqual(mockSurveyDays);
     });
   });
 });

@@ -3,9 +3,9 @@ import {
   InstallQuestionnaireResponse,
   Questionnaire,
   QuestionnaireSettings,
-} from "../interfaces/questionnaire.js";
+} from "../types/questionnaire.js";
 
-export const QuestionnaireListMockObject: readonly Questionnaire[] = [
+export const mockQuestionnaires: readonly Questionnaire[] = [
   {
     name: "OPN2101A",
     serverParkName: "gusty",
@@ -35,7 +35,7 @@ export const QuestionnaireListMockObject: readonly Questionnaire[] = [
   },
 ];
 
-export const QuestionnaireMockObject: Questionnaire = {
+export const mockQuestionnaire: Questionnaire = {
   name: "OPN2101A",
   serverParkName: "gusty",
   installDate: "2021-01-15T14:41:29.4399898+00:00",
@@ -46,15 +46,15 @@ export const QuestionnaireMockObject: Questionnaire = {
   blaiseVersion: "5.9.9.2735",
 };
 
-export const InstallQuestionnaireMockObject: InstallQuestionnaire = {
+export const mockInstallQuestionnaire: InstallQuestionnaire = {
   questionnaireFile: "OPN2004A.bpkg",
 };
 
-export const InstallQuestionnaireResponseMockObject: InstallQuestionnaireResponse = {
+export const mockInstallQuestionnaireResponse: InstallQuestionnaireResponse = {
   questionnaireFile: "OPN2004A.bpkg",
 };
 
-export const QuestionnaireSettingsMockList: readonly QuestionnaireSettings[] = [
+export const mockQuestionnaireSettings: readonly QuestionnaireSettings[] = [
   {
     type: "StrictInterviewing",
     saveSessionOnTimeout: true,

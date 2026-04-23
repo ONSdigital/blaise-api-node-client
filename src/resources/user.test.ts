@@ -1,15 +1,13 @@
 import { describe, it, expect, afterEach } from "vitest";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import BlaiseApiClient, {
-  CreateUserMockObject,
-  CreateUserResponseMockObject,
-} from "../blaiseApiClient.js";
+import BlaiseApiClient from "../blaiseApiClient.js";
+import { mockNewUser, mockNewUserResponse } from "../mocks/user.mock.js";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiClient = new BlaiseApiClient("http://testUri");
 
-describe("blaiseApiClient users", () => {
+describe("blaiseApiClient user functions", () => {
   afterEach(() => {
     mock.reset();
   });
@@ -65,8 +63,8 @@ describe("blaiseApiClient users", () => {
 
   describe("create user", () => {
     it("creates a user and returns a response", async () => {
-      mock.onPost("api/v2/users").reply(201, CreateUserResponseMockObject);
-      const createUser = await blaiseApiClient.createUser(CreateUserMockObject);
+      mock.onPost("api/v2/users").reply(201, mockNewUserResponse);
+      const createUser = await blaiseApiClient.createUser(mockNewUser);
 
       expect(createUser.name).toEqual("Beyonce");
       expect(createUser.role).toEqual("DST");
@@ -113,6 +111,24 @@ describe("blaiseApiClient users", () => {
     it("returns null", async () => {
       mock.onPatch(`api/v2/users/${username}/role`).reply(204, null);
       expect(await blaiseApiClient.changeUserRole(username, role)).toBeNull();
+    });
+  });
+
+  describe("change user server parks", () => {
+    const username = "test-user";
+    const serverParks = ["gusty", "local"];
+    const defaultServerPark = "gusty";
+
+    it("returns null", async () => {
+      mock.onPatch(`api/v2/users/${username}/serverparks`).reply(204, null);
+
+      const result = await blaiseApiClient.changeUserServerParks(
+        username,
+        serverParks,
+        defaultServerPark,
+      );
+
+      expect(result).toBeNull();
     });
   });
 });

@@ -1,6 +1,6 @@
 import BlaiseApiClient from "../blaiseApiClient.js";
-import { CaseEditInformation, CaseResponse, CaseStatus } from "../interfaces/case.js";
-import { CaseData } from "../types/caseData.js";
+import { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.js";
+import { JSONValue } from "../types/common.js";
 
 export async function getCase(
   this: BlaiseApiClient,
@@ -39,7 +39,7 @@ export async function addCase(
   serverpark: string,
   questionnaireName: string,
   caseId: string,
-  caseFields: CaseData,
+  caseFields: Record<string, JSONValue>,
 ): Promise<CaseResponse> {
   return this.post(
     `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`,
@@ -52,7 +52,7 @@ export async function updateCase(
   serverpark: string,
   questionnaireName: string,
   caseId: string,
-  caseFields: CaseData,
+  caseFields: Record<string, JSONValue>,
 ): Promise<null> {
   return this.patch<null>(
     `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`,
@@ -65,7 +65,7 @@ export async function addCaseMultikey(
   serverpark: string,
   questionnaireName: string,
   multiKeyValueMap: Map<string, string>,
-  caseFields: CaseData,
+  caseFields: Record<string, JSONValue>,
 ): Promise<CaseResponse> {
   const queryString = getMultikeyQueryString(multiKeyValueMap);
 

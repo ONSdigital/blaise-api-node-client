@@ -1,28 +1,29 @@
 import { describe, it, expect, afterEach } from "vitest";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import BlaiseApiClient, {
-  QuestionnaireListMockObject,
-  QuestionnaireMockObject,
-  InstallQuestionnaireMockObject,
-  InstallQuestionnaireResponseMockObject,
-  QuestionnaireSettingsMockList,
-} from "../blaiseApiClient.js";
+import BlaiseApiClient from "../blaiseApiClient.js";
+import {
+  mockQuestionnaires,
+  mockQuestionnaire,
+  mockInstallQuestionnaire,
+  mockInstallQuestionnaireResponse,
+  mockQuestionnaireSettings,
+} from "../mocks/questionnaire.mock.js";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiClient = new BlaiseApiClient("http://testUri");
 
-describe("blaiseApiClient", () => {
+describe("blaiseApiClient questionnaire functions", () => {
   afterEach(() => {
     mock.reset();
   });
 
   describe("get all questionnaires with Cati data", () => {
     it("returns a list of all questionnaires including CATI data", async () => {
-      mock.onGet("api/v2/cati/questionnaires").reply(200, QuestionnaireListMockObject);
+      mock.onGet("api/v2/cati/questionnaires").reply(200, mockQuestionnaires);
       const questionnaires = await blaiseApiClient.getAllQuestionnairesWithCatiData();
 
-      expect(questionnaires).toEqual(QuestionnaireListMockObject);
+      expect(questionnaires).toEqual(mockQuestionnaires);
     });
   });
 
@@ -32,10 +33,10 @@ describe("blaiseApiClient", () => {
     it("returns a list of all questionnaires including CATI data within a serverpark", async () => {
       mock
         .onGet(`api/v2/cati/serverparks/${serverpark}/questionnaires`)
-        .reply(200, QuestionnaireListMockObject);
+        .reply(200, mockQuestionnaires);
       const questionnaires = await blaiseApiClient.getQuestionnairesWithCatiData(serverpark);
 
-      expect(questionnaires).toEqual(QuestionnaireListMockObject);
+      expect(questionnaires).toEqual(mockQuestionnaires);
     });
   });
 
@@ -44,16 +45,14 @@ describe("blaiseApiClient", () => {
 
     it("returns an questionnaire including CATI data", async () => {
       mock
-        .onGet(
-          `api/v2/cati/serverparks/${serverpark}/questionnaires/${QuestionnaireMockObject.name}`,
-        )
-        .reply(200, QuestionnaireMockObject);
+        .onGet(`api/v2/cati/serverparks/${serverpark}/questionnaires/${mockQuestionnaire.name}`)
+        .reply(200, mockQuestionnaire);
       const questionnaire = await blaiseApiClient.getQuestionnaireWithCatiData(
         serverpark,
-        QuestionnaireMockObject.name,
+        mockQuestionnaire.name,
       );
 
-      expect(questionnaire).toEqual(QuestionnaireMockObject);
+      expect(questionnaire).toEqual(mockQuestionnaire);
     });
   });
 
@@ -61,12 +60,10 @@ describe("blaiseApiClient", () => {
     const serverpark = "test";
 
     it("returns a list of questionnaires in a serverpark", async () => {
-      mock
-        .onGet(`api/v2/serverparks/${serverpark}/questionnaires`)
-        .reply(200, QuestionnaireListMockObject);
+      mock.onGet(`api/v2/serverparks/${serverpark}/questionnaires`).reply(200, mockQuestionnaires);
       const questionnaires = await blaiseApiClient.getQuestionnaires(serverpark);
 
-      expect(questionnaires).toEqual(QuestionnaireListMockObject);
+      expect(questionnaires).toEqual(mockQuestionnaires);
     });
   });
 
@@ -75,14 +72,14 @@ describe("blaiseApiClient", () => {
 
     it("returns a questionnaire", async () => {
       mock
-        .onGet(`api/v2/serverparks/${serverpark}/questionnaires/${QuestionnaireMockObject.name}`)
-        .reply(200, QuestionnaireMockObject);
+        .onGet(`api/v2/serverparks/${serverpark}/questionnaires/${mockQuestionnaire.name}`)
+        .reply(200, mockQuestionnaire);
       const questionnaire = await blaiseApiClient.getQuestionnaire(
         serverpark,
-        QuestionnaireMockObject.name,
+        mockQuestionnaire.name,
       );
 
-      expect(questionnaire).toEqual(QuestionnaireMockObject);
+      expect(questionnaire).toEqual(mockQuestionnaire);
     });
   });
 
@@ -123,12 +120,12 @@ describe("blaiseApiClient", () => {
     it("returns true if questionnaire has mode", async () => {
       mock
         .onGet(
-          `api/v2/serverparks/${serverpark}/questionnaires/${QuestionnaireMockObject.name}/modes/${hasMode}`,
+          `api/v2/serverparks/${serverpark}/questionnaires/${mockQuestionnaire.name}/modes/${hasMode}`,
         )
         .reply(200, true);
       const exists = await blaiseApiClient.doesQuestionnaireHaveMode(
         serverpark,
-        QuestionnaireMockObject.name,
+        mockQuestionnaire.name,
         hasMode,
       );
 
@@ -138,12 +135,12 @@ describe("blaiseApiClient", () => {
     it("returns false if questionnaire does not have mode", async () => {
       mock
         .onGet(
-          `api/v2/serverparks/${serverpark}/questionnaires/${QuestionnaireMockObject.name}/modes/${doesntHaveMode}`,
+          `api/v2/serverparks/${serverpark}/questionnaires/${mockQuestionnaire.name}/modes/${doesntHaveMode}`,
         )
         .reply(200, false);
       const exists = await blaiseApiClient.doesQuestionnaireHaveMode(
         serverpark,
-        QuestionnaireMockObject.name,
+        mockQuestionnaire.name,
         doesntHaveMode,
       );
 
@@ -157,13 +154,13 @@ describe("blaiseApiClient", () => {
     it("installs an questionnaire and returns the questionnaire file", async () => {
       mock
         .onPost(`api/v2/serverparks/${serverpark}/questionnaires`)
-        .reply(201, InstallQuestionnaireResponseMockObject);
+        .reply(201, mockInstallQuestionnaireResponse);
       const questionnaire = await blaiseApiClient.installQuestionnaire(
         serverpark,
-        InstallQuestionnaireMockObject,
+        mockInstallQuestionnaire,
       );
 
-      expect(questionnaire).toEqual(InstallQuestionnaireResponseMockObject);
+      expect(questionnaire).toEqual(mockInstallQuestionnaireResponse);
     });
   });
 
@@ -208,14 +205,9 @@ describe("blaiseApiClient", () => {
 
     it("returns list of modes for questionnaire", async () => {
       mock
-        .onGet(
-          `api/v2/serverparks/${serverpark}/questionnaires/${QuestionnaireMockObject.name}/modes`,
-        )
+        .onGet(`api/v2/serverparks/${serverpark}/questionnaires/${mockQuestionnaire.name}/modes`)
         .reply(200, ["CATI", "CAWI"]);
-      const modes = await blaiseApiClient.getQuestionnaireModes(
-        serverpark,
-        QuestionnaireMockObject.name,
-      );
+      const modes = await blaiseApiClient.getQuestionnaireModes(serverpark, mockQuestionnaire.name);
 
       expect(modes).toContain("CATI");
       expect(modes).toContain("CAWI");
@@ -227,16 +219,14 @@ describe("blaiseApiClient", () => {
 
     it("returns list of settings for questionnaire", async () => {
       mock
-        .onGet(
-          `api/v2/serverparks/${serverpark}/questionnaires/${QuestionnaireMockObject.name}/settings`,
-        )
-        .reply(200, QuestionnaireSettingsMockList);
+        .onGet(`api/v2/serverparks/${serverpark}/questionnaires/${mockQuestionnaire.name}/settings`)
+        .reply(200, mockQuestionnaireSettings);
       const settings = await blaiseApiClient.getQuestionnaireSettings(
         serverpark,
-        QuestionnaireMockObject.name,
+        mockQuestionnaire.name,
       );
 
-      expect(settings).toEqual(QuestionnaireSettingsMockList);
+      expect(settings).toEqual(mockQuestionnaireSettings);
     });
   });
 

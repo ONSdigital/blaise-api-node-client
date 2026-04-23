@@ -1,7 +1,7 @@
-import { CaseData } from "../types/caseData.js";
+import { JSONValue } from "./common.js";
 
 export interface QuestionnaireReport {
   questionnaireName: string;
   questionnaireId: string;
-  reportingData: CaseData[];
+  reportingData: Record<string, JSONValue>[];
 }

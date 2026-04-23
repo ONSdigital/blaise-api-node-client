@@ -1,5 +1,5 @@
 import BlaiseApiClient from "../blaiseApiClient.js";
-import { DaybatchResponse, DaybatchSettings } from "../interfaces/daybatch.js";
+import { DaybatchResponse, DaybatchSettings } from "../types/daybatch.js";
 
 const formatDate = (date: string | Date): string =>
   date instanceof Date ? date.toISOString() : date;

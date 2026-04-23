@@ -1,9 +1,9 @@
-import { CaseEditInformation, CaseResponse, CaseStatus } from "../interfaces/case.js";
+import { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.js";
 import CaseOutcome from "../enums/caseOutcome.js";
 import EditedStatus from "../enums/editedStatus.js";
 import Organisation from "../enums/organisation.js";
 
-export const CaseStatusListMockObject: CaseStatus[] = [
+export const mockCaseStatuses: CaseStatus[] = [
   {
     primaryKey: "1",
     outcome: CaseOutcome.Completed,
@@ -18,7 +18,7 @@ export const CaseStatusListMockObject: CaseStatus[] = [
   },
 ];
 
-export const CaseResponseMockObject: CaseResponse = {
+export const mockCaseResponse: CaseResponse = {
   caseId: "1",
   fieldData: {
     "qiD.Serial_Number": "1",
@@ -39,7 +39,7 @@ export const CaseResponseMockObject: CaseResponse = {
   },
 };
 
-export const CaseEditInformationListMockObject: CaseEditInformation[] = [
+export const mockCaseEditInformationRecords: CaseEditInformation[] = [
   {
     primaryKey: "100101",
     outcome: CaseOutcome.Completed,

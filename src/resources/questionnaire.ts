@@ -4,7 +4,7 @@ import {
   InstallQuestionnaireResponse,
   Questionnaire,
   QuestionnaireSettings,
-} from "../interfaces/questionnaire.js";
+} from "../types/questionnaire.js";
 
 export async function getAllQuestionnairesWithCatiData(
   this: BlaiseApiClient,

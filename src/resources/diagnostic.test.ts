@@ -2,17 +2,17 @@ import { describe, it, expect, beforeAll, afterAll } from "vitest";
 import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
 import BlaiseApiClient from "../blaiseApiClient.js";
-import { DiagnosticMockObject } from "../mockObjects/diagnosticMockObjects.js";
+import { mockDiagnostics } from "../mocks/diagnostic.mock.js";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
 const blaiseApiUrl = "testUri";
 
 const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
 
-describe("BlaiseRestapiClient", () => {
+describe("BlaiseRestapiClient diagnostic functions", () => {
   describe("get health Check from API", () => {
     beforeAll(() => {
-      mock.onGet("api/v2/health/diagnosis").reply(200, DiagnosticMockObject);
+      mock.onGet("api/v2/health/diagnosis").reply(200, mockDiagnostics);
     });
 
     afterAll(() => {

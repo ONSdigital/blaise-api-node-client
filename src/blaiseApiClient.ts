@@ -1,13 +1,13 @@
 import axios, { AxiosInstance } from "axios";
 import BlaiseIapNodeProvider from "blaise-iap-node-provider";
-import { BlaiseApiConfig } from "./interfaces/blaiseApiConfig.js";
-import { BlaiseApi } from "./interfaces/blaiseApi.js";
-import * as users from "./functions/userFunctions.js";
-import * as questionnaires from "./functions/questionnaireFunctions.js";
-import * as cases from "./functions/caseFunctions.js";
-import * as diagnostics from "./functions/diagnosticFunctions.js";
-import * as daybatch from "./functions/daybatchFunctions.js";
-import * as reports from "./functions/questionnaireReportFunctions.js";
+import { BlaiseApiConfig } from "./types/blaiseApiConfig.js";
+import { BlaiseApi } from "./types/blaiseApi.js";
+import * as users from "./resources/user.js";
+import * as questionnaires from "./resources/questionnaire.js";
+import * as cases from "./resources/case.js";
+import * as diagnostics from "./resources/diagnostic.js";
+import * as daybatch from "./resources/daybatch.js";
+import * as reports from "./resources/questionnaireReport.js";
 
 class BlaiseApiClient implements BlaiseApi {
   blaiseApiUrl: string;
@@ -40,73 +40,42 @@ class BlaiseApiClient implements BlaiseApi {
   }
 
   getUser = users.getUser;
-
   getUsers = users.getUsers;
-
   validatePassword = users.validatePassword;
-
   createUser = users.createUser;
-
   deleteUser = users.deleteUser;
-
   getUserRoles = users.getUserRoles;
-
   changePassword = users.changePassword;
-
   changeUserRole = users.changeUserRole;
-
   changeUserServerParks = users.changeUserServerParks;
 
   getAllQuestionnairesWithCatiData = questionnaires.getAllQuestionnairesWithCatiData;
-
   getQuestionnairesWithCatiData = questionnaires.getQuestionnairesWithCatiData;
-
   getQuestionnaireWithCatiData = questionnaires.getQuestionnaireWithCatiData;
-
   getQuestionnaires = questionnaires.getQuestionnaires;
-
   questionnaireExists = questionnaires.questionnaireExists;
-
   doesQuestionnaireHaveMode = questionnaires.doesQuestionnaireHaveMode;
-
   getQuestionnaire = questionnaires.getQuestionnaire;
-
   installQuestionnaire = questionnaires.installQuestionnaire;
-
   deleteQuestionnaire = questionnaires.deleteQuestionnaire;
-
   getQuestionnaireCaseIds = questionnaires.getQuestionnaireCaseIds;
-
   getQuestionnaireModes = questionnaires.getQuestionnaireModes;
-
   getQuestionnaireSettings = questionnaires.getQuestionnaireSettings;
-
   activateQuestionnaire = questionnaires.activateQuestionnaire;
-
   deactivateQuestionnaire = questionnaires.deactivateQuestionnaire;
 
   getDaybatch = daybatch.getDaybatch;
-
   addDaybatch = daybatch.addDaybatch;
-
   getSurveyDays = daybatch.getSurveyDays;
-
   addSurveyDays = daybatch.addSurveyDays;
 
   getCase = cases.getCase;
-
   getCaseMultikey = cases.getCaseMultikey;
-
   addCase = cases.addCase;
-
   updateCase = cases.updateCase;
-
   addCaseMultikey = cases.addCaseMultikey;
-
   getMultikeyQueryString = cases.getMultikeyQueryString;
-
   getCaseStatus = cases.getCaseStatus;
-
   getCaseEditInformation = cases.getCaseEditInformation;
 
   getDiagnostics = diagnostics.getDiagnostics;
@@ -139,33 +108,3 @@ class BlaiseApiClient implements BlaiseApi {
 }
 
 export default BlaiseApiClient;
-
-export * from "./interfaces/questionnaire.js";
-
-export * from "./interfaces/diagnostic.js";
-
-export * from "./interfaces/case.js";
-
-export * from "./interfaces/user.js";
-
-export * from "./interfaces/daybatch.js";
-
-export * from "./interfaces/questionnaireReport.js";
-
-export * from "./enums/caseOutcome.js";
-
-export * from "./enums/editedStatus.js";
-
-export * from "./types/caseData.js";
-
-export * from "./mockObjects/caseMockObjects.js";
-
-export * from "./mockObjects/diagnosticMockObjects.js";
-
-export * from "./mockObjects/questionnaireMockObjects.js";
-
-export * from "./mockObjects/userMockObjects.js";
-
-export * from "./mockObjects/daybatchMockObjects.js";
-
-export * from "./mockObjects/questionnaireReportMockObjects.js";
