@@ -19,7 +19,9 @@ jobs:
                   node-version: 24.x
                   cache: yarn
             - name: 📦 Install Dependencies
-              run: yarn install --frozen-lockfile
+              run: |
+                yarn cache clean
+                yarn install --frozen-lockfile
             - name: 🧹 Run Linter
               run: yarn lint
             - name: 🧪 Run Tests and Generate Coverage
