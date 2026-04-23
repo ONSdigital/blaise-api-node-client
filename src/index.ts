@@ -20,8 +20,6 @@ export * from "./types/survey.js";
 
 export * from "./types/user.js";
 
-export * from "./types/questionnaireReport.js";
-
 export * from "./enums/caseOutcome.js";
 
 export * from "./enums/editedStatus.js";
