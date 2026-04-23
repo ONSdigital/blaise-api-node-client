@@ -23,7 +23,7 @@ import BlaiseApiClient from "blaise-api-node-client";
 const BLAISE_API_URL = process.env.BLAISE_API_URL || "";
 const TIMEOUT_MS = 1000;
 
-// The client accepts an optional timeout in milliseconds
+// The client accepts a configuration object for extended settings
 const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`, TIMEOUT_MS);
 
 export async function fetchQuestionnaires() {
@@ -43,9 +43,9 @@ export async function fetchQuestionnaires() {
 To support local testing and ensure your mock data stays in sync with production contracts, the library exports validated mock objects. These are defined using readonly modifiers to prevent state pollution between tests.
 
 ```typescript
-import { QuestionnaireListMockObject } from "blaise-api-node-client";
+import { mockQuestionnaires } from "blaise-api-node-client";
 
-console.log(QuestionnaireListMockObject[0].name);
+console.log(mockQuestionnaires[0].name);
 ```
 
 ## 🛠️ Development
@@ -68,11 +68,13 @@ yarn install
 
 This library follows strict clean-code principles:
 
-* **Immutability**: Interfaces and mock responses utilise `readonly` modifiers to enforce data integrity.
+* **Domain-Driven Layout**: API calls are logically grouped by entity within the resources/ directory (e.g., Cases, Users, Questionnaires), rather than by generic functions.
 
-* **Strict Typing**: Union types and strict mapping are used for dynamic values (e.g., `UserRole` and `CaseOutcome`), providing IDE autocomplete and compile-time safety.
+* **Centralised Contracts**: All data contracts (types and interfaces) reside in the types/ directory to prevent circular dependencies and maintain a single source of truth.
 
-* **Decoupled Logic**: Domain interfaces are kept in `interfaces/`, while foundational data structures reside in `types/` to prevent unnecessary coupling.
+* **Strict Typing**: Union types and strict mapping are used for dynamic values (e.g., UserRole and CaseOutcome), providing IDE autocomplete and compile-time safety.
+
+* **Barrel Exports**: The public API surface is strictly controlled via index.ts, ensuring consumers only access intended interfaces, enums, and client classes.
 
 ### Quality Control
 

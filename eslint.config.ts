@@ -24,7 +24,7 @@ export default tseslint.config(
   },
 
   {
-    files: ["src/**/*.ts", "mocks/**/*.ts"],
+    files: ["src/**/*.ts"],
     plugins: {
       import: pluginImport,
       prettier: pluginPrettier,
@@ -64,7 +64,7 @@ export default tseslint.config(
       "no-unreachable": "error",
       "import/no-extraneous-dependencies": [
         "error",
-        { devDependencies: ["src/**/*.test.ts", "src/**/*.spec.ts", "mocks/**"] },
+        { devDependencies: ["src/**/*.test.ts"] },
       ],
     },
   },
