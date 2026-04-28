@@ -18,13 +18,13 @@ export default tseslint.config(
     },
     settings: {
       "import/resolver": {
-        typescript: { project: ["./tsconfig.json"] },
+        typescript: { project: "./tsconfig.eslint.json" },
       },
     },
   },
 
   {
-    files: ["src/**/*.ts"],
+    files: ["**/*.ts"],
     plugins: {
       import: pluginImport,
       prettier: pluginPrettier,
@@ -41,6 +41,7 @@ export default tseslint.config(
         { blankLine: "always", prev: ["const", "let", "var"], next: "*" },
         { blankLine: "any", prev: ["const", "let", "var"], next: ["const", "let", "var"] },
         { blankLine: "always", prev: "*", next: ["class", "function", "export"] },
+        { blankLine: "always", prev: ["block-like", "multiline-block-like"], next: "*" },
       ],
       "prettier/prettier": [
         "error",
@@ -64,7 +65,9 @@ export default tseslint.config(
       "no-unreachable": "error",
       "import/no-extraneous-dependencies": [
         "error",
-        { devDependencies: ["src/**/*.test.ts"] },
+        {
+          devDependencies: ["src/**/*.test.ts", "*.config.ts"],
+        },
       ],
     },
   },
