@@ -1,6 +1,7 @@
 {
   "name": "blaise-api-node-client",
   "version": "1.0.0",
+  "private": true,
   "license": "MIT",
   "engines": {
     "node": ">=24.0.0"
@@ -43,7 +44,8 @@
     "globals": "^17.5.0",
     "jiti": "^2.6.1",
     "prettier": "^3.8.3",
-    "typescript-eslint": "^8.59.0",
+    "typescript-eslint": "^8.59.1",
     "vitest": "^4.1.5"
-  }
+  },
+  "packageManager": "yarn@4.14.1"
 }

@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import BlaiseIapNodeProvider from "blaise-iap-node-provider";
+import { BlaiseIapNodeProvider } from "blaise-iap-node-provider";
 import { BlaiseApiConfig } from "./types/blaiseApiConfig.js";
 import { BlaiseApi } from "./types/blaiseApi.js";
 import * as users from "./resources/user.js";
