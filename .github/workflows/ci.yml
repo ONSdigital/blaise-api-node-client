@@ -20,7 +20,8 @@ jobs:
                   cache: yarn
             - name: 📦 Install Dependencies
               # TODO: remove network-concurrency after yarn upgrade
-              run: yarn install --frozen-lockfile --network-concurrency 1
+              # run: yarn install --frozen-lockfile --network-concurrency 1
+              run: yarn install --frozen-lockfile # check...
             - name: 🧹 Run Linter
               run: yarn lint
             - name: 🧪 Run Tests and Generate Coverage

@@ -8,8 +8,8 @@ export interface Questionnaire {
   name: string;
   expired?: boolean;
   serverParkName: string;
-  activeToday?: boolean; // deprecated
-  surveyDays?: string[]; // deprecated
+  activeToday?: boolean; // TODO: deprecated?
+  surveyDays?: string[]; // TODO: deprecated?
   link?: string;
   fieldPeriod?: string;
   surveyTla?: string;
@@ -17,7 +17,7 @@ export interface Questionnaire {
   status?: string;
   hasData?: boolean;
   nodes?: Node[];
-  active?: boolean; // deprecated
+  active?: boolean; // TODO: deprecated?
   blaiseVersion?: string;
 }
 

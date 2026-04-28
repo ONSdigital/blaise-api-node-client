@@ -13,5 +13,3 @@ export async function getQuestionnaireReportData(
     `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/report?${queryParams}`,
   );
 }
-
-export default getQuestionnaireReportData;
