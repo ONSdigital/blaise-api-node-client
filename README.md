@@ -1,4 +1,4 @@
-# Blaise REST API Node Client
+# Blaise REST API Node Client 🌐
 
 A robust, type-safe Node.js client for interacting with our Blaise REST API. Designed for high-reliability service-to-service communication, this library provides immutable data contracts and standardised interaction patterns for Blaise resources.
 
