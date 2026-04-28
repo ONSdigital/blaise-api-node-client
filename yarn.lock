@@ -1080,13 +1080,13 @@ __metadata:
 
 "blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#BLAIS5-5177":
   version: 1.0.0
-  resolution: "blaise-iap-node-provider@https://github.com/ONSdigital/blaise-iap-node-provider.git#commit=78cd6569423ddf238f22bd6ecde20a0b7ca1c4b2"
+  resolution: "blaise-iap-node-provider@https://github.com/ONSdigital/blaise-iap-node-provider.git#commit=3e1b8df5c30c798f28dcc8ea448d509d1e8f6a7a"
   dependencies:
     "@types/node": "npm:^25.6.0"
     google-auth-library: "npm:^10.6.2"
     jsonwebtoken: "npm:^9.0.3"
     typescript: "npm:^6.0.3"
-  checksum: 10c0/141f4c40952c37d418f589285845bfc1a1a16725f2b384e9a29bffb258a07743fe8aa9a30bde1bb6da96e55144a666d0b0432549d8ce221ef79bb395676c5f14
+  checksum: 10c0/8c618ddc14813bf48f0facdc2afab3a0070f6c201bcce5bdd795d6759a5ed968acd8b4befd8bd59745aad5f60beed4ed9ee0da74ec01eb8de0c28f7131290568
   languageName: node
   linkType: hard
 

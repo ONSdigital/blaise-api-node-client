@@ -1,5 +1,5 @@
 import axios, { AxiosInstance } from "axios";
-import { BlaiseIapNodeProvider } from "blaise-iap-node-provider";
+import { BlaiseIapProvider } from "blaise-iap-node-provider";
 import { BlaiseApiConfig } from "./types/blaiseApiConfig.js";
 import { BlaiseApi } from "./types/blaiseApi.js";
 import * as users from "./resources/user.js";
@@ -12,7 +12,7 @@ import * as reports from "./resources/questionnaireReport.js";
 class BlaiseApiClient implements BlaiseApi {
   blaiseApiUrl: string;
 
-  blaiseIapProvider?: BlaiseIapNodeProvider;
+  blaiseIapProvider?: BlaiseIapProvider;
 
   httpClient: AxiosInstance;
 
@@ -20,7 +20,7 @@ class BlaiseApiClient implements BlaiseApi {
     this.blaiseApiUrl = blaiseApiUrl;
 
     if (config?.blaiseApiClientId) {
-      this.blaiseIapProvider = new BlaiseIapNodeProvider(config.blaiseApiClientId);
+      this.blaiseIapProvider = new BlaiseIapProvider(config.blaiseApiClientId);
     }
 
     this.httpClient = axios.create({
