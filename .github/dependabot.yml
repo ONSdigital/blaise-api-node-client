@@ -7,7 +7,7 @@ updates:
       interval: weekly
       day: monday
       time: '06:00'
-    timezone: Europe/London
+      timezone: Europe/London
     labels:
       - dependencies
       - javascript
@@ -17,7 +17,7 @@ updates:
       interval: weekly
       day: monday
       time: '06:00'
-    timezone: Europe/London
+      timezone: Europe/London
     labels:
       - dependencies
       - github-actions
