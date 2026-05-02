@@ -68,13 +68,13 @@ yarn install
 
 This library follows strict clean-code principles:
 
-* **Domain-Driven Layout**: API calls are logically grouped by entity within the resources/ directory (e.g., Cases, Users, Questionnaires), rather than by generic functions.
+- **Domain-Driven Layout**: API calls are logically grouped by entity within the resources/ directory (e.g., Cases, Users, Questionnaires), rather than by generic functions.
 
-* **Centralised Contracts**: All data contracts (types and interfaces) reside in the types/ directory to prevent circular dependencies and maintain a single source of truth.
+- **Centralised Contracts**: All data contracts (types and interfaces) reside in the types/ directory to prevent circular dependencies and maintain a single source of truth.
 
-* **Strict Typing**: Union types and strict mapping are used for dynamic values (e.g., UserRole and CaseOutcome), providing IDE autocomplete and compile-time safety.
+- **Strict Typing**: Union types and strict mapping are used for dynamic values (e.g., UserRole and CaseOutcome), providing IDE autocomplete and compile-time safety.
 
-* **Barrel Exports**: The public API surface is strictly controlled via index.ts, ensuring consumers only access intended interfaces, enums, and client classes.
+- **Barrel Exports**: The public API surface is strictly controlled via index.ts, ensuring consumers only access intended interfaces, enums, and client classes.
 
 ### Quality Control
 
