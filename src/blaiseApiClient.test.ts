@@ -1,6 +1,7 @@
-import { describe, it, expect, vi, afterEach } from "vitest";
 import MockAdapter from "axios-mock-adapter";
-import BlaiseApiClient from "./blaiseApiClient.js";
+import { afterEach, describe, expect, it, vi } from "vitest";
+
+import { BlaiseApiClient } from "./blaiseApiClient.js";
 
 class TestBlaiseApiClient extends BlaiseApiClient {
   public async testGet(url: string) {
@@ -19,7 +20,7 @@ describe("BlaiseApiClient internal configuration", () => {
     });
 
     const getAuthHeaderSpy = vi
-      .spyOn(client.blaiseIapProvider!, "getAuthHeader")
+      .spyOn(client.iapProvider!, "getAuthHeader")
       .mockResolvedValue({ Authorization: "Bearer token" });
 
     const mock = new MockAdapter(client.httpClient, { onNoMatch: "throwException" });
@@ -40,7 +41,7 @@ describe("BlaiseApiClient internal configuration", () => {
 
     await client.testGet("/test");
 
-    expect(client.blaiseIapProvider).toBeUndefined();
+    expect(client.iapProvider).toBeUndefined();
   });
 
   it("configures the http client with a timeout when provided", () => {

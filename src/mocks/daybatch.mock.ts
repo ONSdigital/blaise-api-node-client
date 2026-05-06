@@ -1,4 +1,4 @@
-import { DaybatchResponse, DaybatchSettings } from "../types/daybatch.js";
+import type { DaybatchResponse, DaybatchSettings } from "../types/daybatch.types.js";
 
 export const mockDaybatchCases: ReadonlyArray<DaybatchResponse> = [
   {

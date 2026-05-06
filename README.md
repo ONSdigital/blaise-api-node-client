@@ -17,14 +17,16 @@ Release versions can be found on this repo's [GitHub releases](https://github.co
 The client is designed for dependency injection. It exposes strongly-typed methods and interfaces, ensuring that data structures returned by the API are consistent and immutable.
 
 ```typescript
-import BlaiseApiClient from "blaise-api-node-client";
+import { BlaiseApiClient } from "blaise-api-node-client";
 
 // Initialise the client with the Base URL of your Blaise REST API
 const BLAISE_API_URL = process.env.BLAISE_API_URL || "";
 const TIMEOUT_MS = 1000;
 
 // The client accepts a configuration object for extended settings
-const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`, TIMEOUT_MS);
+const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`, {
+  timeoutInMs: TIMEOUT_MS,
+});
 
 export async function fetchQuestionnaires() {
   try {

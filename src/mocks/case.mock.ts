@@ -1,7 +1,8 @@
-import { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.js";
-import CaseOutcome from "../enums/caseOutcome.js";
-import EditedStatus from "../enums/editedStatus.js";
-import Organisation from "../enums/organisation.js";
+import { CaseOutcome } from "../enums/caseOutcome.js";
+import { EditedStatus } from "../enums/editedStatus.js";
+import { Organisation } from "../enums/organisation.js";
+
+import type { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.types.js";
 
 export const mockCaseStatuses: CaseStatus[] = [
   {

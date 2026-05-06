@@ -1,6 +1,6 @@
-import BlaiseApiClient from "../blaiseApiClient.js";
-import { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.js";
-import { JSONValue } from "../types/common.js";
+import type { BlaiseApiClient } from "../blaiseApiClient.js";
+import type { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.types.js";
+import type { JSONValue } from "../types/common.types.js";
 
 export async function getCase(
   this: BlaiseApiClient,

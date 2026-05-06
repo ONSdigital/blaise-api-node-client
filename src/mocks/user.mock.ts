@@ -1,4 +1,4 @@
-import { NewUser } from "../types/user.js";
+import type { NewUser } from "../types/user.types.js";
 
 export const mockNewUser: NewUser = {
   password: "somethingVerySecure",

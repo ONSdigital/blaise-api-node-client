@@ -1,9 +1,9 @@
-import {
+import type {
   InstallQuestionnaire,
   InstallQuestionnaireResponse,
   Questionnaire,
   QuestionnaireSettings,
-} from "../types/questionnaire.js";
+} from "../types/questionnaire.types.js";
 
 export const mockQuestionnaires: readonly Questionnaire[] = [
   {

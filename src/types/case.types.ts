@@ -1,7 +1,7 @@
+import type { JSONValue } from "./common.types.js";
 import type { CaseOutcome } from "../enums/caseOutcome.js";
 import type { EditedStatus } from "../enums/editedStatus.js";
 import type { Organisation } from "../enums/organisation.js";
-import type { JSONValue } from "./common.js";
 
 export interface CaseResponse {
   readonly caseId: string;

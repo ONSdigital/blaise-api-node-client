@@ -1,7 +1,8 @@
-import { describe, it, expect, beforeAll, afterAll } from "vitest";
-import MockAdapter from "axios-mock-adapter";
 import axios from "axios";
-import BlaiseApiClient from "../blaiseApiClient.js";
+import MockAdapter from "axios-mock-adapter";
+import { afterAll, beforeAll, describe, expect, it } from "vitest";
+
+import { BlaiseApiClient } from "../blaiseApiClient.js";
 import { mockDiagnostics } from "../mocks/diagnostic.mock.js";
 
 const mock = new MockAdapter(axios, { onNoMatch: "throwException" });

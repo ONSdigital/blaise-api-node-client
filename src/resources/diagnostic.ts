@@ -1,5 +1,5 @@
-import BlaiseApiClient from "../blaiseApiClient.js";
-import { Diagnostic } from "../types/diagnostic.js";
+import type { BlaiseApiClient } from "../blaiseApiClient.js";
+import type { Diagnostic } from "../types/diagnostic.types.js";
 
 export async function getDiagnostics(this: BlaiseApiClient): Promise<Diagnostic[]> {
   return this.get<Diagnostic[]>("api/v2/health/diagnosis");

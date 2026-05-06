@@ -1,18 +1,20 @@
-import axios, { AxiosInstance } from "axios";
-import { BlaiseIapProvider } from "blaise-iap-node-provider";
-import { BlaiseApiConfig } from "./types/blaiseApiConfig.js";
-import { BlaiseApi } from "./types/blaiseApi.js";
-import * as users from "./resources/user.js";
-import * as questionnaires from "./resources/questionnaire.js";
-import * as cases from "./resources/case.js";
-import * as diagnostics from "./resources/diagnostic.js";
-import * as daybatch from "./resources/daybatch.js";
-import * as reports from "./resources/questionnaireReport.js";
+import axios, { type AxiosInstance } from "axios";
+import { IapProvider } from "blaise-iap-node-provider";
 
-class BlaiseApiClient implements BlaiseApi {
+import * as cases from "./resources/case.js";
+import * as daybatch from "./resources/daybatch.js";
+import * as diagnostics from "./resources/diagnostic.js";
+import * as questionnaires from "./resources/questionnaire.js";
+import * as reports from "./resources/questionnaireReport.js";
+import * as users from "./resources/user.js";
+
+import type { BlaiseApi } from "./types/blaiseApi.types.js";
+import type { BlaiseApiConfig } from "./types/blaiseApiConfig.types.js";
+
+export class BlaiseApiClient implements BlaiseApi {
   blaiseApiUrl: string;
 
-  blaiseIapProvider?: BlaiseIapProvider;
+  iapProvider?: IapProvider;
 
   httpClient: AxiosInstance;
 
@@ -20,7 +22,7 @@ class BlaiseApiClient implements BlaiseApi {
     this.blaiseApiUrl = blaiseApiUrl;
 
     if (config?.blaiseApiClientId) {
-      this.blaiseIapProvider = new BlaiseIapProvider(config.blaiseApiClientId);
+      this.iapProvider = new IapProvider(config.blaiseApiClientId);
     }
 
     this.httpClient = axios.create({
@@ -29,8 +31,8 @@ class BlaiseApiClient implements BlaiseApi {
     });
 
     this.httpClient.interceptors.request.use(async (requestConfig) => {
-      if (this.blaiseIapProvider) {
-        const authHeaders = await this.blaiseIapProvider.getAuthHeader();
+      if (this.iapProvider) {
+        const authHeaders = await this.iapProvider.getAuthHeader();
 
         Object.assign(requestConfig.headers, authHeaders);
       }
@@ -106,5 +108,3 @@ class BlaiseApiClient implements BlaiseApi {
     return response.data;
   }
 }
-
-export default BlaiseApiClient;

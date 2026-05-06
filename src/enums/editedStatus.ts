@@ -8,5 +8,3 @@ const EditedStatus = {
 export type EditedStatus = (typeof EditedStatus)[keyof typeof EditedStatus];
 
 export { EditedStatus };
-
-export default EditedStatus;

@@ -42,5 +42,3 @@ const CaseOutcome = {
 export type CaseOutcome = (typeof CaseOutcome)[keyof typeof CaseOutcome];
 
 export { CaseOutcome };
-
-export default CaseOutcome;

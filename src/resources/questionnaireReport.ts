@@ -1,5 +1,5 @@
-import BlaiseApiClient from "../blaiseApiClient.js";
-import { QuestionnaireReport } from "../types/questionnaireReport.js";
+import type { BlaiseApiClient } from "../blaiseApiClient.js";
+import type { QuestionnaireReport } from "../types/questionnaireReport.types.js";
 
 export async function getQuestionnaireReportData(
   this: BlaiseApiClient,

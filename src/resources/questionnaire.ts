@@ -1,10 +1,10 @@
-import BlaiseApiClient from "../blaiseApiClient.js";
-import {
+import type { BlaiseApiClient } from "../blaiseApiClient.js";
+import type {
   InstallQuestionnaire,
   InstallQuestionnaireResponse,
   Questionnaire,
   QuestionnaireSettings,
-} from "../types/questionnaire.js";
+} from "../types/questionnaire.types.js";
 
 export async function getAllQuestionnairesWithCatiData(
   this: BlaiseApiClient,

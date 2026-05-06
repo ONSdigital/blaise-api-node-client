@@ -1,24 +1,24 @@
-export { default as BlaiseApiClient } from "./blaiseApiClient.js";
+export { BlaiseApiClient } from "./blaiseApiClient.js";
 
-export * from "./types/blaiseApi.js";
+export * from "./types/blaiseApi.types.js";
 
-export * from "./types/blaiseApiConfig.js";
+export * from "./types/blaiseApiConfig.types.js";
 
-export * from "./types/case.js";
+export * from "./types/case.types.js";
 
-export * from "./types/common.js";
+export * from "./types/common.types.js";
 
-export * from "./types/daybatch.js";
+export * from "./types/daybatch.types.js";
 
-export * from "./types/diagnostic.js";
+export * from "./types/diagnostic.types.js";
 
-export * from "./types/questionnaire.js";
+export * from "./types/questionnaire.types.js";
 
-export * from "./types/questionnaireReport.js";
+export * from "./types/questionnaireReport.types.js";
 
-export * from "./types/survey.js";
+export * from "./types/survey.types.js";
 
-export * from "./types/user.js";
+export * from "./types/user.types.js";
 
 export * from "./enums/caseOutcome.js";
 

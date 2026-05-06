@@ -7,5 +7,3 @@ const Organisation = {
 export type Organisation = (typeof Organisation)[keyof typeof Organisation];
 
 export { Organisation };
-
-export default Organisation;

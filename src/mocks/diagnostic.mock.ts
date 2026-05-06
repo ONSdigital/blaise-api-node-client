@@ -1,4 +1,4 @@
-import { Diagnostic } from "../types/diagnostic.js";
+import type { Diagnostic } from "../types/diagnostic.types.js";
 
 export const mockDiagnostics: readonly Diagnostic[] = [
   { healthCheckType: "Connection model", status: "OK" },

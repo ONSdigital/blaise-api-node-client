@@ -1,5 +1,5 @@
-import BlaiseApiClient from "../blaiseApiClient.js";
-import { NewUser, User, UserRole, PasswordRequest, RoleRequest } from "../types/user.js";
+import type { BlaiseApiClient } from "../blaiseApiClient.js";
+import type { NewUser, PasswordRequest, RoleRequest, User, UserRole } from "../types/user.types.js";
 
 export async function getUser(this: BlaiseApiClient, username: string): Promise<User> {
   return this.get<User>(`api/v2/users/${username}`);

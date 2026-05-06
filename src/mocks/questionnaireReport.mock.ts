@@ -1,5 +1,6 @@
-import { QuestionnaireReport } from "../types/questionnaireReport.js";
-import CaseOutcome from "../enums/caseOutcome.js";
+import { CaseOutcome } from "../enums/caseOutcome.js";
+
+import type { QuestionnaireReport } from "../types/questionnaireReport.types.js";
 
 export const mockQuestionnaireReport: QuestionnaireReport = {
   questionnaireName: "FRS2211A",
