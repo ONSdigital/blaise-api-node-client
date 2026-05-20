@@ -1,31 +1,34 @@
-import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { afterEach, beforeEach, describe, expect, it } from "vitest";
 
 import { BlaiseApiClient } from "../blaiseApiClient.js";
 import {
   mockAddDaybatchSettings,
-  mockDaybatchCases,
+  mockDaybatch,
   mockSurveyDayDates,
   mockSurveyDays,
 } from "../mocks/daybatch.mock.js";
 
-const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
+class TestBlaiseApiClient extends BlaiseApiClient {
+  readonly mock = new MockAdapter(this.httpClient, { onNoMatch: "throwException" });
+}
+
 const blaiseApiUrl = "testUri";
 
-const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
+const blaiseApiClient = new TestBlaiseApiClient(`http://${blaiseApiUrl}`);
+const { mock } = blaiseApiClient;
 
 describe("blaiseApiClient daybatch functions", () => {
   const basePath = "api/v2/cati/serverparks";
 
   describe("get daybatch", () => {
-    const serverpark = "test";
+    const serverPark = "test";
     const questionnaireName = "dst2108t";
 
     beforeEach(() => {
       mock
-        .onGet(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/daybatch`)
-        .reply(200, mockDaybatchCases);
+        .onGet(`${basePath}/${serverPark}/questionnaires/${questionnaireName}/daybatch`)
+        .reply(200, mockDaybatch);
     });
 
     afterEach(() => {
@@ -33,20 +36,20 @@ describe("blaiseApiClient daybatch functions", () => {
     });
 
     it("returns a list of case IDs in the current daybatch", async () => {
-      const daybatch = await blaiseApiClient.getDaybatch(serverpark, questionnaireName);
+      const daybatch = await blaiseApiClient.getDaybatch(serverPark, questionnaireName);
 
-      expect(daybatch).toEqual(mockDaybatchCases);
+      expect(daybatch).toEqual(mockDaybatch);
     });
   });
 
   describe("add daybatch", () => {
-    const serverpark = "test";
+    const serverPark = "test";
     const questionnaireName = "dst2108t";
 
     beforeEach(() => {
       mock
-        .onPost(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/daybatch`)
-        .reply(201, mockDaybatchCases);
+        .onPost(`${basePath}/${serverPark}/questionnaires/${questionnaireName}/daybatch`)
+        .reply(201, mockDaybatch);
     });
 
     afterEach(() => {
@@ -55,22 +58,22 @@ describe("blaiseApiClient daybatch functions", () => {
 
     it("installs a questionnaire and returns the questionnaire file", async () => {
       const daybatch = await blaiseApiClient.addDaybatch(
-        serverpark,
+        serverPark,
         questionnaireName,
         mockAddDaybatchSettings,
       );
 
-      expect(daybatch).toEqual(mockDaybatchCases);
+      expect(daybatch).toEqual(mockDaybatch);
     });
   });
 
   describe("get survey days", () => {
-    const serverpark = "test";
+    const serverPark = "test";
     const questionnaireName = "dst2108t";
 
     beforeEach(() => {
       mock
-        .onGet(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/surveydays`)
+        .onGet(`${basePath}/${serverPark}/questionnaires/${questionnaireName}/surveydays`)
         .reply(200, mockSurveyDays);
     });
 
@@ -79,19 +82,19 @@ describe("blaiseApiClient daybatch functions", () => {
     });
 
     it("returns a list of surveydays", async () => {
-      const surveyDays = await blaiseApiClient.getSurveyDays(serverpark, questionnaireName);
+      const surveyDays = await blaiseApiClient.getSurveyDays(serverPark, questionnaireName);
 
       expect(surveyDays).toEqual(mockSurveyDays);
     });
   });
 
   describe("add survey days", () => {
-    const serverpark = "test";
+    const serverPark = "test";
     const questionnaireName = "dst2108t";
 
     beforeEach(() => {
       mock
-        .onPost(`${basePath}/${serverpark}/questionnaires/${questionnaireName}/surveydays`)
+        .onPost(`${basePath}/${serverPark}/questionnaires/${questionnaireName}/surveydays`)
         .reply(201, mockSurveyDays);
     });
 
@@ -101,7 +104,7 @@ describe("blaiseApiClient daybatch functions", () => {
 
     it("adds surveydays by strings", async () => {
       const surveyDays = await blaiseApiClient.addSurveyDays(
-        serverpark,
+        serverPark,
         questionnaireName,
         mockSurveyDays,
       );
@@ -111,7 +114,7 @@ describe("blaiseApiClient daybatch functions", () => {
 
     it("adds surveydays by dates", async () => {
       const surveyDays = await blaiseApiClient.addSurveyDays(
-        serverpark,
+        serverPark,
         questionnaireName,
         mockSurveyDayDates,
       );

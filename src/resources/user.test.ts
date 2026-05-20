@@ -1,12 +1,15 @@
-import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { afterEach, describe, expect, it } from "vitest";
 
 import { BlaiseApiClient } from "../blaiseApiClient.js";
-import { mockNewUser, mockNewUserResponse } from "../mocks/user.mock.js";
+import { mockNewUser } from "../mocks/user.mock.js";
 
-const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
-const blaiseApiClient = new BlaiseApiClient("http://testUri");
+class TestBlaiseApiClient extends BlaiseApiClient {
+  readonly mock = new MockAdapter(this.httpClient, { onNoMatch: "throwException" });
+}
+
+const blaiseApiClient = new TestBlaiseApiClient("http://testUri");
+const { mock } = blaiseApiClient;
 
 describe("blaiseApiClient user functions", () => {
   afterEach(() => {
@@ -28,6 +31,21 @@ describe("blaiseApiClient user functions", () => {
 
       expect(result.name).toEqual(username);
       expect(result.role).toEqual("DST");
+    });
+
+    it("encodes reserved characters in usernames", async () => {
+      const reservedCharacterUsername = "test/user?preview=true";
+
+      mock.onGet(`api/v2/users/${encodeURIComponent(reservedCharacterUsername)}`).reply(200, {
+        name: reservedCharacterUsername,
+        role: "DST",
+        serverParks: ["gusty"],
+        defaultServerPark: "gusty",
+      });
+
+      const result = await blaiseApiClient.getUser(reservedCharacterUsername);
+
+      expect(result.name).toEqual(reservedCharacterUsername);
     });
   });
 
@@ -64,7 +82,7 @@ describe("blaiseApiClient user functions", () => {
 
   describe("create user", () => {
     it("creates a user and returns a response", async () => {
-      mock.onPost("api/v2/users").reply(201, mockNewUserResponse);
+      mock.onPost("api/v2/users").reply(201, mockNewUser);
       const createUser = await blaiseApiClient.createUser(mockNewUser);
 
       expect(createUser.name).toEqual("Beyonce");

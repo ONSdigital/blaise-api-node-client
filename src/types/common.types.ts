@@ -3,5 +3,5 @@ export type JSONValue =
   | number
   | boolean
   | null
-  | JSONValue[]
-  | { [key: string]: JSONValue };
+  | readonly JSONValue[]
+  | { readonly [key: string]: JSONValue };

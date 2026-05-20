@@ -1,9 +1,9 @@
 export interface DaybatchResponse {
-  dayBatchDate: string;
-  caseIds: string[];
+  readonly dayBatchDate: string;
+  readonly caseIds: readonly string[];
 }
 
 export interface DaybatchSettings {
-  dayBatchDate: string;
-  checkForTreatedCases: boolean;
+  readonly dayBatchDate: string;
+  readonly checkForTreatedCases: boolean;
 }

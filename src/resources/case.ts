@@ -1,96 +1,95 @@
+import {
+  buildRepeatedQueryString,
+  encodePathSegment,
+  getServerParkQuestionnairePath,
+} from "../requestPath.js";
+
 import type { BlaiseApiClient } from "../blaiseApiClient.js";
 import type { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.types.js";
 import type { JSONValue } from "../types/common.types.js";
 
+const getCasesPath = (serverPark: string, questionnaireName: string): string =>
+  `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/cases`;
+
+const getCasePath = (serverPark: string, questionnaireName: string, caseId: string): string =>
+  `${getCasesPath(serverPark, questionnaireName)}/${encodePathSegment(caseId)}`;
+
+const getMultikeyQueryString = (multiKeyValueMap: ReadonlyMap<string, string>): string => {
+  const queryParts = [
+    buildRepeatedQueryString("keyNames", multiKeyValueMap.keys()),
+    buildRepeatedQueryString("keyValues", multiKeyValueMap.values()),
+  ];
+
+  return queryParts.filter((queryPart) => queryPart.length > 0).join("&");
+};
+
 export async function getCase(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
   caseId: string,
 ): Promise<CaseResponse> {
-  return this.get(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`,
-  );
-}
-
-export function getMultikeyQueryString(multiKeyValueMap: Map<string, string>) {
-  const keyNamesQueryString = `keyNames=${Array.from(multiKeyValueMap.keys()).join("&keyNames=")}`;
-  const keyValuesQueryString = `keyValues=${Array.from(multiKeyValueMap.values()).join("&keyValues=")}`;
-  const keyValueQueryString = `${keyNamesQueryString}&${keyValuesQueryString}`;
-
-  return keyValueQueryString;
+  return this.get(getCasePath(serverPark, questionnaireName, caseId));
 }
 
 export async function getCaseMultikey(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-  multiKeyValueMap: Map<string, string>,
+  multiKeyValueMap: ReadonlyMap<string, string>,
 ): Promise<CaseResponse> {
   const queryString = getMultikeyQueryString(multiKeyValueMap);
 
-  return this.get(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/multikey?${queryString}`,
-  );
+  return this.get(`${getCasesPath(serverPark, questionnaireName)}/multikey?${queryString}`);
 }
 
 export async function addCase(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
   caseId: string,
-  caseFields: Record<string, JSONValue>,
+  caseFields: Readonly<Record<string, JSONValue>>,
 ): Promise<CaseResponse> {
-  return this.post(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`,
-    caseFields,
-  );
+  return this.post(getCasePath(serverPark, questionnaireName, caseId), caseFields);
 }
 
 export async function updateCase(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
   caseId: string,
-  caseFields: Record<string, JSONValue>,
+  caseFields: Readonly<Record<string, JSONValue>>,
 ): Promise<null> {
-  return this.patch<null>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/${caseId}`,
-    caseFields,
-  );
+  return this.patch<null>(getCasePath(serverPark, questionnaireName, caseId), caseFields);
 }
 
 export async function addCaseMultikey(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-  multiKeyValueMap: Map<string, string>,
-  caseFields: Record<string, JSONValue>,
+  multiKeyValueMap: ReadonlyMap<string, string>,
+  caseFields: Readonly<Record<string, JSONValue>>,
 ): Promise<CaseResponse> {
   const queryString = getMultikeyQueryString(multiKeyValueMap);
 
   return this.post(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/multikey?${queryString}`,
+    `${getCasesPath(serverPark, questionnaireName)}/multikey?${queryString}`,
     caseFields,
   );
 }
 
 export async function getCaseStatus(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-): Promise<CaseStatus[]> {
-  return this.get(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/status`,
-  );
+): Promise<readonly CaseStatus[]> {
+  return this.get(`${getCasesPath(serverPark, questionnaireName)}/status`);
 }
 
 export async function getCaseEditInformation(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-): Promise<CaseEditInformation[]> {
-  return this.get(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/edit`,
-  );
+): Promise<readonly CaseEditInformation[]> {
+  return this.get(`${getCasesPath(serverPark, questionnaireName)}/edit`);
 }

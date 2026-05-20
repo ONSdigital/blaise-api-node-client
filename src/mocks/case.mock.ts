@@ -4,7 +4,7 @@ import { Organisation } from "../enums/organisation.js";
 
 import type { CaseEditInformation, CaseResponse, CaseStatus } from "../types/case.types.js";
 
-export const mockCaseStatuses: CaseStatus[] = [
+export const mockCaseStatuses = [
   {
     primaryKey: "1",
     outcome: CaseOutcome.Completed,
@@ -17,9 +17,9 @@ export const mockCaseStatuses: CaseStatus[] = [
     primaryKey: "3",
     outcome: CaseOutcome.None,
   },
-];
+] as const satisfies readonly CaseStatus[];
 
-export const mockCaseResponse: CaseResponse = {
+export const mockCaseResponse = {
   caseId: "1",
   fieldData: {
     "qiD.Serial_Number": "1",
@@ -38,9 +38,9 @@ export const mockCaseResponse: CaseResponse = {
     "dmDteOfBth[2]": "2005-04-12",
     dmhSize: "2",
   },
-};
+} as const satisfies CaseResponse;
 
-export const mockCaseEditInformationRecords: CaseEditInformation[] = [
+export const mockCaseEditInformationRecords = [
   {
     primaryKey: "100101",
     outcome: CaseOutcome.Completed,
@@ -71,4 +71,4 @@ export const mockCaseEditInformationRecords: CaseEditInformation[] = [
     editUrl: "",
     readOnlyUrl: "",
   },
-];
+] as const satisfies readonly CaseEditInformation[];

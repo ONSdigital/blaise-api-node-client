@@ -5,7 +5,7 @@ import type { Organisation } from "../enums/organisation.js";
 
 export interface CaseResponse {
   readonly caseId: string;
-  readonly fieldData: Record<string, JSONValue>;
+  readonly fieldData: Readonly<Record<string, JSONValue>>;
 }
 
 export interface CaseStatus {

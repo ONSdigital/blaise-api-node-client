@@ -20,11 +20,16 @@ The client is designed for dependency injection. It exposes strongly-typed metho
 import { BlaiseApiClient } from "blaise-api-node-client";
 
 // Initialise the client with the Base URL of your Blaise REST API
-const BLAISE_API_URL = process.env.BLAISE_API_URL || "";
-const TIMEOUT_MS = 1000;
+const BLAISE_API_URL = process.env.BLAISE_API_URL;
+
+if (!BLAISE_API_URL) {
+  throw new Error("BLAISE_API_URL is required");
+}
+
+const TIMEOUT_MS = 10_000;
 
 // The client accepts a configuration object for extended settings
-const blaiseApiClient = new BlaiseApiClient(`http://${BLAISE_API_URL}`, {
+const blaiseApiClient = new BlaiseApiClient(BLAISE_API_URL, {
   timeoutInMs: TIMEOUT_MS,
 });
 
@@ -45,7 +50,7 @@ export async function fetchQuestionnaires() {
 To support local testing and ensure your mock data stays in sync with production contracts, the library exports validated mock objects. These are defined using readonly modifiers to prevent state pollution between tests.
 
 ```typescript
-import { mockQuestionnaires } from "blaise-api-node-client";
+import { mockQuestionnaires } from "blaise-api-node-client/mocks";
 
 console.log(mockQuestionnaires[0].name);
 ```

@@ -2,7 +2,7 @@ import { CaseOutcome } from "../enums/caseOutcome.js";
 
 import type { QuestionnaireReport } from "../types/questionnaireReport.types.js";
 
-export const mockQuestionnaireReport: QuestionnaireReport = {
+export const mockQuestionnaireReport = {
   questionnaireName: "FRS2211A",
   questionnaireId: "00000000-0000-0000-0000-000000000000",
   reportingData: [
@@ -15,4 +15,4 @@ export const mockQuestionnaireReport: QuestionnaireReport = {
       "qhAdmin.HOut": CaseOutcome.Completed,
     },
   ],
-};
+} as const satisfies QuestionnaireReport;

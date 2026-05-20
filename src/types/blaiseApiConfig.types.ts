@@ -1,4 +1,4 @@
 export interface BlaiseApiConfig {
-  timeoutInMs?: number;
-  blaiseApiClientId?: string;
+  readonly timeoutInMs?: number;
+  readonly blaiseApiClientId?: string;
 }

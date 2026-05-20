@@ -1,3 +1,11 @@
+import {
+  encodePathSegment,
+  getCatiServerParkQuestionnairePath,
+  getCatiServerParkQuestionnairesPath,
+  getServerParkQuestionnairePath,
+  getServerParkQuestionnairesPath,
+} from "../requestPath.js";
+
 import type { BlaiseApiClient } from "../blaiseApiClient.js";
 import type {
   InstallQuestionnaire,
@@ -8,132 +16,131 @@ import type {
 
 export async function getAllQuestionnairesWithCatiData(
   this: BlaiseApiClient,
-): Promise<Questionnaire[]> {
-  return this.get<Questionnaire[]>("api/v2/cati/questionnaires");
+): Promise<readonly Questionnaire[]> {
+  return this.get<readonly Questionnaire[]>("api/v2/cati/questionnaires");
 }
 
 export async function getQuestionnairesWithCatiData(
   this: BlaiseApiClient,
-  serverpark: string,
-): Promise<Questionnaire[]> {
-  return this.get<Questionnaire[]>(`api/v2/cati/serverparks/${serverpark}/questionnaires`);
+  serverPark: string,
+): Promise<readonly Questionnaire[]> {
+  return this.get<readonly Questionnaire[]>(getCatiServerParkQuestionnairesPath(serverPark));
 }
 
 export async function getQuestionnaireWithCatiData(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<Questionnaire> {
-  return this.get<Questionnaire>(
-    `api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}`,
-  );
+  return this.get<Questionnaire>(getCatiServerParkQuestionnairePath(serverPark, questionnaireName));
 }
 
 export async function getQuestionnaires(
   this: BlaiseApiClient,
-  serverpark: string,
-): Promise<Questionnaire[]> {
-  return this.get<Questionnaire[]>(`api/v2/serverparks/${serverpark}/questionnaires`);
+  serverPark: string,
+): Promise<readonly Questionnaire[]> {
+  return this.get<readonly Questionnaire[]>(getServerParkQuestionnairesPath(serverPark));
 }
 
 export async function questionnaireExists(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<boolean> {
   return this.get<boolean>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/exists`,
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/exists`,
   );
 }
 
 export async function doesQuestionnaireHaveMode(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
   mode: string,
 ): Promise<boolean> {
   return this.get<boolean>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/modes/${mode}`,
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/modes/${encodePathSegment(mode)}`,
   );
 }
 
 export async function getQuestionnaire(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<Questionnaire> {
-  return this.get<Questionnaire>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}`,
-  );
+  return this.get<Questionnaire>(getServerParkQuestionnairePath(serverPark, questionnaireName));
 }
 
 export async function installQuestionnaire(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaire: InstallQuestionnaire,
 ): Promise<InstallQuestionnaireResponse> {
   return this.post<InstallQuestionnaireResponse>(
-    `api/v2/serverparks/${serverpark}/questionnaires`,
+    getServerParkQuestionnairesPath(serverPark),
     questionnaire,
   );
 }
 
 export async function deleteQuestionnaire(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<null> {
+  // The Blaise API requires the questionnaire name as both a path segment and a query parameter.
+  const queryString = new URLSearchParams({ name: questionnaireName }).toString();
+
   return this.delete<null>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}?name=${questionnaireName}`,
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}?${queryString}`,
   );
 }
 
 export async function getQuestionnaireCaseIds(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-): Promise<string[]> {
-  return this.get<string[]>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/cases/ids`,
+): Promise<readonly string[]> {
+  return this.get<readonly string[]>(
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/cases/ids`,
   );
 }
 
 export async function getQuestionnaireModes(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-): Promise<string[]> {
-  return this.get<string[]>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/modes`,
+): Promise<readonly string[]> {
+  return this.get<readonly string[]>(
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/modes`,
   );
 }
 
 export async function getQuestionnaireSettings(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-): Promise<QuestionnaireSettings[]> {
-  return this.get<QuestionnaireSettings[]>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/settings`,
+): Promise<readonly QuestionnaireSettings[]> {
+  return this.get<readonly QuestionnaireSettings[]>(
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/settings`,
   );
 }
 
 export async function activateQuestionnaire(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<null> {
   return this.patch<null>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/activate`,
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/activate`,
   );
 }
 
 export async function deactivateQuestionnaire(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<null> {
   return this.patch<null>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/deactivate`,
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/deactivate`,
   );
 }

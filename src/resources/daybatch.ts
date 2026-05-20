@@ -1,51 +1,49 @@
+import { getCatiServerParkQuestionnairePath } from "../requestPath.js";
+
 import type { BlaiseApiClient } from "../blaiseApiClient.js";
 import type { DaybatchResponse, DaybatchSettings } from "../types/daybatch.types.js";
 
 const formatDate = (date: string | Date): string =>
   date instanceof Date ? date.toISOString() : date;
 
+const getDaybatchPath = (serverPark: string, questionnaireName: string): string =>
+  `${getCatiServerParkQuestionnairePath(serverPark, questionnaireName)}/daybatch`;
+
+const getSurveyDaysPath = (serverPark: string, questionnaireName: string): string =>
+  `${getCatiServerParkQuestionnairePath(serverPark, questionnaireName)}/surveydays`;
+
 export async function getDaybatch(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
 ): Promise<DaybatchResponse> {
-  return this.get(
-    `api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/daybatch`,
-  );
+  return this.get(getDaybatchPath(serverPark, questionnaireName));
 }
 
 export async function addDaybatch(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
   daybatchSettings: DaybatchSettings,
 ): Promise<DaybatchResponse> {
-  return this.post(
-    `api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/daybatch`,
-    daybatchSettings,
-  );
+  return this.post(getDaybatchPath(serverPark, questionnaireName), daybatchSettings);
 }
 
 export async function getSurveyDays(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-): Promise<string[]> {
-  return this.get(
-    `api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/surveydays`,
-  );
+): Promise<readonly string[]> {
+  return this.get(getSurveyDaysPath(serverPark, questionnaireName));
 }
 
 export async function addSurveyDays(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
   surveyDays: ReadonlyArray<string | Date>,
-): Promise<string[]> {
+): Promise<readonly string[]> {
   const formattedSurveyDays = surveyDays.map(formatDate);
 
-  return this.post(
-    `api/v2/cati/serverparks/${serverpark}/questionnaires/${questionnaireName}/surveydays`,
-    formattedSurveyDays,
-  );
+  return this.post(getSurveyDaysPath(serverPark, questionnaireName), formattedSurveyDays);
 }

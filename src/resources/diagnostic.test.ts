@@ -1,14 +1,17 @@
-import axios from "axios";
 import MockAdapter from "axios-mock-adapter";
 import { afterAll, beforeAll, describe, expect, it } from "vitest";
 
 import { BlaiseApiClient } from "../blaiseApiClient.js";
 import { mockDiagnostics } from "../mocks/diagnostic.mock.js";
 
-const mock = new MockAdapter(axios, { onNoMatch: "throwException" });
+class TestBlaiseApiClient extends BlaiseApiClient {
+  readonly mock = new MockAdapter(this.httpClient, { onNoMatch: "throwException" });
+}
+
 const blaiseApiUrl = "testUri";
 
-const blaiseApiClient = new BlaiseApiClient(`http://${blaiseApiUrl}`);
+const blaiseApiClient = new TestBlaiseApiClient(`http://${blaiseApiUrl}`);
+const { mock } = blaiseApiClient;
 
 describe("BlaiseRestapiClient diagnostic functions", () => {
   describe("get health Check from API", () => {

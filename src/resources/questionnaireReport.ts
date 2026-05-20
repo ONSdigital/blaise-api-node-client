@@ -1,15 +1,17 @@
+import { buildRepeatedQueryString, getServerParkQuestionnairePath } from "../requestPath.js";
+
 import type { BlaiseApiClient } from "../blaiseApiClient.js";
 import type { QuestionnaireReport } from "../types/questionnaireReport.types.js";
 
 export async function getQuestionnaireReportData(
   this: BlaiseApiClient,
-  serverpark: string,
+  serverPark: string,
   questionnaireName: string,
-  fieldIds: string[],
+  fieldIds: readonly string[],
 ): Promise<QuestionnaireReport> {
-  const queryParams = fieldIds.map((fieldId) => `fieldIds=${fieldId}`).join("&");
+  const queryParams = buildRepeatedQueryString("fieldIds", fieldIds);
 
   return this.get<QuestionnaireReport>(
-    `api/v2/serverparks/${serverpark}/questionnaires/${questionnaireName}/report?${queryParams}`,
+    `${getServerParkQuestionnairePath(serverPark, questionnaireName)}/report?${queryParams}`,
   );
 }

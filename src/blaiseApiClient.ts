@@ -1,4 +1,4 @@
-import axios, { type AxiosInstance } from "axios";
+import axios, { AxiosHeaders, type AxiosInstance } from "axios";
 import { IapProvider } from "blaise-iap-node-provider";
 
 import * as cases from "./resources/case.js";
@@ -11,30 +11,60 @@ import * as users from "./resources/user.js";
 import type { BlaiseApi } from "./types/blaiseApi.types.js";
 import type { BlaiseApiConfig } from "./types/blaiseApiConfig.types.js";
 
+const DEFAULT_TIMEOUT_IN_MS = 30_000;
+
+const getApiUrl = (rawApiUrl: string): string => {
+  const apiUrl = rawApiUrl.trim();
+
+  if (apiUrl.length === 0) {
+    throw new TypeError("blaiseApiUrl must be a non-empty absolute http(s) URL");
+  }
+
+  const parsedApiUrl = new URL(apiUrl);
+
+  if (parsedApiUrl.protocol !== "http:" && parsedApiUrl.protocol !== "https:") {
+    throw new TypeError("blaiseApiUrl must use the http or https protocol");
+  }
+
+  return apiUrl;
+};
+
+const getTimeoutInMs = (timeoutInMs?: number): number => {
+  if (timeoutInMs === undefined) {
+    return DEFAULT_TIMEOUT_IN_MS;
+  }
+
+  if (!Number.isFinite(timeoutInMs) || timeoutInMs < 0) {
+    throw new TypeError("timeoutInMs must be a non-negative finite number");
+  }
+
+  return timeoutInMs;
+};
+
 export class BlaiseApiClient implements BlaiseApi {
-  blaiseApiUrl: string;
+  protected readonly blaiseApiUrl: string;
 
-  iapProvider?: IapProvider;
+  protected readonly iapProvider?: IapProvider;
 
-  httpClient: AxiosInstance;
+  protected readonly httpClient: AxiosInstance;
 
   constructor(blaiseApiUrl: string, config?: BlaiseApiConfig) {
-    this.blaiseApiUrl = blaiseApiUrl;
+    this.blaiseApiUrl = getApiUrl(blaiseApiUrl);
 
     if (config?.blaiseApiClientId) {
       this.iapProvider = new IapProvider(config.blaiseApiClientId);
     }
 
     this.httpClient = axios.create({
-      baseURL: blaiseApiUrl,
-      timeout: config?.timeoutInMs,
+      baseURL: this.blaiseApiUrl,
+      timeout: getTimeoutInMs(config?.timeoutInMs),
     });
 
     this.httpClient.interceptors.request.use(async (requestConfig) => {
       if (this.iapProvider) {
         const authHeaders = await this.iapProvider.getAuthHeader();
 
-        Object.assign(requestConfig.headers, authHeaders);
+        requestConfig.headers = AxiosHeaders.from({ ...requestConfig.headers, ...authHeaders });
       }
 
       return requestConfig;
@@ -76,7 +106,6 @@ export class BlaiseApiClient implements BlaiseApi {
   addCase = cases.addCase;
   updateCase = cases.updateCase;
   addCaseMultikey = cases.addCaseMultikey;
-  getMultikeyQueryString = cases.getMultikeyQueryString;
   getCaseStatus = cases.getCaseStatus;
   getCaseEditInformation = cases.getCaseEditInformation;
 

@@ -1,12 +1,16 @@
+import { encodePathSegment } from "../requestPath.js";
+
 import type { BlaiseApiClient } from "../blaiseApiClient.js";
 import type { NewUser, PasswordRequest, RoleRequest, User, UserRole } from "../types/user.types.js";
 
+const getUserPath = (username: string): string => `api/v2/users/${encodePathSegment(username)}`;
+
 export async function getUser(this: BlaiseApiClient, username: string): Promise<User> {
-  return this.get<User>(`api/v2/users/${username}`);
+  return this.get<User>(getUserPath(username));
 }
 
-export async function getUsers(this: BlaiseApiClient): Promise<User[]> {
-  return this.get<User[]>("api/v2/users");
+export async function getUsers(this: BlaiseApiClient): Promise<readonly User[]> {
+  return this.get<readonly User[]>("api/v2/users");
 }
 
 export async function validatePassword(
@@ -16,7 +20,7 @@ export async function validatePassword(
 ): Promise<boolean> {
   const validationRequest: PasswordRequest = { password };
 
-  return this.post<boolean>(`api/v2/users/${username}/validate`, validationRequest);
+  return this.post<boolean>(`${getUserPath(username)}/validate`, validationRequest);
 }
 
 export async function createUser(this: BlaiseApiClient, user: NewUser): Promise<NewUser> {
@@ -24,11 +28,11 @@ export async function createUser(this: BlaiseApiClient, user: NewUser): Promise<
 }
 
 export async function deleteUser(this: BlaiseApiClient, username: string): Promise<null> {
-  return this.delete<null>(`api/v2/users/${username}`);
+  return this.delete<null>(getUserPath(username));
 }
 
-export async function getUserRoles(this: BlaiseApiClient): Promise<UserRole[]> {
-  return this.get<UserRole[]>("api/v2/userroles");
+export async function getUserRoles(this: BlaiseApiClient): Promise<readonly UserRole[]> {
+  return this.get<readonly UserRole[]>("api/v2/userroles");
 }
 
 export async function changeUserRole(
@@ -38,18 +42,18 @@ export async function changeUserRole(
 ): Promise<null> {
   const roleRequest: RoleRequest = { role };
 
-  return this.patch<null>(`api/v2/users/${username}/role`, roleRequest);
+  return this.patch<null>(`${getUserPath(username)}/role`, roleRequest);
 }
 
 export async function changeUserServerParks(
   this: BlaiseApiClient,
   username: string,
-  serverParks: string[],
+  serverParks: ReadonlyArray<string>,
   defaultServerPark: string,
 ): Promise<null> {
   const serverParksRequest = { serverParks, defaultServerPark };
 
-  return this.patch<null>(`api/v2/users/${username}/serverparks`, serverParksRequest);
+  return this.patch<null>(`${getUserPath(username)}/serverparks`, serverParksRequest);
 }
 
 export async function changePassword(
@@ -59,5 +63,5 @@ export async function changePassword(
 ): Promise<null> {
   const passwordRequest: PasswordRequest = { password };
 
-  return this.patch<null>(`api/v2/users/${username}/password`, passwordRequest);
+  return this.patch<null>(`${getUserPath(username)}/password`, passwordRequest);
 }
