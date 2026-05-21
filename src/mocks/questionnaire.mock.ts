@@ -13,7 +13,6 @@ export const mockQuestionnaires = [
     status: "Active",
     dataRecordCount: 0,
     hasData: false,
-    active: false,
   },
   {
     name: "OPN2007T",
@@ -22,7 +21,6 @@ export const mockQuestionnaires = [
     status: "Active",
     dataRecordCount: 10,
     hasData: true,
-    active: true,
   },
   {
     name: "LMS2101_AA1",
@@ -31,7 +29,6 @@ export const mockQuestionnaires = [
     status: "Active",
     dataRecordCount: 0,
     hasData: false,
-    active: false,
   },
 ] as const satisfies readonly Questionnaire[];
 
@@ -42,7 +39,6 @@ export const mockQuestionnaire = {
   status: "Active",
   dataRecordCount: 0,
   hasData: false,
-  active: false,
   blaiseVersion: "5.9.9.2735",
 } as const satisfies Questionnaire;
 

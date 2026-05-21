@@ -8,10 +8,6 @@ export interface Questionnaire {
   readonly name: string;
   readonly expired?: boolean;
   readonly serverParkName: string;
-  /** @deprecated */
-  readonly activeToday?: boolean;
-  /** @deprecated */
-  readonly surveyDays?: readonly string[];
   readonly link?: string;
   readonly fieldPeriod?: string;
   readonly surveyTla?: string;
@@ -19,8 +15,6 @@ export interface Questionnaire {
   readonly status?: string;
   readonly hasData?: boolean;
   readonly nodes?: readonly QuestionnaireNode[];
-  /** @deprecated */
-  readonly active?: boolean;
   readonly blaiseVersion?: string;
 }
 
