@@ -39,7 +39,7 @@
   },
   "dependencies": {
     "axios": "^1.16.1",
-    "blaise-iap-node-provider": "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#BLAIS5-5177"
+    "blaise-iap-node-provider": "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#v3.0.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
