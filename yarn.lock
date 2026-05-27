@@ -1895,7 +1895,7 @@ __metadata:
     "@vitest/coverage-v8": "npm:^4.1.7"
     axios: "npm:^1.16.1"
     axios-mock-adapter: "npm:^2.1.0"
-    blaise-iap-node-provider: "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#BLAIS5-5177"
+    blaise-iap-node-provider: "git+https://github.com/ONSdigital/blaise-iap-node-provider.git#v3.0.0"
     cspell: "npm:^10.0.0"
     eslint: "npm:^10.4.0"
     eslint-config-prettier: "npm:^10.1.8"
@@ -1914,9 +1914,9 @@ __metadata:
   languageName: unknown
   linkType: soft
 
-"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#BLAIS5-5177":
+"blaise-iap-node-provider@git+https://github.com/ONSdigital/blaise-iap-node-provider.git#v3.0.0":
   version: 1.0.0
-  resolution: "blaise-iap-node-provider@https://github.com/ONSdigital/blaise-iap-node-provider.git#commit=1ebe030e5d8006eb25768a9ee7ee814c6ddac1a5"
+  resolution: "blaise-iap-node-provider@https://github.com/ONSdigital/blaise-iap-node-provider.git#commit=f5ff927c1db5ff539a772ebc0802cc519c52de3d"
   dependencies:
     google-auth-library: "npm:^10.6.2"
   checksum: 10c0/d414e550159dfa7d6740b7efb4112f7789173d53af0f9d50f3bd53a7a047106dafa71ea7111ec3f6b287fa88126fcc7dc3892b95e6d707a94544c0e51c06aa2d
