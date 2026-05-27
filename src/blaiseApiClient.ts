@@ -1,172 +1,139 @@
-import axios, { AxiosInstance, AxiosRequestConfig } from 'axios';
-import BlaiseIapNodeProvider from 'blaise-iap-node-provider';
-import { BlaiseApiConfig } from './interfaces/blaiseApiConfig';
-import { BlaiseApi } from './interfaces/blaiseApi';
-import * as users from './functions/userFunctions';
-import * as questionnaires from './functions/questionnaireFunctions';
-import * as cases from './functions/caseFunctions';
-import * as diagnostics from './functions/diagnosticFunctions';
-import * as daybatch from './functions/daybatchFunctions';
-import * as reports from './functions/questionnaireReportFunctions';
+import axios, { AxiosHeaders, type AxiosInstance } from "axios";
+import { IapProvider } from "blaise-iap-node-provider";
 
-class BlaiseApiClient implements BlaiseApi {
-  blaiseApiUrl: string;
+import * as cases from "./resources/case.js";
+import * as daybatch from "./resources/daybatch.js";
+import * as diagnostics from "./resources/diagnostic.js";
+import * as questionnaires from "./resources/questionnaire.js";
+import * as reports from "./resources/questionnaireReport.js";
+import * as users from "./resources/user.js";
 
-  blaiseIapProvider?: BlaiseIapNodeProvider;
+import type { BlaiseApi } from "./types/blaiseApi.types.js";
+import type { BlaiseApiConfig } from "./types/blaiseApiConfig.types.js";
 
-  httpClient: AxiosInstance;
+const DEFAULT_TIMEOUT_IN_MS = 30_000;
+
+const getApiUrl = (rawApiUrl: string): string => {
+  const apiUrl = rawApiUrl.trim();
+
+  if (apiUrl.length === 0) {
+    throw new TypeError("blaiseApiUrl must be a non-empty absolute http(s) URL");
+  }
+
+  const parsedApiUrl = new URL(apiUrl);
+
+  if (parsedApiUrl.protocol !== "http:" && parsedApiUrl.protocol !== "https:") {
+    throw new TypeError("blaiseApiUrl must use the http or https protocol");
+  }
+
+  return apiUrl;
+};
+
+const getTimeoutInMs = (timeoutInMs?: number): number => {
+  if (timeoutInMs === undefined) {
+    return DEFAULT_TIMEOUT_IN_MS;
+  }
+
+  if (!Number.isFinite(timeoutInMs) || timeoutInMs < 0) {
+    throw new TypeError("timeoutInMs must be a non-negative finite number");
+  }
+
+  return timeoutInMs;
+};
+
+export class BlaiseApiClient implements BlaiseApi {
+  protected readonly blaiseApiUrl: string;
+
+  protected readonly iapProvider?: IapProvider;
+
+  protected readonly httpClient: AxiosInstance;
 
   constructor(blaiseApiUrl: string, config?: BlaiseApiConfig) {
-    this.blaiseApiUrl = blaiseApiUrl;
-
-    this.httpClient = axios.create();
-
-    if (config?.timeoutInMs !== undefined) {
-      this.httpClient.defaults.timeout = config.timeoutInMs;
-    }
+    this.blaiseApiUrl = getApiUrl(blaiseApiUrl);
 
     if (config?.blaiseApiClientId) {
-      this.blaiseIapProvider = new BlaiseIapNodeProvider(config.blaiseApiClientId);
+      this.iapProvider = new IapProvider(config.blaiseApiClientId);
     }
+
+    this.httpClient = axios.create({
+      baseURL: this.blaiseApiUrl,
+      timeout: getTimeoutInMs(config?.timeoutInMs),
+    });
+
+    this.httpClient.interceptors.request.use(async (requestConfig) => {
+      if (this.iapProvider) {
+        const authHeaders = await this.iapProvider.getAuthHeader();
+
+        requestConfig.headers = AxiosHeaders.from({ ...requestConfig.headers, ...authHeaders });
+      }
+
+      return requestConfig;
+    });
   }
 
   getUser = users.getUser;
-
   getUsers = users.getUsers;
-
   validatePassword = users.validatePassword;
-
   createUser = users.createUser;
-
   deleteUser = users.deleteUser;
-
   getUserRoles = users.getUserRoles;
-
   changePassword = users.changePassword;
-
   changeUserRole = users.changeUserRole;
-
   changeUserServerParks = users.changeUserServerParks;
 
   getAllQuestionnairesWithCatiData = questionnaires.getAllQuestionnairesWithCatiData;
-
   getQuestionnairesWithCatiData = questionnaires.getQuestionnairesWithCatiData;
-
   getQuestionnaireWithCatiData = questionnaires.getQuestionnaireWithCatiData;
-
   getQuestionnaires = questionnaires.getQuestionnaires;
-
   questionnaireExists = questionnaires.questionnaireExists;
-
   doesQuestionnaireHaveMode = questionnaires.doesQuestionnaireHaveMode;
-
   getQuestionnaire = questionnaires.getQuestionnaire;
-
   installQuestionnaire = questionnaires.installQuestionnaire;
-
   deleteQuestionnaire = questionnaires.deleteQuestionnaire;
-
   getQuestionnaireCaseIds = questionnaires.getQuestionnaireCaseIds;
-
   getQuestionnaireModes = questionnaires.getQuestionnaireModes;
-
   getQuestionnaireSettings = questionnaires.getQuestionnaireSettings;
-
   activateQuestionnaire = questionnaires.activateQuestionnaire;
-
   deactivateQuestionnaire = questionnaires.deactivateQuestionnaire;
 
   getDaybatch = daybatch.getDaybatch;
-
   addDaybatch = daybatch.addDaybatch;
-
   getSurveyDays = daybatch.getSurveyDays;
-
   addSurveyDays = daybatch.addSurveyDays;
 
   getCase = cases.getCase;
-
   getCaseMultikey = cases.getCaseMultikey;
-
   addCase = cases.addCase;
-
   updateCase = cases.updateCase;
-
   addCaseMultikey = cases.addCaseMultikey;
-
-  getMultikeyQueryString = cases.getMultikeyQueryString;
-
   getCaseStatus = cases.getCaseStatus;
-
   getCaseEditInformation = cases.getCaseEditInformation;
 
   getDiagnostics = diagnostics.getDiagnostics;
 
   getQuestionnaireReportData = reports.getQuestionnaireReportData;
 
-  // eslint-disable-next-line class-methods-use-this
-  private url(url: string): string {
-    let formattedUrl = url;
-    if (!formattedUrl.startsWith('/')) {
-      formattedUrl = `/${formattedUrl}`;
-    }
-    return formattedUrl;
-  }
-
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async get<T>(url: string): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.get(`${this.blaiseApiUrl}${this.url(url)}`, config);
-    return response.data as T;
+    const response = await this.httpClient.get<T>(url);
+
+    return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/explicit-module-boundary-types
-  protected async post<T>(url: string, data: any): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.post(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
-    return response.data as T;
+  protected async post<T>(url: string, data: unknown): Promise<T> {
+    const response = await this.httpClient.post<T>(url, data);
+
+    return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   protected async delete<T>(url: string): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.delete(`${this.blaiseApiUrl}${this.url(url)}`, config);
-    return response.data as T;
+    const response = await this.httpClient.delete<T>(url);
+
+    return response.data;
   }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any, @typescript-eslint/no-redundant-type-constituents
-  protected async patch<T>(url: string, data: any | undefined = undefined): Promise<T> {
-    const config = await this.axiosConfig();
-    const response = await this.httpClient.patch(`${this.blaiseApiUrl}${this.url(url)}`, data, config);
-    return response.data as T;
-  }
+  protected async patch<T>(url: string, data?: unknown): Promise<T> {
+    const response = await this.httpClient.patch<T>(url, data);
 
-  private async axiosConfig(): Promise<AxiosRequestConfig> {
-    let config = {};
-    if (this.blaiseIapProvider) {
-      config = { headers: await this.blaiseIapProvider.getAuthHeader() };
-    }
-    return config;
+    return response.data;
   }
 }
-
-export default BlaiseApiClient;
-
-export * from './interfaces/questionnaire';
-export * from './interfaces/diagnostic';
-export * from './interfaces/case';
-export * from './interfaces/user';
-export * from './interfaces/daybatch';
-export * from './interfaces/questionnaireReport';
-
-export * from './enums/caseOutcome';
-export * from './enums/editedStatus';
-export * from './types/caseData';
-export * from './types/surveyDays';
-
-export * from './mockObjects/caseMockObjects';
-export * from './mockObjects/diagnosticMockObjects';
-export * from './mockObjects/questionnaireMockObjects';
-export * from './mockObjects/userMockObjects';
-export * from './mockObjects/daybatchMockObjects';
-export * from './mockObjects/questionnaireReportMockObjects';

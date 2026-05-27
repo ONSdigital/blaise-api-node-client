@@ -1,9 +1,7 @@
-/.idea/
-/node_modules/
-.DS_Store
-.env
-/build/
-/dist/
-/coverage/
-/yarn-error.log
-/.eslintcache
+.idea/
+.vscode/
+.yarn/
+coverage/
+dist/
+node_modules/
+*.log
